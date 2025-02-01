@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function Login2() {
   const navigate = useNavigate();
@@ -131,9 +132,9 @@ function Login2() {
           <div className="divider">VAGY</div>
           <div className="text-center">
             <p>Nincs fiókja?</p>
-            {/* <Link to="/register" className="link link-primary">
+            <Link to="/register2" className="link link-primary">
               Regisztráljon most
-            </Link> */}
+            </Link>
           </div>
         </div>
       </div>

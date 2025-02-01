@@ -202,11 +202,6 @@ function Register2() {
                   value={formData.passwordAgain}
                 />
               </label>
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Elfelejtette jelszavát?
-                </a>
-              </label>
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">
