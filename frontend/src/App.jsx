@@ -8,6 +8,8 @@ import Login2 from "./components/Login2";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./components/Profile";
+import AdminDashboard from "./components/AdminDashboard";
+import UserDashboard from "./components/UserDashboard";
 
 
 
@@ -31,6 +33,8 @@ function App() {
         <Route path="/register2" element={<Register2/>}/>
         <Route path="/login2" element={<Login2/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/admindashboard" element={<AdminDashboard/>}/>
+        <Route path="/userdashboard" element={<UserDashboard/>}/>
         <Route path="*" element={<Navigate to ="/"/>}/>
       </Routes>
       </BrowserRouter>

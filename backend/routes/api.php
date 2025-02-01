@@ -17,4 +17,14 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/profile', [ProfileController::class, 'store']);
 Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
 
+Route::group(['middleware' => ['auth', 'checkadmin:70']], function () {
+    Route::get('/admindashboard', function (Request $request) {
+        return response()->json(['message' => 'Admin access granted']);
+    });
+});
+
+Route::group(['middleware' => ['auth', 'checkadmin:100']], function () {
+    // Super admin routes
+});
+
 

@@ -32,6 +32,27 @@ function Menu() {
   <div className="flex-1">
     <Link to="/" className="btn btn-ghost text-xl">daisyUI</Link>
   </div>
+  <div>
+          {user ? (
+          <>
+          {user.isadmin >=70 && <Link to="/admindashboard">Admin Dashboard</Link>}
+          
+          {user.isadmin >10 && user.isadmin < 70 && (<Link to="/userdashboard" className="justify-between">
+            User Dashboard
+            </Link>)}
+          
+          
+          
+          </>
+          ):(
+          <>
+         <Link to="/" className="justify-between">
+            Guest
+            </Link>
+          </>)}
+        
+  </div>
+
   <div className="flex-none gap-2">
     <div className="form-control">
       <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
@@ -55,6 +76,7 @@ function Menu() {
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
+         
           
         { profile && profile.file_path ? (
         <>
