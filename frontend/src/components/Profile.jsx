@@ -1,8 +1,17 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+
+
 
 const Profile = () => {
+    const navigate = useNavigate();
     const [image, setImage] = useState(null);
+    const {update}=useContext(AuthContext);
+   
+
+
     const user=JSON.parse(sessionStorage.getItem('user'));
 
     const [formDataProfile, setFormDataProfile] = useState({
@@ -15,7 +24,11 @@ const Profile = () => {
 
 
     const handleFileChange = (e) => {
+
+       // setImage(e.target.files);
         setImage(e.target.files);
+      //  update();
+       
     };
 
     const onSubmit = async (e) => {
@@ -33,6 +46,7 @@ const Profile = () => {
 
         if (image && image.length > 0) {
             formData.append("image", image[0]);
+            
           } else {
             console.error("No image selected");
             return; // Prevent form submission if no image is selected
@@ -53,6 +67,10 @@ const Profile = () => {
                 },
             });
             console.log(response.data);
+           // navigate('/');
+           update();
+            
+            
         } catch (error) {
             console.error('There was an error uploading the Data!', error);
         }

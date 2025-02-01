@@ -98,13 +98,13 @@ function Menu() {
       tabIndex={0}
       className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
       <li>
-        <Link to="/register" className="justify-between">
+        <Link to="/register2" className="justify-between">
           Register
          
         </Link>
       </li>
      
-      <li><Link to="/login">Login</Link></li>
+      <li><Link to="/login2">Login</Link></li>
     </ul>
     </>
 
