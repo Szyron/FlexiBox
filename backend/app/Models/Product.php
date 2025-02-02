@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $fillable = [
+        'name',
+        'description',
+        'price_per_day',
+        'category_id',
+        'available',
+    ];
+
+    public function category() //Many-to-One relationship
+    {
+        return $this->belongTo(Category::class, 'category_id');
+
+    }
+}

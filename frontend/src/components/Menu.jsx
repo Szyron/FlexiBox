@@ -32,6 +32,23 @@ function Menu() {
   <div className="flex-1">
     <Link to="/" className="btn btn-ghost text-xl">daisyUI</Link>
   </div>
+  <div className="flex-none">
+    {user ? (
+          <>
+          {user.isadmin >=70 && <Link to="/newcategory" className="btn btn-ghost">Új Kategória</Link>} 
+          </>
+          ):(
+          <>
+         <Link to="/" className="justify-between">
+            Nincs kategoria
+            </Link>
+          </>)}
+
+    
+  </div>
+  <div className="flex-none">
+    <Link to="/categories" className="btn btn-ghost">Kategóriák</Link>
+  </div>
   <div>
           {user ? (
           <>

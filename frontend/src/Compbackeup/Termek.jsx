@@ -24,6 +24,7 @@ function Termek({termek}) {
       <h2 className="card-title">id:{termek.id}</h2>
       <p>{termek.termeknev}</p>
       <p>{termek.termekar}</p>
+      
       <div className="card-actions justify-end">
         <button className='btn btn-primary' onClick={()=>modosit(termek)}>Módosítás</button>
         <button className='btn btn-warning' onClick={()=>torles(termek)} >Törlés</button>

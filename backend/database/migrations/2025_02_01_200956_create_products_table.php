@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->integer('price_per_day');
+            $table->foreignId('category_id')->constrained('categories');
+            $table->boolean('available');
             $table->timestamps();
         });
     }
