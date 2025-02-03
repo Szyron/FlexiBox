@@ -9,7 +9,7 @@ function CategoriesList() {
 
 
   return (
-    <div>
+    <div className="bg-secondary min-h-screen">
          <h1 className="text text-3xl font-bold text-center">Kategória Lista:</h1>
          <div className="flex flex-row flex-wrap items-center justify-center">
         {

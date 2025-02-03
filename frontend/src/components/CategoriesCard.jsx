@@ -17,7 +17,7 @@ function CategoriesCard({ category }) {
 
 
     return (
-        <div className="card bg-base-100 w-96 shadow-xl m-5">
+        <div className="card bg-neutral w-96 shadow-xl m-5">
             <figure>
                 <img
                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -28,19 +28,11 @@ function CategoriesCard({ category }) {
                 <div className="card-actions justify-end">
                     {user ? (
                         <>
-                            {user.isadmin >= 70 && <button className='btn btn-primary' onClick={() => modosit(category)}>Módosítás</button>  }
+                            {user.isadmin >= 70 && <button className='btn btn-primary' onClick={() => modosit(category)}>Módosítás</button>}
                             {user.isadmin >= 70 && <button className='btn btn-error' onClick={() => torles(category)}>Törlés</button>}
                         </>
-                    ) : (
-                        <>
-                            <Link to="/" className="justify-between">
-                                Nincs kategoria
-                            </Link>
-                        </>)}
+                    ) : null}
 
-
-                    
-                    
                 </div>
             </div>
         </div>

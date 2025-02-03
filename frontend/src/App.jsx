@@ -13,6 +13,10 @@ import AdminDashboard from "./components/AdminDashboard";
 import UserDashboard from "./components/UserDashboard";
 import NewCategory from "./components/NewCategory";
 import CategoriesList from "./components/CategoriesList";
+import NewProduct from "./components/NewProduct";
+import ProductsList from "./components/ProductsList";
+import ProductsInfo from "./components/ProductsInfo";
+import CartView from "./components/CartView";
 
 
 
@@ -37,8 +41,12 @@ function App() {
         <Route path="/register2" element={<Register2/>}/>
         <Route path="/login2" element={<Login2/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/cart" element={<CartView/>}/>
         <Route path="/newcategory" element={<NewCategory/>}/>
         <Route path="/categories" element={<CategoriesList/>}/>
+        <Route path="/newproduct" element={<NewProduct/>}/>
+        <Route path="/products" element={<ProductsList/>}/>
+        <Route path="/productsinfo" element={<ProductsInfo/>}/>
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
         <Route path="/userdashboard" element={<UserDashboard/>}/>
         <Route path="*" element={<Navigate to ="/"/>}/>

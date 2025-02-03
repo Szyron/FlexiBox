@@ -10,7 +10,7 @@ export const AuthProvider=({children})=>{
     const [refresh,setRefresh]=useState(false);
     const [user,setUser]=useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
     
       useEffect(()=>{
        if (user){
@@ -44,7 +44,6 @@ export const AuthProvider=({children})=>{
     sessionStorage.setItem('user',user);
     setIsLoggedIn(true);
     update();
-   
     }
 
 
@@ -52,6 +51,7 @@ export const AuthProvider=({children})=>{
     const logout=()=>{
         sessionStorage.removeItem('usertoken');
         sessionStorage.removeItem('user');
+        sessionStorage.removeItem('profile');
         setIsLoggedIn(false);
         update();
         setUser(null);

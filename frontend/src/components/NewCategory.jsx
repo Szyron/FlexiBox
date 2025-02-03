@@ -1,6 +1,6 @@
 import { useState , useContext} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 import ServiceContext from "../context/ServiceContext";
 
 function NewCategory() {

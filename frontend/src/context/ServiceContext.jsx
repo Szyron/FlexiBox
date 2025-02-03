@@ -6,6 +6,7 @@ const ServiceContext=createContext();
 export const ServiceProvider=({children})=>{
     const [ refresh , setRefresh]=useState(false);
     const [ categories , setCategories ] = useState([]);
+    const [ products , setProducts ] = useState([]);
 
     const update =()=>{
         setRefresh(prev=>!prev)
@@ -18,6 +19,12 @@ export const ServiceProvider=({children})=>{
         .catch(err=>alert(err));
     },[refresh]);
 
+    useEffect(()=>{ 
+        fetch(`${import.meta.env.VITE_BASE_URL}/product`)
+        .then(res=>res.json())
+        .then(adat=>setProducts(adat.products))
+        .catch(err=>alert(err));
+    },[refresh]);
    
 
     
@@ -50,8 +57,10 @@ export const ServiceProvider=({children})=>{
     return <ServiceContext.Provider value={{
         update,
         categories,
+        products,
         setCategories,
-        backendMuvelet,
+        setProducts,
+        backendMuvelet
 
     }}>{children}</ServiceContext.Provider>
 

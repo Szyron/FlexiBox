@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Product extends Model
 {
     protected $fillable = [
@@ -16,7 +17,7 @@ class Product extends Model
 
     public function category() //Many-to-One relationship
     {
-        return $this->belongTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
 
     }
 }
