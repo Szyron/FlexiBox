@@ -10,8 +10,8 @@ function ProductsCard({ product }) {
   const [isInfo, setInfo] = useState(false);
   
 
-  const modosit = () => {
-    navigate("/newproduct", { state: { product } });
+  const toCart = () => {
+    navigate("/cart", { state: { product } });
   };
 
   const openInfo = () => {
@@ -75,7 +75,7 @@ function ProductsCard({ product }) {
                 </button>
               )}
                {user.isadmin >10  && (<button className="btn" onClick={() => openInfo()}>Info</button>)}
-               {user.isadmin >10  && (<button className="btn btn-warning" onClick={() => modosit(product)}>Megrendelés</button>)}
+               {user.isadmin >10  && (<button className="btn btn-warning" onClick={() => toCart(product)}>Kosárba</button>)}
             </>
           ) : null}
         </div>
