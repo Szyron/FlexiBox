@@ -76,8 +76,8 @@ function ProductsCard({ product }) {
                   Törlés
                 </button>
               )}
-               {user.isadmin >10  && (<button className="btn" onClick={() => openInfo()}>Info</button>)}
-               {user.isadmin >10  && (<button className="btn btn-warning" onClick={() => addToCart(product)}>Kosárba</button>)}
+               {user.isadmin >=0  && (<button className="btn" onClick={() => openInfo()}>Info</button>)}
+               {user.isadmin >=0  && (<button className="btn btn-warning" onClick={() => addToCart(product)}>Kosárba</button>)}
             </>
           ) : null}
         </div>
