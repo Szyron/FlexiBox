@@ -17,6 +17,7 @@ import NewProduct from "./components/NewProduct";
 import ProductsList from "./components/ProductsList";
 import ProductsInfo from "./components/ProductsInfo";
 import CartView from "./components/CartView";
+import { CartProvider } from "./context/CartContext";
 
 
 
@@ -31,7 +32,7 @@ function App() {
   return (
    <div>
      
-
+    <CartProvider>
      <AuthProvider>
      <ServiceProvider>
      <BrowserRouter>
@@ -55,6 +56,7 @@ function App() {
       </ServiceProvider>
       </AuthProvider>
       <ToastContainer/>
+      </CartProvider>
     
    </div>
   )

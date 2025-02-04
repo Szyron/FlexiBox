@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useContext,useState } from "react";
 import ServiceContext from "../context/ServiceContext";
 import ProductsInfo from "./ProductsInfo";
+import {CartContext} from "../context/CartContext";
 
 function ProductsCard({ product }) {
+  const { cartItems, addToCart } = useContext(CartContext);
   const user = JSON.parse(sessionStorage.getItem("user"));
   const navigate = useNavigate();
   const { backendMuvelet } = useContext(ServiceContext);
@@ -75,7 +77,7 @@ function ProductsCard({ product }) {
                 </button>
               )}
                {user.isadmin >10  && (<button className="btn" onClick={() => openInfo()}>Info</button>)}
-               {user.isadmin >10  && (<button className="btn btn-warning" onClick={() => toCart(product)}>Kosárba</button>)}
+               {user.isadmin >10  && (<button className="btn btn-warning" onClick={() => addToCart(product)}>Kosárba</button>)}
             </>
           ) : null}
         </div>
