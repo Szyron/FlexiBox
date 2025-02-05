@@ -9,6 +9,13 @@ function ProductsList() {
   return (
     <div className="bg-secondary min-h-screen">
       <h1 className="text text-3xl font-bold text-center">Termék Lista:</h1>
+      <div className="form-control w-[18%] mx-auto">
+          <input
+            type="text"
+            placeholder="Search"
+            className="input input-bordered w-24 md:w-auto"
+          />
+      </div>
       <div className="flex flex-row flex-wrap items-center justify-center">
         {products.map((product) => (
           <ProductsCard key={product.id} product={product} />
