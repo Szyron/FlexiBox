@@ -1,5 +1,6 @@
-import { use } from "react";
+import { use, useContext } from "react";
 import { useState, useEffect, createContext } from "react";
+import { CartContext } from "./CartContext";
 
 
 
@@ -12,6 +13,8 @@ export const AuthProvider=({children})=>{
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
     
+    const {clearCart}=useContext(CartContext);
+
       useEffect(()=>{
        if (user){
         fetch(`${import.meta.env.VITE_BASE_URL}/profile/${user.id}`,{ 
@@ -53,6 +56,7 @@ export const AuthProvider=({children})=>{
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('profile');
         localStorage.removeItem('cartItems');
+        clearCart();
         setIsLoggedIn(false);
         update();
         setUser(null);
