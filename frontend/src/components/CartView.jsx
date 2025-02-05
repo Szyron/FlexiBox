@@ -2,10 +2,15 @@ import React from "react";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import OrderContext from "../context/OrderContext";
+import TermofUseInfo from "./TermofUseInfo";
 
 function CartView() {
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
     useContext(CartContext);
+
+    
+    const {isPrivacyInfo, openPrivacyInfo, closePrivacyInfo} = useContext(OrderContext);
 
     
 
@@ -53,9 +58,16 @@ function CartView() {
               <button className="px-4 py-2 bg-red-700 text-white text-xs font-bold uppercase rounded hover:bg-red-700 focus:outline-none focus:bg-red-700" onClick={() => { clearCart() }}>
                 Clear cart
               </button>
-              <Link to="/" className="m-2 px-4 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700">
+              {/* <Link to="/" className="m-2 px-4 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700">
                 Megrendel
-              </Link>
+              </Link> */}
+              <button onClick={()=>openPrivacyInfo()} className="m-2 px-4 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700" >
+                Megrendel
+              </button>
+              {
+            isPrivacyInfo && (<TermofUseInfo  closeFunction={()=>closePrivacyInfo()} />)
+            
+        }
             </div>
           ) : (
             <h1 className="text-lg font-bold">Your cart is empty</h1>

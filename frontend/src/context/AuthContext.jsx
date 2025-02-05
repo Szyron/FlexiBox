@@ -55,7 +55,6 @@ export const AuthProvider=({children})=>{
         sessionStorage.removeItem('usertoken');
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('profile');
-        localStorage.removeItem('cartItems');
         clearCart();
         setIsLoggedIn(false);
         update();
