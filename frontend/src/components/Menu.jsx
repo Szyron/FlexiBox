@@ -45,7 +45,7 @@ function Menu() {
         {user ? (
           <>
             {user.isadmin >= 70 && (
-              <Link to="/newcategory" className="btn btn-ghost">
+              <Link to="/newcategory" className="btn btn-ghost text-secondary">
                 Új Kategória
               </Link>
             )}
@@ -53,7 +53,7 @@ function Menu() {
         ) : null}
       </div>
       <div className="flex-none">
-        <Link to="/categories" className="btn btn-ghost">
+        <Link to="/categories" className="btn btn-ghost text-secondary">
           Kategóriák
         </Link>
       </div>
@@ -61,7 +61,7 @@ function Menu() {
         {user ? (
           <>
             {user.isadmin >= 70 && (
-              <Link to="/newproduct" className="btn btn-ghost">
+              <Link to="/newproduct" className="btn btn-ghost text-secondary">
                 Új Termék
               </Link>
             )}
@@ -69,7 +69,7 @@ function Menu() {
         ) : null}
       </div>
       <div className="flex-none">
-        <Link to="/products" className="btn btn-ghost">
+        <Link to="/products" className="btn btn-ghost text-secondary">
           Termékek
         </Link>
       </div>
@@ -77,11 +77,11 @@ function Menu() {
         {user ? (
           <>
             {user.isadmin >= 70 && (
-              <Link to="/admindashboard">Admin Dashboard</Link>
+              <Link to="/admindashboard" className="btn btn-ghost text-secondary">Admin Dashboard</Link>
             )}
 
             {user.isadmin > 10 && user.isadmin < 70 && (
-              <Link to="/userdashboard" className="justify-between">
+              <Link to="/userdashboard" className="justify-between btn btn-ghost text-secondary">
                 User Dashboard
               </Link>
             )}
@@ -94,18 +94,7 @@ function Menu() {
           </>
         )}
       </div>
-      <div className="flex-none gap-2">
-        <div className="m-10">
-          {user ? (
-            <>
-              <h1>Hello, {user.first_name} </h1>
-            </>
-          ) : (
-            <>
-              <h1>Hello,Guest </h1>
-            </>
-          )}
-        </div>
+      
         <div className="flex-none flex gap-4 items-center">
           <div className="dropdown dropdown-end">
             <div
@@ -147,32 +136,51 @@ function Menu() {
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                {profile && profile.file_path ? (
-                  <>
-                    <img
-                      src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${
-                        profile.file_path
-                      }`}
-                      //src={`http://localhost:8000/storage/images/1738181966_profileimage.jpg`}
-                      alt="Pofile"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    />
-                  </>
-                )}
-              </div>
+          <div className="m-5  rounded-box btn btn-ghost">
+          {user ? (
+              <>
+                
+                <Link to="/profile" className="justify-between">
+                  <h1 className="font-bold text-secondary">Hello, {user.first_name} </h1>
+                </Link>
+              </>
+            ) : (
+              <>
+                <h1>Hello,Guest </h1>
+              </>
+            )}
+          
+          </div>
+          <div className="flex-none gap-2">
+          
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                
+                <div className="w-10 rounded-full">
+                  {profile && profile.file_path ? (
+                    <>
+                      <img
+                        src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${
+                          profile.file_path
+                        }`}
+                        //src={`http://localhost:8000/storage/images/1738181966_profileimage.jpg`}
+                        alt="Pofile"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        alt="Tailwind CSS Navbar component"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      />
+                    </>
+                  )}
+                </div>
+                
             </div>
 
             {user !== null ? (
