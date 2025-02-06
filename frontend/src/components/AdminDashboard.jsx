@@ -10,7 +10,7 @@ function AdminDashboard() {
     }
     
   return (
-    <div>
+    <div className="bg-base-200 min-h-screen">
         <h1>AdminDashboard</h1>
         <p>{user.id}</p>
         <p>{user.first_name}</p>

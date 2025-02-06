@@ -7,7 +7,7 @@ function ProductsList() {
   const { products } = useContext(ServiceContext);
 
   return (
-    <div className="bg-secondary min-h-screen">
+    <div className="bg-base-200 min-h-screen">
       <h1 className="text text-3xl font-bold text-center">Termék Lista:</h1>
       <div className="form-control w-[18%] mx-auto">
           <input

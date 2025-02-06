@@ -57,6 +57,22 @@ function Menu() {
           Kategóriák
         </Link>
       </div>
+      <div className="flex-none">
+        {user ? (
+          <>
+            {user.isadmin >= 70 && (
+              <Link to="/newproduct" className="btn btn-ghost">
+                Új Termék
+              </Link>
+            )}
+          </>
+        ) : null}
+      </div>
+      <div className="flex-none">
+        <Link to="/products" className="btn btn-ghost">
+          Termékek
+        </Link>
+      </div>
       <div>
         {user ? (
           <>
@@ -78,23 +94,6 @@ function Menu() {
           </>
         )}
       </div>
-      <div className="flex-none">
-        {user ? (
-          <>
-            {user.isadmin >= 70 && (
-              <Link to="/newproduct" className="btn btn-ghost">
-                Új Termék
-              </Link>
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="flex-none">
-        <Link to="/products" className="btn btn-ghost">
-          Termékek
-        </Link>
-      </div>
-
       <div className="flex-none gap-2">
         <div className="m-10">
           {user ? (
