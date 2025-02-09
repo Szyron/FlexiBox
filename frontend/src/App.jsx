@@ -39,7 +39,6 @@ function App() {
      <ServiceProvider>
      <BrowserRouter>
       <Menu/>
-      
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/register2" element={<Register2/>}/>

@@ -48,12 +48,12 @@ function CartView() {
     <div className="w-full md:w-1/4 p-4 sticky top-0">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title">Kosár</h2>
+          <h2 className="card-title">Összegzés</h2>
           {cartItems.length > 0 ? (
             <div className="flex flex-col justify-between items-center">
               <h1 className="text-lg font-bold">Total: ${getCartTotal()}</h1>
               <button className="px-4 py-2 bg-red-700 text-white text-xs font-bold uppercase rounded hover:bg-red-700 focus:outline-none focus:bg-red-700" onClick={() => { clearCart() }}>
-                Clear cart
+                Teljes kosár kiürítése
               </button>
               {/* <Link to="/" className="m-2 px-4 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700">
                 Megrendel
@@ -67,7 +67,7 @@ function CartView() {
         }
             </div>
           ) : (
-            <h1 className="text-lg font-bold">Your cart is empty</h1>
+            <h1 className="text-lg font-bold">Kosarad üres jelenleg.</h1>
           )}
           <div className="card-actions justify-end"></div>
         </div>
