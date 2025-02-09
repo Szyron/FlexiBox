@@ -30,7 +30,8 @@ class LoginController extends Controller
                 'token_type' => 'Bearer',
                 'user' => [
                     'id' => $user->id,
-                    'first_name' => $user->first_name
+                    'first_name' => $user->first_name,
+                    'isadmin' => $user->isadmin
                     
                 ],
             ]);
