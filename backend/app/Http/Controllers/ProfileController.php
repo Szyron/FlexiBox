@@ -34,7 +34,13 @@ class ProfileController extends Controller
 
         $profile = Profile::create($validatedData);
 
-        Log::info('Profile created successfully', ['profile' => $profile]);
+        Log::info('Profile created successfully', [
+            'profile' => [
+                'id' => $profile->id,
+                'image' => $profile->file_path,
+            ],
+            
+            ]);
 
         return response()->json($profile, 201);
     }

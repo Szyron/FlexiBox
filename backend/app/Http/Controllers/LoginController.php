@@ -28,7 +28,11 @@ class LoginController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'user' => $user
+                'user' => [
+                    'id' => $user->id,
+                    'first_name' => $user->first_name
+                    
+                ],
             ]);
         }
 
