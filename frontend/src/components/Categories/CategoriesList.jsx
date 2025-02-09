@@ -1,7 +1,7 @@
 import React from 'react'
 import { useContext } from 'react';
 import CategoriesCard from './CategoriesCard'
-import ServiceContext from '../context/ServiceContext';
+import ServiceContext from '../../context/ServiceContext';
 
 function CategoriesList() {
 

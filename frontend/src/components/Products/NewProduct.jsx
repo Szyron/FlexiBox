@@ -1,6 +1,6 @@
 import { useState , useContext} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ServiceContext from "../context/ServiceContext";
+import ServiceContext from "../../context/ServiceContext";
 
 function NewProduct() {
 

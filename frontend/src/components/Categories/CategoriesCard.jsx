@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import ServiceContext from '../context/ServiceContext';
+import ServiceContext from '../../context/ServiceContext';
 
 function CategoriesCard({ category }) {
     const user = JSON.parse(sessionStorage.getItem('user'));

@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import ProductsCard from "./ProductsCard";
-import ServiceContext from "../context/ServiceContext";
+import ServiceContext from "../../context/ServiceContext";
 
 function ProductsList() {
   const { products } = useContext(ServiceContext);

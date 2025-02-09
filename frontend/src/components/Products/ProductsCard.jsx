@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useContext,useState } from "react";
-import ServiceContext from "../context/ServiceContext";
+import ServiceContext from "../../context/ServiceContext";
 import ProductsInfo from "./ProductsInfo";
-import {CartContext} from "../context/CartContext";
+import {CartContext} from "../../context/CartContext";
 
 function ProductsCard({ product }) {
   const { cartItems, addToCart } = useContext(CartContext);
