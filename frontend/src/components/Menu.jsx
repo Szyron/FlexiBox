@@ -53,9 +53,17 @@ function Menu() {
         ) : null}
       </div>
       <div className="flex-none">
+
+
+      {user ? (
+          <>
+            {user.isadmin >= 70 && (
         <Link to="/categories" className="btn btn-ghost text-secondary">
-          Kategóriák
-        </Link>
+        Kategóriák
+      </Link>
+            )}
+          </>
+        ) : null}
       </div>
       <div className="flex-none">
         {user ? (
