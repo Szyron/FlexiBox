@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string("file_name");
+            $table->string('file_path');
             $table->string('name');
             $table->text('description');
             $table->integer('price_per_day');

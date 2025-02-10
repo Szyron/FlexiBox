@@ -52,6 +52,31 @@ export const ServiceProvider=({children})=>{
         }
       };
 
+      const backendMuveletFile = async (adat, method, url, headers) => {
+        try {
+          const keres = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: adat,
+          });
+      
+          const valasz = await keres.json(); // JSON formátumban dolgozunk
+      
+          if (keres.ok) { 
+            toast.success("Sikeres adatfelvitel!"); 
+          } else {
+            toast.error(valasz.error || "Valami hiba történt!");
+          }
+      
+          update(); 
+      
+        } catch (error) {
+          toast.error("Hálózati hiba történt!");
+          console.error(error);
+        }
+      };
+
+
 
 
     return <ServiceContext.Provider value={{
@@ -60,7 +85,8 @@ export const ServiceProvider=({children})=>{
         products,
         setCategories,
         setProducts,
-        backendMuvelet
+        backendMuvelet,
+        backendMuveletFile
 
     }}>{children}</ServiceContext.Provider>
 

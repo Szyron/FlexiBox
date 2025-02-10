@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class ServiceController extends Controller
 {
@@ -28,6 +31,7 @@ class ServiceController extends Controller
     public function productStore(Request $request)
     {
         $request->validate([
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
             'name' => 'required|string',
             'description' => 'required|string',
             'price_per_day' => 'required|integer',
@@ -35,13 +39,25 @@ class ServiceController extends Controller
             'available' => 'required|boolean'
         ]);
 
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price_per_day = $request->price_per_day;
-        $product->category_id = $request->category_id;
-        $product->available = $request->available;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('product_images', $fileName, 'public');
+            $validatedData['file_path'] = '/storage/' . $filePath;
+            $validatedData['file_name'] = $fileName; // Ensure file_name is set
+        }
+           
+         $product = new Product();
+         $product->file_path = $validatedData['file_path'];
+         $product->file_name = $validatedData['file_name'];
+         $product->name = $request->name;
+         $product->description = $request->description;
+         $product->price_per_day = $request->price_per_day;
+         $product->category_id = $request->category_id;
+         $product->available = $request->available;
         $product->save();
+
+       // $product = Product::create($validatedData);
 
         return response()->json([
             'message' => 'Product created successfully',
@@ -69,6 +85,77 @@ class ServiceController extends Controller
 
         return response()->json([
             'products' => $products
+        ], 200);
+    }
+
+    public function productUpdate(Request $request)
+    {
+        
+
+        Log::info('Request data', $request->all());
+        //Log::info('Product ID:', ['id' => $request->id]);
+        Log::info('Product ID:', ['id' => $request->input('id')]); 
+       
+        try {
+            $validatedData = $request->validate([
+            'id' => 'required|integer|exists:products,id',
+            'image' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
+            'name' => 'sometimes|string',
+            'description' => 'sometimes|string',
+            'price_per_day' => 'sometimes|integer',
+            'category_id' => 'sometimes|integer|exists:categories,id',
+            'available' => 'sometimes|boolean'
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed', ['errors' => $e->errors()]);
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        }
+    
+        
+        $product = Product::find($request->id);
+        
+    
+        if ($request->hasFile('image')) {
+            // Delete the old image file
+            Storage::disk('public')->delete('product_images/' . $product->file_name);
+    
+            // Store the new image file
+            $file = $request->file('image');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('product_images', $fileName, 'public');
+            $validatedData['file_path'] = '/storage/' . $filePath;
+            $validatedData['file_name'] = $fileName; // Ensure file_name is set
+        }
+    
+        // Update the product details
+        $product->name = $validatedData['name'] ?? $product->name;
+        $product->description = $validatedData['description'] ?? $product->description;
+        $product->price_per_day = $validatedData['price_per_day'] ?? $product->price_per_day;
+        $product->category_id = $validatedData['category_id'] ?? $product->category_id;
+        $product->available = $validatedData['available'] ?? $product->available;
+        if (isset($validatedData['file_path'])) {
+            $product->file_path = $validatedData['file_path'];
+            $product->file_name = $validatedData['file_name'];
+        }
+        $product->save();
+    
+        return response()->json([
+            'message' => 'Product updated successfully',
+            'product' => $product
+        ], 200);
+    }
+
+    public function productDestroy($id)
+    {
+        $product = Product::find($id);
+        Storage::disk('public')->delete('product_images/' . $product->file_name);
+        $product->delete();
+
+        return response()->json([
+            'message' => 'Product deleted successfully'
         ], 200);
     }
 

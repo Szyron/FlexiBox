@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
+        'file_name',
+        'file_path',
         'name',
         'description',
         'price_per_day',

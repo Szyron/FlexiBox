@@ -11,6 +11,11 @@ function ProductsCard({ product }) {
   const { backendMuvelet } = useContext(ServiceContext);
   const [isInfo, setInfo] = useState(false);
   
+  const modosit = (product) => {
+    navigate("/newproduct", { state: { product } });
+  };
+
+
 
   const toCart = () => {
     navigate("/cart", { state: { product } });
@@ -35,6 +40,9 @@ function ProductsCard({ product }) {
     );
   };
   console.log(product);
+  console.log(`${import.meta.env.VITE_LARAVEL_IMAGE_URL}/${product.file_path}`);
+
+  // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
 
   return (
     
@@ -42,7 +50,8 @@ function ProductsCard({ product }) {
     <div className="card bg-base-100 w-96 shadow-xl m-5">
       <figure>
         <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+        src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${product.file_path}`} 
+         
           alt="Shoes"
         />
       </figure>

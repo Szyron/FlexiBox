@@ -20,6 +20,8 @@ Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
 Route::post('/category', [ServiceController::class, 'categoryStore']);
 Route::post('/product', [ServiceController::class, 'productStore']);
 Route::get('/product', [ServiceController::class, 'productIndex']);
+Route::post('/product/update', [ServiceController::class, 'productUpdate']);
+Route::delete('/product/{id}', [ServiceController::class, 'productDestroy']);
 Route::get('/category', [ServiceController::class, 'index']);
 Route::delete('/category/{id}', [ServiceController::class, 'destroy']);
 Route::patch('/category', [ServiceController::class, 'update']);
