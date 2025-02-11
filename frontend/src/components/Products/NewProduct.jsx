@@ -2,6 +2,7 @@ import { useState , useContext} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ServiceContext from "../../context/ServiceContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function NewProduct() {
 
@@ -95,8 +96,8 @@ function NewProduct() {
   // Append the image to the form data
   if (image && image.length > 0) {
     formDataToSubmit.append("image", image[0]);
-  } else {
-    console.error("No image selected");
+  } else if (method === "POST" && !formData.id){
+    toast.error("No image selected");
     return; // Prevent form submission if no image is selected
   }
 

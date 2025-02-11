@@ -20,7 +20,8 @@ import ProductsInfo from "./components/Products/ProductsInfo";
 import CartView from "./components/Cart/CartView";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
-
+import RegistrationDataEdit from "./components/Dashboards/RegistrationDataEdit";
+import { AdminProvider } from "./context/AdminContext";
 
 
 
@@ -33,6 +34,7 @@ function App() {
 
   return (
    <div>
+    <AdminProvider>
      <OrderProvider>
     <CartProvider>
      <AuthProvider>
@@ -53,6 +55,7 @@ function App() {
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
         <Route path="/userdashboard" element={<UserDashboard/>}/>
         <Route path="*" element={<Navigate to ="/"/>}/>
+        <Route path="/registrationdataedit" element={<RegistrationDataEdit/>}/>
       </Routes>
       </BrowserRouter>
       <Footer/>
@@ -61,6 +64,7 @@ function App() {
       <ToastContainer/>
       </CartProvider>
       </OrderProvider>
+      </AdminProvider>
     
    </div>
   )

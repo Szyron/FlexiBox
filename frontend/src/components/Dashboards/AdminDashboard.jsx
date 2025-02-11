@@ -1,23 +1,48 @@
-import React from 'react'
-
+import { useContext } from 'react'
+import AdminDashboardCard from './AdminDashboardCard';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import AdminContext from '../../context/AdminContext';
 
 function AdminDashboard() {
     const user=JSON.parse(sessionStorage.getItem('user'));
+    const {users} = useContext(AdminContext);
     if(user.isadmin<70){
         return (
-            <div>Access Denied</div>
+            <div>
+                {toast.error('Access Denied')}
+            </div>
         )
     }
+
+    
+
+    
     
   return (
-    <div className="bg-base-200 min-h-screen">
-        <h1>AdminDashboard</h1>
-        <p>{user.id}</p>
-        <p>{user.first_name}</p>
-        <p>{user.last_name}</p>
-        <p>{user.email}</p>
-        <p>{user.isadmin}</p>
-       
+    <div className="bg-base-200 min-h-screen overflow-x-auto">
+        <h1 className="font-bold  text text-secondary text-3xl text-center p-10">Regisztált Felhasználói Adatok</h1>
+        <table className="table table-xs bg-white">
+        <thead>
+      <tr>
+        <th>Id</th>
+        <th>Vezetéknév</th>
+        <th>Keresztnév</th>
+        <th>Email cím</th>
+      </tr>
+    </thead>
+      {
+          users.map((user) => <AdminDashboardCard key={user.id} user={user} />)
+      }
+        <tfoot>
+      <tr>
+        <th>Id</th>
+        <th>Vezetéknév</th>
+        <th>Keresztnév</th>
+        <th>Email cím</th>
+      </tr>
+    </tfoot>
+  </table>
     </div>
   )
 }
