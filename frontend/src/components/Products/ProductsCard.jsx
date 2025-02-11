@@ -57,7 +57,6 @@ function ProductsCard({ product }) {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{product.name}</h2>
-        {/* <textarea  readOnly className="card-title">{product.description}</textarea> */}
         <h2 className="card-title">{product.price_per_day}</h2>
         <h2 className="card-title">{product.category.name}</h2> 
         <h2 className="card-title">{product.available ? "Elérhető" : "Nem elérhető"}</h2>

@@ -11,13 +11,7 @@ function Menu() {
   const { cartItems, getCartTotal } = useContext(CartContext);
 
 
-  console.log(profile);
-
-  /*   useEffect(() => {
-    if (user) {
-      fetchProfile(user.id);
-    }
-  }, [user, fetchProfile]); */
+  //console.log(profile);
 
   useEffect(() => {
     if (profile) {
@@ -59,8 +53,8 @@ function Menu() {
           <>
             {user.isadmin >= 70 && (
         <Link to="/categories" className="btn btn-ghost text-secondary">
-        Kategóriák
-      </Link>
+          Kategóriák
+        </Link>
             )}
           </>
         ) : null}
