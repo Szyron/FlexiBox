@@ -81,6 +81,7 @@ export const ServiceProvider=({children})=>{
 
     return <ServiceContext.Provider value={{
         update,
+        refresh,
         categories,
         products,
         setCategories,

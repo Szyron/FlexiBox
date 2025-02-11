@@ -51,7 +51,7 @@ function ProductsCard({ product }) {
       <figure>
         <img
         src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${product.file_path}`} 
-         
+          className="rounded-lg w-full h-48 object-cover"
           alt="Shoes"
         />
       </figure>

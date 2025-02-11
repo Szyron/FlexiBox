@@ -27,7 +27,7 @@ function CartView() {
       {cartItems.map((item) => (
         <div className="flex flex-col md:flex-row justify-between items-center rounded-box bg-base-100 m-5" key={item.id}>
           <div className="flex gap-4">
-            <img src='https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' alt="termék kép" className="rounded-md h-24 w-24 object-cover" />
+            <img src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${item.file_path}`} alt="termék kép" className="rounded-md h-24 w-24 object-cover" />
             <div className="flex flex-col">
               <h1 className="text-lg font-bold">{item.name}</h1>
               <p className="text-gray-600">{item.price_per_day}</p>
