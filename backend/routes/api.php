@@ -23,6 +23,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/profile', [ProfileController::class, 'store']);
 Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
 Route::post('/profile/{user_id}', [ProfileController::class, 'update']);
+Route::delete('/profile/{user_id}', [ProfileController::class, 'destroy']);
 Route::post('/category', [ServiceController::class, 'categoryStore']);
 Route::post('/product', [ServiceController::class, 'productStore']);
 Route::get('/product', [ServiceController::class, 'productIndex']);

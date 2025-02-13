@@ -120,4 +120,29 @@ class ProfileController extends Controller
     return response()->json($profile, 200);
 }
 
+public function destroy($user_id)
+{
+    $profile = Profile::where('user_id', $user_id)->first();
+
+    if (!$profile) {
+        return response()->json(['message' => 'Profile not found'], 200);
+    }
+
+    if ($profile->file_path) {
+        Storage::disk('public')->delete(str_replace('/storage/', '', $profile->file_path));
+    }
+
+    $profile->delete();
+
+    Log::info('Profile deleted successfully', [
+        'profile' => [
+            'id' => $profile->id,
+            'image' => $profile->file_path,
+        ],
+    ]);
+
+    return response()->json(['message' => 'Profile deleted successfully'], 200);
+
+
+}
 }

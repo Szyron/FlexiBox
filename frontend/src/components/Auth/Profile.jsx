@@ -43,6 +43,18 @@ const Profile = () => {
     setImage(e.target.files);
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/profile/${formDataProfile.user_id}`);
+      console.log(response.data);
+      toast.success('Profile Deleted');
+      update();
+      navigate('/');
+    } catch (error) {
+      console.error('There was an error deleting the profile!', error);
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -151,6 +163,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="flex justify-center gap-4">
+          <button type="button" onClick={() => handleDelete()} className="btn bg-rose-400 rounded-btn">Delete</button>
           <button type="button" onClick={() => navigate('/')} className="btn bg-rose-400 rounded-btn">Back</button>
           <button type="submit" className="btn bg-sky-400 rounded-btn">Save</button>
         </div>
