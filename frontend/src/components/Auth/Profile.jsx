@@ -81,7 +81,7 @@ const Profile = () => {
           },
         });
       };
-      console.log(response.data);
+    
     } catch (error) {
       console.error('There was an error uploading the Data!', error);
     }
@@ -101,7 +101,7 @@ const Profile = () => {
 
         <div className="card bg-base-100 w-96 shadow-xl">
           <div className='flex flex-col gap-4 items-center m-5'>
-            {!profile.file_path && <img
+            {profile.file_path ==null && <img
               alt=""
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               className="inline-block size-10 rounded-full ring-2 ring-white"
