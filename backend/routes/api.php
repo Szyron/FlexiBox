@@ -19,8 +19,10 @@ Route::put('/user/{id}', [RegisterController::class, 'edit']);
 Route::delete('/user/{id}', [RegisterController::class, 'destroy']);
 Route::patch('/profile', [RegisterController::class, 'update']);
 Route::post('/login', [LoginController::class, 'login']);
+
 Route::post('/profile', [ProfileController::class, 'store']);
 Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
+Route::post('/profile/{user_id}', [ProfileController::class, 'update']);
 Route::post('/category', [ServiceController::class, 'categoryStore']);
 Route::post('/product', [ServiceController::class, 'productStore']);
 Route::get('/product', [ServiceController::class, 'productIndex']);

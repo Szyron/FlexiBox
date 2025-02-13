@@ -20,7 +20,7 @@ export const AdminProvider = ({ children }) => {
             .then(res => res.json())
             .then(adat => {
                 setUsers(adat);
-                console.log(adat);
+                //console.log(adat);
             })
             .catch(err => alert(err));
     }, [refresh]);

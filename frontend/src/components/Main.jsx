@@ -9,7 +9,7 @@ function Main() {
 
             <div
                 className="divider divider-secondary text-2xl font-extrabold leading-9 tracking-tight mb-10 text-primary dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
-                Flexibox
+                Flexor
             </div>
             <p className="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300 ">
                Üdvözli a React Laraval Project

@@ -99,7 +99,7 @@ class ServiceController extends Controller
         try {
             $validatedData = $request->validate([
             'id' => 'required|integer|exists:products,id',
-            'image' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
+            'image' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:20480',
             'name' => 'sometimes|string',
             'description' => 'sometimes|string',
             'price_per_day' => 'sometimes|integer',

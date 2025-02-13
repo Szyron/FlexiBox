@@ -1,6 +1,7 @@
 import { use, useContext } from "react";
 import { useState, useEffect, createContext } from "react";
 import { CartContext } from "./CartContext";
+import axios from 'axios';
 
 
 
@@ -9,9 +10,11 @@ const AuthContext=createContext();
 export const AuthProvider=({children})=>{
     
     const [refresh,setRefresh]=useState(false);
-    const [user,setUser]=useState(null);
+    const [user,setUser]=useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
+    
+
     
     const {clearCart}=useContext(CartContext);
 
@@ -31,12 +34,6 @@ export const AuthProvider=({children})=>{
         .catch(err=>alert(err));
          }
         },[refresh]);
-
-    
-    
-    
-
-    
 
     const update=()=>{
         setRefresh(prev=>!prev);
