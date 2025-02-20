@@ -22,4 +22,9 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
 
     }
+
+    public function orderItems() //One-to-Many relationship
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

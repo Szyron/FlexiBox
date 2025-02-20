@@ -27,6 +27,7 @@ function AdminDashboardCard({user}) {
     }
 
 
+
   return (
     
    
@@ -38,6 +39,7 @@ function AdminDashboardCard({user}) {
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
         <td>{user.email}</td>
+        <td>{new Date(user.created_at).toISOString().split('T')[0]} {new Date(user.created_at).toISOString().split('T')[1].slice(0 , 8)}</td>
         <td><button onClick={() => openModal()} className='btn'>Edit</button></td>
         <td><button onClick={() => deleteUser(user.id)} className='btn'>Delete</button></td>
         {isModalOpen && (

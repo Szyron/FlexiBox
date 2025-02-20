@@ -29,6 +29,7 @@ function AdminDashboard() {
         <th>Vezetéknév</th>
         <th>Keresztnév</th>
         <th>Email cím</th>
+        <th>Létrehozva</th>
       </tr>
     </thead>
       {
@@ -40,6 +41,7 @@ function AdminDashboard() {
         <th>Vezetéknév</th>
         <th>Keresztnév</th>
         <th>Email cím</th>
+        <th>Létrehozva</th>
       </tr>
     </tfoot>
   </table>
