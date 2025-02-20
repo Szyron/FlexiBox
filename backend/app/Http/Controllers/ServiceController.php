@@ -148,8 +148,11 @@ class ServiceController extends Controller
         ], 200);
     }
 
-    public function productDestroy($id)
+    public function productDestroy(Request $request)
     {
+       // Get the product_id from the request headers
+       $id = $request->header('productId');
+       
         $product = Product::find($id);
         Storage::disk('public')->delete('product_images/' . $product->file_name);
         $product->delete();
@@ -159,8 +162,11 @@ class ServiceController extends Controller
         ], 200);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        // Get the category_id from the request headers
+       $id = $request->header('categoryId');
+
         $category = Category::find($id);
         $category->delete();
 

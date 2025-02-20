@@ -12,6 +12,8 @@ function NewCategory() {
 
     let cim = "Új Kategória Felvitele";
     let method = "POST";
+    let header = {"Content-type": "application/json"};
+
 
     let formObj = {
         id: "",
@@ -38,7 +40,7 @@ function NewCategory() {
     
     const onSubmit = (e) => {
       e.preventDefault();
-      backendMuvelet(formData,method,url);
+      backendMuvelet(formData,method,url,header);
       navigate("/categories");
     };
 

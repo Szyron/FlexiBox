@@ -42,9 +42,13 @@ class ProfileController extends Controller
         return response()->json($profile, 201);
     }
 
-    public function index($user_id)
+    public function index(Request $request)
+
     {
-        $profile = Profile::where('user_id', $user_id)->first();
+         // Get the user_id from the request headers
+         $userId = $request->header('user_id');
+
+        $profile = Profile::where('user_id', $userId)->first();
 
         if (!$profile) {
             return response()->json(['message' => 'Profile not found'], 200);
@@ -53,9 +57,12 @@ class ProfileController extends Controller
         return response()->json($profile, 200);
     }
 
-    public function update(Request $request, $user_id)
+    public function update(Request $request)
 {
-    $profile = Profile::where('user_id', $user_id)->first();
+     // Get the user_id from the request headers
+     $userId = $request->header('user_id');
+    
+    $profile = Profile::where('user_id', $userId)->first();
 
     if (!$profile) {
         // Create a new profile if it does not exist
@@ -74,7 +81,7 @@ class ProfileController extends Controller
             $validatedData['file_name'] = $fileName;
         }
 
-        $validatedData['user_id'] = $user_id;
+        $validatedData['user_id'] = $userId;   // Add the user_id to the validated data from request(userId)
         $profile = Profile::create($validatedData);
 
         Log::info('Profile created successfully', [
@@ -120,9 +127,12 @@ class ProfileController extends Controller
     return response()->json($profile, 200);
 }
 
-public function destroy($user_id)
+public function destroy(Request $request)
 {
-    $profile = Profile::where('user_id', $user_id)->first();
+     // Get the user_id from the request headers
+     $userId = $request->header('user_id');
+    
+    $profile = Profile::where('user_id', $userId)->first();
 
     if (!$profile) {
         return response()->json(['message' => 'Profile not found'], 200);

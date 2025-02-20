@@ -10,9 +10,18 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const { update, profile, refresh } = useContext(AuthContext);
   const [formDataProfile, setFormDataProfile] = useState([]);
-  const url = profile ? `${import.meta.env.VITE_BASE_URL}/profile/${formDataProfile.user_id}` : `${import.meta.env.VITE_BASE_URL}/profile`;
+  const url = profile ? `${import.meta.env.VITE_BASE_URL}/profile/update` : `${import.meta.env.VITE_BASE_URL}/profile`;
   const method = profile ? 'POST' : 'POST';
   //console.log(url);
+  const token = sessionStorage.getItem('usertoken');
+  const header = profile ? {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': `Bearer ${token}`,
+    'user_id': formDataProfile.user_id
+  } : {
+    'Content-Type': 'multipart/form-data'
+  };
+
   
 
   //const url = `${import.meta.env.VITE_BASE_URL}/profile`;
@@ -45,7 +54,13 @@ const Profile = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/profile/${formDataProfile.user_id}`);
+      const token = sessionStorage.getItem('usertoken');
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/profile/delete` , {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'user_id': formDataProfile.user_id
+        }
+    });
       console.log(response.data);
       toast.success('Profile Deleted');
       update();
@@ -84,13 +99,12 @@ const Profile = () => {
     try {
 
       /* const response = await axios.post(`http://localhost:8000/api/profile`, formData, */ {
+        
         const response = await axios({
           method: method,
           url: url,
           data: formData,
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+          headers: header
         });
       };
     

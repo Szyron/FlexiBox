@@ -27,9 +27,13 @@ export const AdminProvider = ({ children }) => {
 
     const deleteUser = async (id) => {
         try {
-            const keres = await fetch(`${import.meta.env.VITE_BASE_URL}/user/${id}`, {
+            const token = sessionStorage.getItem('usertoken');
+            const keres = await fetch(`${import.meta.env.VITE_BASE_URL}/user/delete`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                 'user_id': id
+                 }
             });
 
             const valasz = await keres.json();
@@ -50,10 +54,13 @@ export const AdminProvider = ({ children }) => {
 
     const backendMuvelet = async (data, method, url) => {
         try {
+            const token = sessionStorage.getItem('usertoken');
             const keres = await fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'user_id': data.id
                 },
                 body: JSON.stringify(data)
             });

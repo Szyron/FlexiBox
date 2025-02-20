@@ -12,7 +12,14 @@ function CategoriesCard({ category }) {
     }
 
     const torles = (category) => {
-        backendMuvelet(category, "DELETE", `${import.meta.env.VITE_BASE_URL}/category/${category.id}`);
+        backendMuvelet(
+            category,
+             "DELETE", 
+            `${import.meta.env.VITE_BASE_URL}/category/delete`,
+            { "Content-type": "application/json" , 
+                "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
+              "categoryId" : category.id} 
+        );
     }
 
 

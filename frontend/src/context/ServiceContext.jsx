@@ -28,11 +28,11 @@ export const ServiceProvider=({children})=>{
    
 
     
-    const backendMuvelet = async (adat, method, url) => {
+    const backendMuvelet = async (adat, method, url,header) => {
         try {
           const keres = await fetch(url, {
             method: method,
-            headers: { "Content-type": "application/json" },
+            headers: header,
             body: JSON.stringify(adat),
           });
       

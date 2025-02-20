@@ -15,22 +15,23 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/register', [RegisterController::class, 'register']);
-Route::put('/user/{id}', [RegisterController::class, 'edit']);
-Route::delete('/user/{id}', [RegisterController::class, 'destroy']);
+Route::put('/user/edit', [RegisterController::class, 'edit'])->middleware('auth:sanctum');
+Route::delete('/user/delete', [RegisterController::class, 'destroy'])->middleware('auth:sanctum');
 Route::patch('/profile', [RegisterController::class, 'update']);
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/profile', [ProfileController::class, 'store']);
-Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
-Route::post('/profile/{user_id}', [ProfileController::class, 'update']);
-Route::delete('/profile/{user_id}', [ProfileController::class, 'destroy']);
+Route::get('/profile/index', [ProfileController::class, 'index'])->middleware('auth:sanctum');
+//Route::post('/profile/{user_id}', [ProfileController::class, 'update']);
+Route::post('/profile/update', [ProfileController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('/category', [ServiceController::class, 'categoryStore']);
 Route::post('/product', [ServiceController::class, 'productStore']);
 Route::get('/product', [ServiceController::class, 'productIndex']);
 Route::post('/product/update', [ServiceController::class, 'productUpdate']);
-Route::delete('/product/{id}', [ServiceController::class, 'productDestroy']);
+Route::delete('/product/delete', [ServiceController::class, 'productDestroy'])->middleware('auth:sanctum');
 Route::get('/category', [ServiceController::class, 'index']);
-Route::delete('/category/{id}', [ServiceController::class, 'destroy']);
+Route::delete('/category/delete', [ServiceController::class, 'destroy'])->middleware('auth:sanctum');
 Route::patch('/category', [ServiceController::class, 'update']);
 Route::get('/users', [AdminController::class, 'index']);
 

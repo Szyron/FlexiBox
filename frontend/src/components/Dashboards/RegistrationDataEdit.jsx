@@ -25,7 +25,7 @@ function RegistrationDataEdit({user, closeFunction}) {
 
     const onSubmit = (e) => {
     e.preventDefault();
-    backendMuvelet(formData, "PUT", `${import.meta.env.VITE_BASE_URL}/user/${formData.id}`) 
+    backendMuvelet(formData, "PUT", `${import.meta.env.VITE_BASE_URL}/user/edit`) 
     closeFunction();
     update();
     navigate('/admindashboard');

@@ -100,7 +100,7 @@ class RegisterController extends Controller
     }
 
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request)
     {
         try {
             // Validate the incoming request
@@ -111,8 +111,11 @@ class RegisterController extends Controller
                // 'password' => 'required|string|min:8|confirmed',
             ]);
 
+             // Get the user_id from the request headers
+             $userId = $request->header('user_id');
+
             // Find the user by id
-            $user = User::find($id);
+            $user = User::find($userId);
 
             // Update the user
             $user->first_name = $request->first_name;
@@ -144,11 +147,14 @@ class RegisterController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+         // Get the user_id from the request headers
+         $userId = $request->header('user_id');
         try {
+
             // Find the user by id
-            $user = User::find($id);
+            $user = User::find($userId);
 
              // Check if the user has a profile
              if ($user->profile) {

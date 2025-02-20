@@ -14,15 +14,17 @@ export const AuthProvider=({children})=>{
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
     
-
+    const token = sessionStorage.getItem('usertoken');
     
     const {clearCart}=useContext(CartContext);
 
       useEffect(()=>{
        if (user){
-        fetch(`${import.meta.env.VITE_BASE_URL}/profile/${user.id}`,{ 
+        fetch(`${import.meta.env.VITE_BASE_URL}/profile/index`,{ 
           headers:{
-            Authorization:`Bearer ${user.token}`
+           //Authorization:`Bearer ${user.token}`,
+           'Authorization': `Bearer ${token}`,
+            'user_id':user.id
           }
         })
         .then(res=>res.json())

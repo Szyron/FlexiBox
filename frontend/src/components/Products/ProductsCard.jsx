@@ -36,7 +36,10 @@ function ProductsCard({ product }) {
     backendMuvelet(
        product,
       "DELETE",
-      `${import.meta.env.VITE_BASE_URL}/product/${product.id}`
+      `${import.meta.env.VITE_BASE_URL}/product/delete`,
+      { "Content-type": "application/json" , 
+        "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
+      "productId" : product.id} 
     );
   };
   console.log(product);
