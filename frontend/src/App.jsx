@@ -22,6 +22,10 @@ import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import RegistrationDataEdit from "./components/Dashboards/RegistrationDataEdit";
 import { AdminProvider } from "./context/AdminContext";
+import CartCheckout from "./components/Cart/CartCheckout";
+import NewPublicArea from "./components/Address/NewPublicArea";
+import { AddressProvider } from "./context/AddressContext";
+import PublicAreaList from "./components/Address/PublicAreaList";
 
 
 
@@ -39,6 +43,7 @@ function App() {
     <CartProvider>
      <AuthProvider>
      <ServiceProvider>
+      <AddressProvider>
      <BrowserRouter>
       <Menu/>
       <Routes>
@@ -47,11 +52,14 @@ function App() {
         <Route path="/login2" element={<Login2/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/cart" element={<CartView/>}/>
+        <Route path="/checkout" element={<CartCheckout/>}/>
+        <Route path="/newpublicarea" element={<NewPublicArea/>}/>
+        <Route path="/publicareas" element={<PublicAreaList/>}/>
         <Route path="/newcategory" element={<NewCategory/>}/>
         <Route path="/categories" element={<CategoriesList/>}/>
         <Route path="/newproduct" element={<NewProduct/>}/>
         <Route path="/products" element={<ProductsList/>}/>
-        <Route path="/productsinfo" element={<ProductsInfo/>}/>
+        <Route path="/productsinfo" element={<ProductsInfo/>}/> 
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
         <Route path="/userdashboard" element={<UserDashboard/>}/>
         <Route path="*" element={<Navigate to ="/"/>}/>
@@ -59,6 +67,7 @@ function App() {
       </Routes>
       </BrowserRouter>
       <Footer/>
+      </AddressProvider>
       </ServiceProvider>
       </AuthProvider>
       <ToastContainer/>

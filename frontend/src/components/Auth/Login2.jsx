@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Login2() {
   const navigate = useNavigate();
-  const { update, setUser } = useContext(AuthContext);
+  const { update, setUser, user } = useContext(AuthContext);
 
   const kuldes = (formData, method) => {
     fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
@@ -33,6 +33,8 @@ function Login2() {
       })
       .catch((err) => toast.error(err));
   };
+
+ 
 
   const onSubmit = (e) => {
     e.preventDefault();

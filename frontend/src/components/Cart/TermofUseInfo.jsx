@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {toast} from 'react-toastify';
+import {Link} from 'react-router-dom';
 
 
 function TermofUseInfo({ closeFunction }) {
@@ -13,7 +14,7 @@ function TermofUseInfo({ closeFunction }) {
     const openOrder = () => {
         if(isChecked){
             closeFunction();
-            toast.success('Order has been placed successfully');
+           // toast.success('Order has been placed successfully');
         } else {
             toast.error('Please accept the terms of use');
         }
@@ -38,11 +39,11 @@ function TermofUseInfo({ closeFunction }) {
           <div className="modal-action">
             {/* Close button */}
             <button className="btn" onClick={closeFunction}>
-              Close
+              Bezárás
             </button>
-            <button className="btn" onClick={openOrder} >
-              Megrendelés véglegesítése
-            </button>
+            <Link to="/checkout" className="btn" onClick={openOrder} >
+              Tovább a pénztárhoz
+            </Link>
 
           </div>
         </div>

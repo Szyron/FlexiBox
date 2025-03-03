@@ -56,7 +56,7 @@ function CartView() {
                 Teljes kosár kiürítése
               </button>
               <button onClick={()=>openPrivacyInfo()} className="m-2 px-4 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700" >
-                Megrendel
+                Tovább a pénztárhoz
               </button>
               {
             isPrivacyInfo && (<TermofUseInfo  closeFunction={()=>closePrivacyInfo()} />)

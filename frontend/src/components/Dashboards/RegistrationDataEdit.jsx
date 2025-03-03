@@ -115,15 +115,11 @@ function RegistrationDataEdit({user, closeFunction}) {
             </div>
             <div className="modal-action">
               <button className="btn">Save</button>
-            </div>
-            </form>
-       
-        <div className="modal-action">
-          {/* Close button */}
-          <button className="btn" onClick={closeFunction}>
+              <button className="btn" onClick={closeFunction}>
             Close
           </button>
-        </div>
+            </div>
+            </form>
       </div>
     </div>
   )

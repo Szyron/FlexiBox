@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     protected $table = 'address';
-    protected $fillable = ['zip', 'street', 'city', 'street_id'];
+    protected $fillable = ['zip', 'street', 'house_number', 'city','email','street_id','user_id'];
 
     public function streetType()
     {
         return $this->belongsTo(StreetType::class, 'street_id');
     }
 
-    public function customer()
+    
+
+    public function user()
     {
-        return $this->hasOne(Customer::class);
+        return $this->belongsTo(User::class);
     }
 }

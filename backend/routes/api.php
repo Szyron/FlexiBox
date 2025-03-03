@@ -7,6 +7,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AddressController;
+
 
 
 
@@ -34,6 +36,17 @@ Route::get('/category', [ServiceController::class, 'index']);
 Route::delete('/category/delete', [ServiceController::class, 'destroy'])->middleware('auth:sanctum');
 Route::patch('/category', [ServiceController::class, 'update']);
 Route::get('/users', [AdminController::class, 'index']);
+
+Route::post('/publicareaname', [AddressController::class, 'publicAreaStore']);
+Route::get('/publicareaname', [AddressController::class, 'publicAreaIndex']);
+Route::patch('/publicareaname', [AddressController::class, 'publicAreaUpdate']);
+Route::delete('/publicareaname/delete', [AddressController::class, 'publicAreaDestroy'])->middleware('auth:sanctum');
+Route::post('/address', [AddressController::class, 'addressStore']);
+//Route::get('/address', [AddressController::class, 'addressIndex']);
+Route::get('/address/{userId}', [AddressController::class, 'addressIndex']);
+//Route::patch('/address', [AddressController::class, 'addressUpdate']);
+//Route::delete('/address/delete', [AddressController::class, 'addressDestroy'])->middleware('auth:sanctum');
+
 
 //Role management
 Route::group(['middleware' => ['auth', 'checkadmin:70']], function () {

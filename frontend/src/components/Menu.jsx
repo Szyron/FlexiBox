@@ -39,6 +39,32 @@ function Menu() {
         {user ? (
           <>
             {user.isadmin >= 70 && (
+              <Link to="/newpublicarea" className="btn btn-ghost text-secondary">
+                Új Közterület
+              </Link>
+              
+
+            )}
+          </>
+        ) : null}
+      </div>
+      <div className="flex-none">
+        {user ? (
+          <>
+            {user.isadmin >= 70 && (
+              <Link to="/publicareas" className="btn btn-ghost text-secondary">
+                Közterületek
+              </Link>
+              
+
+            )}
+          </>
+        ) : null}
+      </div>
+      <div className="flex-none">
+        {user ? (
+          <>
+            {user.isadmin >= 70 && (
               <Link to="/newcategory" className="btn btn-ghost text-secondary">
                 Új Kategória
               </Link>

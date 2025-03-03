@@ -9,9 +9,15 @@ class Order extends Model
     protected $table = 'orders';
     protected $fillable = ['total', 'order_item_id'];
 
-    public function customer()
+   
+
+    public function orderItem()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->hasMany(OrderItem::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

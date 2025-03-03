@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('address', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->integer('zip')->unsigned();  // unsigned() nincs negativ szam
             $table->string('street');
+            $table->string('house_number');
             $table->string('city');
+            $table->string('email');
             $table->foreignId('street_id')->constrained('street_types')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

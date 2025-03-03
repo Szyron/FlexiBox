@@ -15,6 +15,9 @@ export const AuthProvider=({children})=>{
     const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
     
     const token = sessionStorage.getItem('usertoken');
+
+    
+    console.log('faszuserauthban',user);
     
     const {clearCart}=useContext(CartContext);
 
