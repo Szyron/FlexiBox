@@ -8,6 +8,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -46,6 +48,14 @@ Route::post('/address', [AddressController::class, 'addressStore']);
 Route::get('/address/{userId}', [AddressController::class, 'addressIndex']);
 //Route::patch('/address', [AddressController::class, 'addressUpdate']);
 //Route::delete('/address/delete', [AddressController::class, 'addressDestroy'])->middleware('auth:sanctum');
+
+Route::post('/payment' , [PaymentController::class, 'store']);
+Route::get('/payment' , [PaymentController::class, 'index']);
+Route::patch('/payment' , [PaymentController::class, 'update']);
+Route::delete('/payment/delete' , [PaymentController::class, 'destroy']);
+
+//ORDER CONTROLLER
+Route::post('/neworder' , [OrderController::class, 'store']);
 
 
 //Role management

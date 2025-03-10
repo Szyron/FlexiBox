@@ -16,9 +16,6 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
-            'city' => 'required|string|max:255',
-            'street' => 'required|string|max:255',
-            'zip' => 'required|string|max:10',
         ]);
 
         if ($request->hasFile('image')) {
@@ -67,9 +64,6 @@ class ProfileController extends Controller
     if (!$profile) {
         // Create a new profile if it does not exist
         $validatedData = $request->validate([
-            'city' => 'required|string|max:255',
-            'street' => 'required|string|max:255',
-            'zip' => 'required|string|max:10',
             'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
         ]);
 
@@ -96,9 +90,6 @@ class ProfileController extends Controller
 
     // Update the existing profile
     $validatedData = $request->validate([
-        'city' => 'required|string|max:255',
-        'street' => 'required|string|max:255',
-        'zip' => 'required|string|max:10',
         'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
     ]);
 

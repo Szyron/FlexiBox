@@ -22,10 +22,13 @@ import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import RegistrationDataEdit from "./components/Dashboards/RegistrationDataEdit";
 import { AdminProvider } from "./context/AdminContext";
-import CartCheckout from "./components/Cart/CartCheckout";
 import NewPublicArea from "./components/Address/NewPublicArea";
 import { AddressProvider } from "./context/AddressContext";
 import PublicAreaList from "./components/Address/PublicAreaList";
+import OrderCheckout from "./components/Cart/OrderCheckout";
+import { PaymentProvider } from "./context/PaymentContext";
+import NewPaymentMethod from "./components/Payments/NewPaymentMethod";
+import PaymentMethodList from "./components/Payments/PaymentMethodList";
 
 
 
@@ -38,9 +41,10 @@ function App() {
 
   return (
    <div>
+    <PaymentProvider>
     <AdminProvider>
-     <OrderProvider>
     <CartProvider>
+     <OrderProvider>
      <AuthProvider>
      <ServiceProvider>
       <AddressProvider>
@@ -52,7 +56,9 @@ function App() {
         <Route path="/login2" element={<Login2/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/cart" element={<CartView/>}/>
-        <Route path="/checkout" element={<CartCheckout/>}/>
+        <Route path="/checkout" element={<OrderCheckout/>}/>
+        <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
+        <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
         <Route path="/newpublicarea" element={<NewPublicArea/>}/>
         <Route path="/publicareas" element={<PublicAreaList/>}/>
         <Route path="/newcategory" element={<NewCategory/>}/>
@@ -71,9 +77,10 @@ function App() {
       </ServiceProvider>
       </AuthProvider>
       <ToastContainer/>
-      </CartProvider>
       </OrderProvider>
+      </CartProvider>
       </AdminProvider>
+      </PaymentProvider>
     
    </div>
   )

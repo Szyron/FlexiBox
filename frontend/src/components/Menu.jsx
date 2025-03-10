@@ -36,86 +36,36 @@ function Menu() {
         </Link>
       </div>
       <div className="flex-none">
-        {user ? (
-          <>
-            {user.isadmin >= 70 && (
-              <Link to="/newpublicarea" className="btn btn-ghost text-secondary">
-                Új Közterület
-              </Link>
-              
-
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="flex-none">
-        {user ? (
-          <>
-            {user.isadmin >= 70 && (
-              <Link to="/publicareas" className="btn btn-ghost text-secondary">
-                Közterületek
-              </Link>
-              
-
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="flex-none">
-        {user ? (
-          <>
-            {user.isadmin >= 70 && (
-              <Link to="/newcategory" className="btn btn-ghost text-secondary">
-                Új Kategória
-              </Link>
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="flex-none">
-
-
-      {user ? (
-          <>
-            {user.isadmin >= 70 && (
-        <Link to="/categories" className="btn btn-ghost text-secondary">
-          Kategóriák
-        </Link>
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="flex-none">
-        {user ? (
-          <>
-            {user.isadmin >= 70 && (
-              <Link to="/newproduct" className="btn btn-ghost text-secondary">
-                Új Termék
-              </Link>
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="flex-none">
-        <Link to="/products" className="btn btn-ghost text-secondary">
+        <Link to="/products" className="btn btn-ghost text-secondary font-bold">
           Termékek
         </Link>
       </div>
-      <div>
-        {user ? (
-          <>
-            {user.isadmin >= 70 && (
-              <Link to="/admindashboard" className="btn btn-ghost text-secondary">Admin Dashboard</Link>
-            )}
-
-            {user.isadmin > 10 && user.isadmin < 70 && (
-              <Link to="/userdashboard" className="justify-between btn btn-ghost text-secondary">
-                User Dashboard
-              </Link>
-            )}
-          </>
-        ) : null}
-      </div>
+      {user ? (
+        <>
+        {user.isadmin >= 70 && (
+            <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <details className="relative">
+                <summary className="text-secondary font-bold">Admin Dashboard</summary>
+                <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
+                    <li><Link to="/admindashboard" className="btn btn-ghost text-secondary">Felhasználó Kezelő</Link></li>
+                    <li><Link to="/newproduct" className="btn btn-ghost text-secondary">Új Termék</Link></li>
+                    <li><Link to="/newcategory" className="btn btn-ghost text-secondary">Új Kategória</Link></li>
+                    <li><Link to="/categories" className="btn btn-ghost text-secondary">Kategóriák</Link></li>
+                    <li><Link to="/newpublicarea" className="btn btn-ghost text-secondary">Új Közterület</Link></li>
+                    <li><Link to="/publicareas" className="btn btn-ghost text-secondary">Közterületek</Link></li>
+                    <li><Link to="/newpaymentmethod" className="btn btn-ghost text-secondary">Új Fizetési mód</Link></li>
+                    <li><Link to="/paymentmethods" className="btn btn-ghost text-secondary">Fizetési módok</Link></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </div>
+        )
+      }
+        </>
+      ) : null}
 
       <div className="flex-none flex gap-4 items-center">
         <div className="dropdown dropdown-end">

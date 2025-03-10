@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('item_price');
             $table->integer('line_total');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

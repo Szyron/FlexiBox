@@ -108,7 +108,7 @@ class AddressController extends Controller
                'message' => 'User not found'
            ], 404);
          }
-        $addresses = Address::where('user_id', $userId)->get();
+        $addresses = Address::where('user_id', $userId)->with('streetType')->get();
         
         return response()->json([
             'addresses' => $addresses

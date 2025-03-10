@@ -11,9 +11,6 @@ class Profile extends Model
         'file_name',
         'file_path',
         'user_id',
-        'city',
-        'street',
-        'zip',
     ];
 
      /**

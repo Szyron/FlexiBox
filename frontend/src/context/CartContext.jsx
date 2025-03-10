@@ -3,10 +3,11 @@ import { createContext, useState, useEffect } from 'react'
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
+  const [cartItems, setCartItems] = useState(sessionStorage.getItem('cartItems') ? JSON.parse(sessionStorage.getItem('cartItems')) : [])
 
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+    
 
     if (isItemInCart) {
       setCartItems(
@@ -46,11 +47,11 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    const cartItems = localStorage.getItem("cartItems");
+    const cartItems = sessionStorage.getItem("cartItems");
     if (cartItems) {
       setCartItems(JSON.parse(cartItems));
     }
@@ -60,6 +61,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
+        setCartItems,
         addToCart,
         removeFromCart,
         clearCart,

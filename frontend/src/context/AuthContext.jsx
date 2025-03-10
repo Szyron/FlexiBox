@@ -2,6 +2,8 @@ import { use, useContext } from "react";
 import { useState, useEffect, createContext } from "react";
 import { CartContext } from "./CartContext";
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import OrderContext from "./OrderContext";
 
 
 
@@ -13,7 +15,6 @@ export const AuthProvider=({children})=>{
     const [user,setUser]=useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
-    
     const token = sessionStorage.getItem('usertoken');
 
     
@@ -57,11 +58,14 @@ export const AuthProvider=({children})=>{
         sessionStorage.removeItem('usertoken');
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('profile');
+        sessionStorage.removeItem('cartItems');
         clearCart();
         setIsLoggedIn(false);
-        update();
         setUser(null);
         setProfile(null);
+        update();
+
+        toast.success('Logged out successfully');
     }
    
 

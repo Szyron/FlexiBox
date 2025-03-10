@@ -15,8 +15,10 @@ function TermofUseInfo({ closeFunction }) {
         if(isChecked){
             closeFunction();
            // toast.success('Order has been placed successfully');
-        } else {
+        } else { 
             toast.error('Please accept the terms of use');
+            closeFunction();
+            
         }
     }
 
