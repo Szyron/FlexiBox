@@ -3,12 +3,14 @@ import CartCheckout from './CartCheckout'
 import PaymentMethod from './PaymentMethod'
 import { useState,useContext } from 'react'
 import OrderContext from '../../context/OrderContext'
+import { useNavigate } from 'react-router-dom'
 
 
 function OrderCheckout() {
 
   const [paymentMethod, setPaymentMethod] = useState(""); // Kezdeti állapot, itt tároljuk a fizetési módot
   const {submitOrder} = useContext(OrderContext);
+  const navigate = useNavigate();
 
   // A PaymentMethod-ból jövő fizetési mód frissítése
   const handlePaymentChange = (paymentType) => {
@@ -19,8 +21,10 @@ function OrderCheckout() {
   const finalSubmit = (e) => {
     e.preventDefault();
     submitOrder();
+    
     console.log("Kiválasztott fizetési mód: ", paymentMethod);
     // Itt végezheted el a véglegesítést, például a backend hívást
+    navigate('/userorder');
   };
 
   return (

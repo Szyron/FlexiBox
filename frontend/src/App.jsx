@@ -29,6 +29,7 @@ import OrderCheckout from "./components/Cart/OrderCheckout";
 import { PaymentProvider } from "./context/PaymentContext";
 import NewPaymentMethod from "./components/Payments/NewPaymentMethod";
 import PaymentMethodList from "./components/Payments/PaymentMethodList";
+import UserOrder from "./components/Cart/UserOrder";
 
 
 
@@ -41,6 +42,7 @@ function App() {
 
   return (
    <div>
+    
     <PaymentProvider>
     <AdminProvider>
     <CartProvider>
@@ -57,6 +59,7 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/cart" element={<CartView/>}/>
         <Route path="/checkout" element={<OrderCheckout/>}/>
+        <Route path="/userorder" element={<UserOrder/>}/>
         <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
         <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
         <Route path="/newpublicarea" element={<NewPublicArea/>}/>
@@ -81,6 +84,7 @@ function App() {
       </CartProvider>
       </AdminProvider>
       </PaymentProvider>
+    
     
    </div>
   )

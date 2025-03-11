@@ -2,6 +2,7 @@ import React, { createContext, useState,useContext } from 'react';
 import { toast } from 'react-toastify';
 import  {CartContext}  from './CartContext';
 
+
 const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
@@ -12,7 +13,7 @@ export const OrderProvider = ({ children }) => {
     const [formDataPayment, setFormDataPayment] = useState({ card_type: "" });
 
     const {cartItems,setCartItems} = useContext(CartContext);
-
+    
     console.log("order test cartitems",sessionStorage.getItem('cartItems'));
     
 
@@ -65,7 +66,7 @@ export const OrderProvider = ({ children }) => {
             const valasz = await keres.json();
 
             if (keres.ok) {
-                toast.success('Sikeres adatfelvitel!');
+                toast.success('Sikeres adatfelvitel!');          
             } else {
                 toast.error(valasz.error || 'Valami hiba történt!');
             }

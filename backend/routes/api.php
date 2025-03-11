@@ -56,6 +56,7 @@ Route::delete('/payment/delete' , [PaymentController::class, 'destroy']);
 
 //ORDER CONTROLLER
 Route::post('/neworder' , [OrderController::class, 'store']);
+Route::get('/order',[OrderController::class,'index'])->middleware('auth:sanctum');
 
 
 //Role management

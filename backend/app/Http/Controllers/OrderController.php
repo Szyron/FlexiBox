@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Address;
 
+
 class OrderController extends Controller
 {
 
@@ -66,5 +67,24 @@ class OrderController extends Controller
         }
         
         return response()->json(['message' => 'Order created successfully'], 201);
+    }
+    
+    public function index(Request $request)
+    {
+       // Get the user_id from the request headers
+       $user_id = $request->header('userId');
+    
+       
+        
+
+       // Fetch orders for the authenticated user with related data
+       $orders = Order::with(['orderItem', 'address', 'user'])
+           ->where('user_id', $user_id)
+           ->orderBy('created_at', 'desc')
+        ->first();
+         //  ->get();
+
+       return response()->json([$orders]);
+        
     }
 }
