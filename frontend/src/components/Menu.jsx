@@ -4,20 +4,54 @@ import { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { toast } from "react-toastify";
+import BrowserReload from "./BrowserReload";
 
 function Menu() {
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const { logout, update, profile } = useContext(AuthContext);
+  //const user = JSON.parse(sessionStorage.getItem("user"));
+  //const { logout, update, profile } = useContext(AuthContext);
+  const token = sessionStorage.getItem("usertoken");
+  const {fetchUserData, fetchProfileData, refresh, logout, update, profile, setProfile, setUser, user, loading, setLoading } = useContext(AuthContext);
   const { cartItems, getCartTotal } = useContext(CartContext);
+ 
 
-
+  console.log("user", user);
+  console.log("profile", profile);
   //console.log(profile);
 
-  useEffect(() => {
-    if (profile) {
-      sessionStorage.setItem("profile", JSON.stringify(profile));
+  // useEffect(() => {
+  //   if (profile) {
+  //     sessionStorage.setItem("profile", JSON.stringify(profile));
+  //   }
+  // }, [profile]);
+
+  useEffect( () => {
+    
+    if (token) {
+      fetchUserData();
+     // {loading && ( <BrowserReload />)}
+      toast.success("Frissítetted a bongésződet!",{duration: 5000});
+     
+      setLoading(true);
     }
-  }, [profile]);
+    
+  }
+  
+  , []);
+
+  useEffect(() => {
+    
+    if (user && token) {
+    fetchProfileData();
+    
+    }
+    
+  }
+
+  
+  , [user]);
+
+  
 
   const navigate = useNavigate();
 
@@ -111,7 +145,7 @@ function Menu() {
 
         {user ? (
           <>
-            <div className="m-5 rounded-box btn btn-ghost">
+            <div className="rounded-box btn btn-ghost">
               <Link to="/profile" className="justify-between">
                 <h1 className="font-bold text-secondary">Hello, {user.first_name} </h1>
               </Link>
@@ -137,6 +171,7 @@ function Menu() {
                         }`}
                       //src={`http://localhost:8000/storage/images/1738181966_profileimage.jpg`}
                       alt="Pofile"
+                     
                     />
                   </>
                 ) : (
