@@ -31,6 +31,7 @@ function AdminDashboard() {
         <th>Vezetéknév</th>
         <th>Keresztnév</th>
         <th>Email cím</th>
+        <th>Jogosultság</th>
         <th>Létrehozva</th>
       </tr>
     </thead>

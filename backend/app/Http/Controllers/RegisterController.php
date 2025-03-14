@@ -108,6 +108,7 @@ class RegisterController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
+                'is_admin' => 'required|integer|min:0|max:100',
                // 'password' => 'required|string|min:8|confirmed',
             ]);
 
@@ -121,6 +122,7 @@ class RegisterController extends Controller
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->email = $request->email;
+            $user->is_admin = $request->is_admin;
            // $user->password = Hash::make($request->password);
 
             // Save the user to the database
