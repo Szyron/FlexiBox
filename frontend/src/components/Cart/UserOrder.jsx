@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import secureStorage from '../../utils/secureStorage';
 
 function UserOrder() {
 
-  const user = JSON.parse(sessionStorage.getItem('user'))
+  //const user = JSON.parse(sessionStorage.getItem('user'))
+  const user = secureStorage.getItem('user');
   const [orders, setOrders] = useState([])
   
   useEffect(() => {

@@ -3,10 +3,12 @@ import { useContext,useState } from "react";
 import ServiceContext from "../../context/ServiceContext";
 import ProductsInfo from "./ProductsInfo";
 import {CartContext} from "../../context/CartContext";
+import secureStorage from "../../utils/secureStorage";
 
 function ProductsCard({ product }) {
   const { cartItems, addToCart } = useContext(CartContext);
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  //const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = secureStorage.getItem("user");
   const navigate = useNavigate();
   const { backendMuvelet } = useContext(ServiceContext);
   const [isInfo, setInfo] = useState(false);

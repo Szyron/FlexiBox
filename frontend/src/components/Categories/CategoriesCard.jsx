@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import ServiceContext from '../../context/ServiceContext';
+import secureStorage from '../../utils/secureStorage';
 
 function CategoriesCard({ category }) {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    //const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = secureStorage.getItem('user');
     const navigate = useNavigate();
     const { backendMuvelet } = useContext(ServiceContext);
 

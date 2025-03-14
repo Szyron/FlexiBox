@@ -4,6 +4,7 @@ import { CartContext } from "./CartContext";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import OrderContext from "./OrderContext";
+import secureStorage from "../utils/secureStorage";
 
 
 
@@ -14,7 +15,8 @@ export const AuthProvider=({children})=>{
     const [refresh,setRefresh]=useState(false);
     const [user,setUser]=useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
+    //const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
+    const [profile, setProfile] = useState(secureStorage.getItem('profile') ? JSON.parse(secureStorage.getItem('profile')) : null);
     const token = sessionStorage.getItem('usertoken');
 
     
@@ -45,19 +47,21 @@ export const AuthProvider=({children})=>{
         setRefresh(prev=>!prev);
     }
 
-   const login=()=>{
-    sessionStorage.setItem('usertoken',token.access_token);
-    sessionStorage.setItem('user',user);
-    setIsLoggedIn(true);
-    update();
-    }
+   //const login=()=>{
+  //   sessionStorage.setItem('usertoken',token.access_token);
+  //   sessionStorage.setItem('user',user);
+  //   setIsLoggedIn(true);
+  //   update();
+   // }
 
 
 
     const logout=()=>{
         sessionStorage.removeItem('usertoken');
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('profile');
+        //sessionStorage.removeItem('user');
+        //sessionStorage.removeItem('profile');
+        secureStorage.removeItem('user');
+        secureStorage.removeItem('profile');
         sessionStorage.removeItem('cartItems');
         clearCart();
         setIsLoggedIn(false);
@@ -72,7 +76,6 @@ export const AuthProvider=({children})=>{
     return <AuthContext.Provider value={{
         refresh,
         update,
-        login,
         logout,
         user,
         setUser,

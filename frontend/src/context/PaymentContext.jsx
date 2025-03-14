@@ -1,6 +1,7 @@
 import { use, useContext } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import secureStorage from '../utils/secureStorage';
 
 
 
@@ -12,7 +13,8 @@ export const PaymentProvider = ({ children }) => {
     const [refresh, setRefresh] = useState(false);
     const [payments, setPayments] = useState([]);
     const token = sessionStorage.getItem('usertoken');
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    //const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = secureStorage.getItem('user');
 
     const update = () => {
         setRefresh(prev => !prev);

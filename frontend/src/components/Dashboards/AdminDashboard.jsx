@@ -3,9 +3,11 @@ import AdminDashboardCard from './AdminDashboardCard';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import AdminContext from '../../context/AdminContext';
+import secureStorage from '../../utils/secureStorage';
 
 function AdminDashboard() {
-    const user=JSON.parse(sessionStorage.getItem('user'));
+    //const user=JSON.parse(sessionStorage.getItem('user'));
+    const user = secureStorage.getItem('user');
     const {users} = useContext(AdminContext);
     if(user.isadmin<70){
         return (

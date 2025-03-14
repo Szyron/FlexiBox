@@ -4,9 +4,11 @@ import { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import secureStorage from "../utils/secureStorage";
 
 function Menu() {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  //const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = secureStorage.getItem("user");
   const { logout, update, profile } = useContext(AuthContext);
   const { cartItems, getCartTotal } = useContext(CartContext);
 
@@ -15,7 +17,8 @@ function Menu() {
 
   useEffect(() => {
     if (profile) {
-      sessionStorage.setItem("profile", JSON.stringify(profile));
+      //sessionStorage.setItem("profile", JSON.stringify(profile));
+      secureStorage.setItem("profile", JSON.stringify(profile));
     }
   }, [profile]);
 

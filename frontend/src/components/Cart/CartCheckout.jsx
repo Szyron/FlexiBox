@@ -4,12 +4,14 @@ import { useContext } from "react";
 import AddressContext from "../../context/AddressContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrderContext from "../../context/OrderContext";
+import secureStorage from "../../utils/secureStorage";
 
 function CartCheckout() {
   const navigate = useNavigate();
   const { areas, address, backendMuvelet, refresh } = useContext(AddressContext);
   const { formData, setFormData } = useContext(OrderContext);
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  //const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = secureStorage.getItem("user");
   const token = sessionStorage.getItem("usertoken");
   const location = useLocation();
 

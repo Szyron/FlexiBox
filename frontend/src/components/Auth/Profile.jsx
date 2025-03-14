@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 import CartCheckout from '../Cart/CartCheckout';
+import secureStorage from '../../utils/secureStorage';
 
 
 const Profile = () => {
@@ -24,7 +25,8 @@ const Profile = () => {
   };
 
 
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  //const user = JSON.parse(sessionStorage.getItem('user'));
+  const user = secureStorage.getItem('user');
 
 
   useEffect(() => {

@@ -1,14 +1,16 @@
 import React, { createContext, useState,useContext } from 'react';
 import { toast } from 'react-toastify';
 import  {CartContext}  from './CartContext';
+import secureStorage from '../utils/secureStorage';
 
 
 const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
     const [refresh,setRefresh]=useState(false);
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const orderUser= sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
+    //const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = secureStorage.getItem('user');
+    //const orderUser= sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
     const [isPrivacyInfo, setPrivacyInfo] = useState(false);
     const [formDataPayment, setFormDataPayment] = useState({ card_type: "" });
 

@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { createCookieSessionStorage, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import  secureStorage  from "../../utils/secureStorage";
+
 
 function Login2() {
   const navigate = useNavigate();
@@ -20,7 +22,9 @@ function Login2() {
         if (!data.error) {
           sessionStorage.setItem("usertoken", data.access_token);
           //sessionStorage.setItem('user',data.user);
-          sessionStorage.setItem("user", JSON.stringify(data.user));
+          //sessionStorage.setItem("user", JSON.stringify(data.user));
+          secureStorage.setItem('user', { ...data.user });
+
           console.log(data.user);
           update();
           setUser(data.user);
