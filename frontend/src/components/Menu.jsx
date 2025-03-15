@@ -60,6 +60,8 @@ function Menu() {
                     <li><Link to="/publicareas" className="btn btn-ghost text-secondary">Közterületek</Link></li>
                     <li><Link to="/newpaymentmethod" className="btn btn-ghost text-secondary">Új Fizetési mód</Link></li>
                     <li><Link to="/paymentmethods" className="btn btn-ghost text-secondary">Fizetési módok</Link></li>
+                    <li><Link to="/newrole" className="btn btn-ghost text-secondary">Új Jogosultság</Link></li>
+                    <li><Link to="/roles" className="btn btn-ghost text-secondary">Jogosultságok</Link></li>
                 </ul>
               </details>
             </li>

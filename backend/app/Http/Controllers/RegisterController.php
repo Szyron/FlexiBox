@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Profile;
+use App\Models\Role;
 use Exception;
 
 class RegisterController extends Controller
@@ -21,7 +22,11 @@ class RegisterController extends Controller
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
+                'role_id' => 'integer|exists:roles,id'
             ]);
+
+             // Determine the role_id, default to 'User' role if not provided
+             $roleId = $request->role_id ?? Role::where('warrant_name', 'user')->first()->id;
 
             // Create a new user
             $user = new User([
@@ -29,6 +34,7 @@ class RegisterController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'role_id' => $roleId
             ]);
 
             // Save the user to the database
@@ -108,7 +114,8 @@ class RegisterController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
-                'is_admin' => 'required|integer|min:0|max:100',
+                'role_id' => 'integer|exists:roles,id'
+                //'isadmin' => 'required|integer|min:0|max:100',
                // 'password' => 'required|string|min:8|confirmed',
             ]);
 
@@ -122,7 +129,8 @@ class RegisterController extends Controller
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->email = $request->email;
-            $user->is_admin = $request->is_admin;
+            $user->role_id = $request->role_id;
+           // $user->isadmin = $request->isadmin;
            // $user->password = Hash::make($request->password);
 
             // Save the user to the database
@@ -184,6 +192,128 @@ class RegisterController extends Controller
             // Return a JSON response with the error message
             return response()->json([
                 'message' => 'Delete failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function roleStore(Request $request)
+    {
+        try {
+            // Validate the incoming request
+            $request->validate([
+               'power' => 'required|integer|min:0|max:100',
+                'warrant_name' => 'required|string|max:255|unique:roles',
+            ]);
+
+            // Create a new role
+            $role = new Role([
+                'power' => $request->power,
+                'warrant_name' => $request->warrant_name,
+            ]);
+
+            // Save the role to the database
+            $role->save();
+
+            // Return a JSON response with the role
+            return response()->json([
+                'message' => 'Role created',
+                'role' => $role
+            ], 201);
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Error during role creation: ' . $e->getMessage());
+
+            // Return a JSON response with the error message
+            return response()->json([
+                'message' => 'Role creation failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function roleIndex()
+    {
+        try {
+            // Get all roles from the database
+            $roles = Role::all();
+
+            // Return a JSON response with the roles
+            return response()->json([
+                'roles' => $roles
+            ], 200);
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Error during role index: ' . $e->getMessage());
+
+            // Return a JSON response with the error message
+            return response()->json([
+                'message' => 'Role index failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function roleUpdate (Request $request)
+    {
+         // Get the role_id from the request headers
+        // $RoleId = $request->header('role_id');
+        try {
+            // Validate the incoming request
+            $request->validate([
+                'power' => 'required|integer|min:0|max:100',
+                'warrant_name' => 'required|string|max:255',
+            ]);
+
+            // Find the role by id
+            $role = Role::find($request->id);
+
+            // Update the role
+            $role->power = $request->power;
+            $role->warrant_name = $request->warrant_name;
+
+            // Save the role to the database
+            $role->save();
+
+            // Return a JSON response with the role
+            return response()->json([
+                'message' => 'Role updated',
+                'role' => $role
+            ], 200);
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Error during role update: ' . $e->getMessage());
+
+            // Return a JSON response with the error message
+            return response()->json([
+                'message' => 'Role update failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function roleDestroy(Request $request)
+    {
+        // Get the role_id from the request headers
+        $roleId = $request->header('roleId');
+        try {
+            // Find the role by id
+            $role = Role::find($roleId);
+
+            // Delete the role
+            $role->delete();
+
+            // Return a JSON response with a success message
+            return response()->json([
+                'message' => 'Role deleted'
+            ], 200);
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Error during role delete: ' . $e->getMessage());
+
+            // Return a JSON response with the error message
+            return response()->json([
+                'message' => 'Role delete failed',
                 'error' => $e->getMessage()
             ], 500);
         }

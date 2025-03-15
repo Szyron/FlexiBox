@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('isadmin')->default(0); // 0: user, 70: admin, 100: super admin
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->integer('power')->unique()->default(11);
+            $table->string('warrant_name')->unique();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('isadmin');
-        });
+        Schema::dropIfExists('roles');
     }
 };

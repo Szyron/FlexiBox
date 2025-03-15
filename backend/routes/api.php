@@ -58,6 +58,10 @@ Route::delete('/payment/delete' , [PaymentController::class, 'destroy']);
 Route::post('/neworder' , [OrderController::class, 'store']);
 Route::get('/order',[OrderController::class,'index'])->middleware('auth:sanctum');
 
+Route::post('/role', [RegisterController::class, 'roleStore'])->middleware('auth:sanctum');
+Route::get('/role', [RegisterController::class, 'roleIndex'])->middleware('auth:sanctum');
+Route::patch('/role', [RegisterController::class, 'roleUpdate'])->middleware('auth:sanctum');
+Route::delete('/role/delete', [RegisterController::class, 'roleDestroy'])->middleware('auth:sanctum');
 
 //Role management
 Route::group(['middleware' => ['auth', 'checkadmin:70']], function () {

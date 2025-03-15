@@ -23,6 +23,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -65,4 +66,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    
 }

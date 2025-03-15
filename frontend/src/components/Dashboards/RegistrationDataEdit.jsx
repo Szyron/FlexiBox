@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import AdminContext from '../../context/AdminContext';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
+import { useEffect } from 'react';
+import secureStorage from '../../utils/secureStorage';
 
 
 
@@ -10,15 +13,39 @@ function RegistrationDataEdit({user, closeFunction}) {
     const navigate = useNavigate();
 
     const {backendMuvelet, update} = useContext(AdminContext);
+    //const roles = sessionStorage.getItem('roles') ? JSON.parse(sessionStorage.getItem('roles')) : null;
+    const [roles, setRoles] = useState([]);
+    //const roles = secureStorage.getItem('roles');
+    // let roles = [
+    //     {
+    //         id: 1,
+    //         warrant_name: 'admin'
+    //     },
+    //     {
+    //         id: 2,
+    //         warrant_name: 'user'
+    //     }
+    // ];
 
+    
+    
    
     const [formData, setFormData] = useState({
     id: user.id,
     first_name: user.first_name,
     last_name: user.last_name,
     email: user.email,
-    isadmin: user.isadmin
+    //isadmin: user.isadmin
+    role_id: user.role_id
     });
+
+    useEffect(() => {
+      // Parse roles from sessionStorage
+      const storedRoles = secureStorage.getItem('roles');
+      if (storedRoles) {
+        setRoles(JSON.parse(storedRoles));
+      }
+    }, []);
 
     const writeData = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -118,7 +145,7 @@ function RegistrationDataEdit({user, closeFunction}) {
               <label className="label">
                 <span className="label-text">Jogosultság</span>
               </label>
-              <label className="input input-bordered flex items-center gap-2">
+              {/* <label className="input input-bordered flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -137,7 +164,13 @@ function RegistrationDataEdit({user, closeFunction}) {
                   onChange={writeData}
                   value={formData.isadmin}
                 />
-              </label>
+              </label>   */}
+               <select className="select select-bordered w-full" id="role_id" onChange={writeData} value={formData.role_id}>
+                {
+                    roles.map((role) => ( <option key={role.id} value={role.id}>{role.warrant_name}</option>))
+                } 
+                </select>
+
             </div>
             <div className="modal-action">
               <button className="btn">Save</button>

@@ -30,6 +30,9 @@ import { PaymentProvider } from "./context/PaymentContext";
 import NewPaymentMethod from "./components/Payments/NewPaymentMethod";
 import PaymentMethodList from "./components/Payments/PaymentMethodList";
 import UserOrder from "./components/Cart/UserOrder";
+import NewRole from "./components/Roles/NewRole";
+import RolesList from "./components/Roles/RolesList";
+
 
 
 
@@ -62,6 +65,8 @@ function App() {
         <Route path="/userorder" element={<UserOrder/>}/>
         <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
         <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
+        <Route path="/newrole" element={<NewRole/>}/>
+        <Route path="/roles" element={<RolesList/>}/>
         <Route path="/newpublicarea" element={<NewPublicArea/>}/>
         <Route path="/publicareas" element={<PublicAreaList/>}/>
         <Route path="/newcategory" element={<NewCategory/>}/>

@@ -7,7 +7,6 @@ import OrderContext from "./OrderContext";
 import secureStorage from "../utils/secureStorage";
 
 
-
 const AuthContext=createContext();
 
 export const AuthProvider=({children})=>{
@@ -18,6 +17,7 @@ export const AuthProvider=({children})=>{
     //const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
     const [profile, setProfile] = useState(secureStorage.getItem('profile') ? JSON.parse(secureStorage.getItem('profile')) : null);
     const token = sessionStorage.getItem('usertoken');
+    const [roles, setRoles] = useState([]);
 
     
     console.log('faszuserauthban',user);
@@ -43,6 +43,27 @@ export const AuthProvider=({children})=>{
          }
         },[refresh]);
 
+        useEffect(()=>{
+            if (user){
+             fetch(`${import.meta.env.VITE_BASE_URL}/role`,{ 
+               headers:{
+                'Authorization': `Bearer ${token}`,
+               }
+             })
+             .then(res=>res.json())
+             .then(adat=>{
+               setRoles(adat.roles);
+               secureStorage.setItem('roles',JSON.stringify(adat.roles));
+                console.log('roleslist',adat.roles);
+               
+               
+             })
+             .catch(err=>alert(err));
+              }
+             },[refresh]);
+
+   
+
     const update=()=>{
         setRefresh(prev=>!prev);
     }
@@ -62,6 +83,7 @@ export const AuthProvider=({children})=>{
         //sessionStorage.removeItem('profile');
         secureStorage.removeItem('user');
         secureStorage.removeItem('profile');
+        secureStorage.removeItem('roles');
         sessionStorage.removeItem('cartItems');
         clearCart();
         setIsLoggedIn(false);
@@ -71,6 +93,31 @@ export const AuthProvider=({children})=>{
 
         toast.success('Logged out successfully');
     }
+
+    const backendMuveletRole = async (data, method, url, header) => {
+      try {
+          const keres = await fetch(url, {
+              method: method,
+              headers: header,
+              body: JSON.stringify(data),
+              //body:data
+          });
+
+          const valasz = await keres.json();
+
+          if (keres.ok) {
+              toast.success('Sikeres adatfelvitel!');
+          } else {
+              toast.error(valasz.error || 'Valami hiba történt!');
+          }
+
+          update();
+
+      } catch (error) {
+          toast.error('Hálózati hiba történt!');
+          console.error(error);
+      }
+  }
    
 
     return <AuthContext.Provider value={{
@@ -81,7 +128,10 @@ export const AuthProvider=({children})=>{
         setUser,
         isLoggedIn,
         profile,
-        setProfile
+        setProfile,
+        backendMuveletRole,
+        roles,
+        setRoles
         
 
     }}>{children}</AuthContext.Provider>
