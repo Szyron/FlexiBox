@@ -11,7 +11,9 @@ import secureStorage from '../../utils/secureStorage';
 
 function RegistrationDataEdit({user, closeFunction}) {
     const navigate = useNavigate();
-
+    const adminpower = secureStorage.getItem('user').isadmin;
+    console.log(adminpower);
+    
     const {backendMuvelet, update} = useContext(AdminContext);
     //const roles = sessionStorage.getItem('roles') ? JSON.parse(sessionStorage.getItem('roles')) : null;
     const [roles, setRoles] = useState([]);
@@ -53,6 +55,11 @@ function RegistrationDataEdit({user, closeFunction}) {
 
     const onSubmit = (e) => {
     e.preventDefault();
+    const keres = roles.find((role) => role.id == formData.role_id).power;
+    if (adminpower< keres) {
+        toast.error('Nincs jogosultságod ehhez a művelethez!');
+        return;
+    }
     backendMuvelet(formData, "PUT", `${import.meta.env.VITE_BASE_URL}/user/edit`) 
     closeFunction();
     update();

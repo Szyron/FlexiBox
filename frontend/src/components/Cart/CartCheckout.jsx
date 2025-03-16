@@ -5,11 +5,12 @@ import AddressContext from "../../context/AddressContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrderContext from "../../context/OrderContext";
 import secureStorage from "../../utils/secureStorage";
+import { use } from "react";
 
 function CartCheckout() {
   const navigate = useNavigate();
   const { areas, address, backendMuvelet, refresh } = useContext(AddressContext);
-  const { formData, setFormData } = useContext(OrderContext);
+  const { formData, setFormData, formDataAddress, setFormDataAddress} = useContext(OrderContext);
   //const user = JSON.parse(sessionStorage.getItem("user"));
   const user = secureStorage.getItem("user");
   const token = sessionStorage.getItem("usertoken");
@@ -60,6 +61,10 @@ function CartCheckout() {
       });
   }, [refresh]);
 
+ 
+
+  
+
   const handleCheckboxChange = (e) => {
     setIsNewAddress(e.target.checked);
     if (!e.target.checked) {
@@ -88,6 +93,10 @@ function CartCheckout() {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+    setFormDataAddress((prevState) => ({
+      ...prevState,
+      address_id: e.target.value,
+    }));
   };
 
   const onSubmit = (e) => {
@@ -108,19 +117,25 @@ function CartCheckout() {
       user_id: formData.user_id,
     };
 
+    
+    
+
     if (isNewAddress) {
       backendMuvelet(dataToSend, "POST", `${import.meta.env.VITE_BASE_URL}/address`, {
         "Content-type": "application/json",
       });
     } else {
       // For existing address
-      backendMuvelet(formData2, "POST", `${import.meta.env.VITE_BASE_URL}/order`, {
-        "Content-type": "application/json",
-      });
+     // backendMuvelet(formData2, "POST", `${import.meta.env.VITE_BASE_URL}/order`, {
+      //  "Content-type": "application/json",
+    //  });
+   
     }
   };
 
   const isProfilePage = location.pathname === "/profile";
+
+  
 
   return (
     <div className="bg-base-200 flex items-center justify-center min-h-screen">

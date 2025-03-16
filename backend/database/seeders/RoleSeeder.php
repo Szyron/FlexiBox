@@ -25,5 +25,15 @@ class RoleSeeder extends Seeder
             ['warrant_name' => 'user'],
             ['power' => 11]
         );
+        Role::updateOrCreate(
+            ['warrant_name' => 'admin'],
+            ['power' => 70]
+        );
+
+        Role::updateOrCreate(
+            ['warrant_name' => 'SuperAdmin'],
+            ['power' => 90]
+        );
+
     }
 }

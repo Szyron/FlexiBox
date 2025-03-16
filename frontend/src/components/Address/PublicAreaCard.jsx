@@ -5,7 +5,8 @@ import secureStorage from '../../utils/secureStorage';
 
 function PublicAreaCard({publicarea}) {
     //const user = JSON.parse(sessionStorage.getItem('user'));
-    const user = JSON.parse(secureStorage.getItem('user'));
+    //const user = JSON.parse(secureStorage.getItem('user'));
+    const user = secureStorage.getItem('user');
     const navigate = useNavigate();
     const { backendMuvelet } = useContext(AddressContext);
 

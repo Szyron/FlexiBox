@@ -13,11 +13,13 @@ export const OrderProvider = ({ children }) => {
     //const orderUser= sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
     const [isPrivacyInfo, setPrivacyInfo] = useState(false);
     const [formDataPayment, setFormDataPayment] = useState({ card_type: "" });
+    const [formDataAddress, setFormDataAddress] = useState([]);
 
     const {cartItems,setCartItems} = useContext(CartContext);
     
     console.log("order test cartitems",sessionStorage.getItem('cartItems'));
     
+    console.log("isAddress",formDataAddress);
 
     //console.log("order test payment",formDataPayment);
     const update=()=>{
@@ -56,6 +58,7 @@ export const OrderProvider = ({ children }) => {
         line_total: item.price_per_day * item.quantity,
     }));
     console.log("GECI",formObjCartItems);
+    console.log("Isaddress",formDataAddress);
 
     const backendOrder = async (data, method, url, header) => {
         try {
@@ -82,6 +85,8 @@ export const OrderProvider = ({ children }) => {
     }
 
     const submitOrder = () => {
+       
+
          const orderData = {
              ...formObjPayment,
             ...formObjAddress,
@@ -90,6 +95,10 @@ export const OrderProvider = ({ children }) => {
 
         const url = `${import.meta.env.VITE_BASE_URL}/neworder`;
         //console.log("url test",url);
+
+       
+
+
         const method = 'POST';
         const header = {
             'Content-Type': 'application/json',
@@ -99,6 +108,29 @@ export const OrderProvider = ({ children }) => {
         console.log("order test",orderData);
         console.log("order test",method);
     };
+
+
+    const submitOrderisAddress = () => {
+       
+
+        const orderData = {
+            ...formObjPayment,
+            ...formDataAddress,
+            user_id: formData.user_id,
+          cart_items: formObjCartItems,
+       }; 
+
+       const url = `${import.meta.env.VITE_BASE_URL}/neworderisaddress`;
+
+       const method = 'POST';
+       const header = {
+           'Content-Type': 'application/json',
+       };
+
+       backendOrder(orderData, method, url, header);
+       
+   };
+
 
 
 
@@ -127,6 +159,9 @@ export const OrderProvider = ({ children }) => {
             setCartItems,
             cartItems,
             submitOrder,
+            formDataAddress,
+            setFormDataAddress,
+            submitOrderisAddress,
         }}>       
             {children}
         </OrderContext.Provider>

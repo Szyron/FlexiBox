@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Profile;
 use App\Models\Role;
 use Exception;
+use Illuminate\Support\Facades\Auth;
+
 
 class RegisterController extends Controller
 {
@@ -125,6 +127,13 @@ class RegisterController extends Controller
             // Find the user by id
             $user = User::find($userId);
 
+             // Check if the authenticated user's power is greater than the user's power
+        if (Auth::user()->role->power < $user->role->power) {
+            return response()->json([
+                'message' => 'No permission to edit this user'
+            ], 403);
+        }
+
             // Update the user
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
@@ -165,6 +174,13 @@ class RegisterController extends Controller
 
             // Find the user by id
             $user = User::find($userId);
+
+             // Check if the authenticated user's power is greater than the user's power
+        if (Auth::user()->role->power < $user->role->power) {
+            return response()->json([
+                'message' => 'No permission to delete this user'
+            ], 403);
+        }
 
              // Check if the user has a profile
              if ($user->profile) {

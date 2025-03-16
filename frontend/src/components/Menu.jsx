@@ -30,6 +30,13 @@ function Menu() {
     update();
   };
 
+  const closeDropdown = (e) => {
+    const details = e.target.closest("details");
+    if (details) {
+      details.removeAttribute("open");
+    }
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -52,16 +59,21 @@ function Menu() {
               <details className="relative">
                 <summary className="text-secondary font-bold">Admin Dashboard</summary>
                 <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
-                    <li><Link to="/admindashboard" className="btn btn-ghost text-secondary">Felhasználó Kezelő</Link></li>
-                    <li><Link to="/newproduct" className="btn btn-ghost text-secondary">Új Termék</Link></li>
-                    <li><Link to="/newcategory" className="btn btn-ghost text-secondary">Új Kategória</Link></li>
-                    <li><Link to="/categories" className="btn btn-ghost text-secondary">Kategóriák</Link></li>
-                    <li><Link to="/newpublicarea" className="btn btn-ghost text-secondary">Új Közterület</Link></li>
-                    <li><Link to="/publicareas" className="btn btn-ghost text-secondary">Közterületek</Link></li>
-                    <li><Link to="/newpaymentmethod" className="btn btn-ghost text-secondary">Új Fizetési mód</Link></li>
-                    <li><Link to="/paymentmethods" className="btn btn-ghost text-secondary">Fizetési módok</Link></li>
-                    <li><Link to="/newrole" className="btn btn-ghost text-secondary">Új Jogosultság</Link></li>
-                    <li><Link to="/roles" className="btn btn-ghost text-secondary">Jogosultságok</Link></li>
+                    <li><Link to="/admindashboard" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Felhasználó Kezelő</Link></li>
+                    <li><Link to="/newproduct" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Új Termék</Link></li>
+                    <li><Link to="/newcategory" className="btn btn-ghost text-secondary onClick={closeDropdown}">Új Kategória</Link></li>
+                    <li><Link to="/categories" className="btn btn-ghost text-secondary"onClick={closeDropdown}>Kategóriák</Link></li>
+                    <li><Link to="/newpublicarea" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Új Közterület</Link></li>
+                    <li><Link to="/publicareas" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Közterületek</Link></li>
+                    <li><Link to="/newpaymentmethod" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
+                    <li><Link to="/paymentmethods" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Fizetési módok</Link></li>
+                    {user.isadmin >= 90 && (
+                      <>
+                        <li><Link to="/newrole" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Új Jogosultság</Link></li>
+                        <li><Link to="/roles" className="btn btn-ghost text-secondary" onClick={closeDropdown}>Jogosultságok</Link></li>
+                      </>
+                    )}
+                  
                 </ul>
               </details>
             </li>
@@ -71,6 +83,8 @@ function Menu() {
       }
         </>
       ) : null}
+
+
 
       <div className="flex-none flex gap-4 items-center">
         <div className="dropdown dropdown-end">

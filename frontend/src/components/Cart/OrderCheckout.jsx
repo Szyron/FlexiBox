@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 function OrderCheckout() {
 
   const [paymentMethod, setPaymentMethod] = useState(""); // Kezdeti állapot, itt tároljuk a fizetési módot
-  const {submitOrder} = useContext(OrderContext);
+  const {submitOrder, formDataAddress,submitOrderisAddress} = useContext(OrderContext);
   const navigate = useNavigate();
 
   // A PaymentMethod-ból jövő fizetési mód frissítése
@@ -20,12 +20,19 @@ function OrderCheckout() {
   // A form submit függvénye
   const finalSubmit = (e) => {
     e.preventDefault();
+    if (formDataAddress.length === 0) {
     submitOrder();
+    }
+    else {
+      submitOrderisAddress();
+    }
     
     console.log("Kiválasztott fizetési mód: ", paymentMethod);
     // Itt végezheted el a véglegesítést, például a backend hívást
     navigate('/userorder');
   };
+
+  
 
   return (
     

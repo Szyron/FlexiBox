@@ -87,4 +87,46 @@ class OrderController extends Controller
        return response()->json([$orders]);
         
     }
+
+    public function storeIsAddress(Request $request)
+    {
+        \Log::info('Received data:', $request->all());
+        // Validate the request data
+        $validatedData = $request->validate([
+            'address_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'payments_method_id' => 'required|integer', // Add this line
+            'cart_items' => 'required|array',
+            'cart_items.*.quantity' => 'required|integer',
+            'cart_items.*.product_id' => 'required|integer',
+            'cart_items.*.item_price' => 'required|numeric',
+        ]);
+
+        // Calculate the total for the order
+        $total = 0;
+        foreach ($validatedData['cart_items'] as $item) {
+            $total += $item['item_price'] * $item['quantity'];
+        }
+
+        // Create the order
+        $order = Order::create([
+            'address_id' => $validatedData['address_id'],
+            'user_id' => $validatedData['user_id'],
+            'payments_method_id' => $validatedData['payments_method_id'], // Add this line
+            'total' => $total, // Set the total value
+        ]);
+
+        // Create the order items
+        foreach ($validatedData['cart_items'] as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'quantity' => $item['quantity'],
+                'product_id' => $item['product_id'],
+                'item_price' => $item['item_price'],
+                'line_total' => $item['item_price'] * $item['quantity'],
+            ]);
+        }
+        
+        return response()->json(['message' => 'Order created successfully'], 201);
+    }
 }
