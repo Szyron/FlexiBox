@@ -10,49 +10,23 @@ import secureStorage from "../utils/secureStorage";
 const AuthContext=createContext();
 
 export const AuthProvider=({children})=>{
+    const {clearCart}=useContext(CartContext);//nem kéne bántani
     
     const [refresh,setRefresh]=useState(false);
-    const [user,setUser]=useState(secureStorage.getItem('user'));
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    //const [profile, setProfile] = useState(sessionStorage.getItem('profile'));esti komment
-    //const [profile, setProfile] = useState(secureStorage.getItem('profile') ? JSON.parse(secureStorage.getItem('profile')) : null);
+    const [user,setUser]=useState(false);
 
-    const [profile, setProfile] = useState(JSON.parse(sessionStorage.getItem('profile')) || null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [profile, setProfile] = useState(sessionStorage.getItem('profile') ? JSON.parse(sessionStorage.getItem('profile')) : null);
+    //const [profile, setProfile] = useState(secureStorage.getItem('profile') ? JSON.parse(secureStorage.getItem('profile')) : null);
     const token = sessionStorage.getItem('usertoken');
     const [roles, setRoles] = useState([]);
 
-    //const user1 = secureStorage.getItem('user');
-
-    console.log("321423 teszt",profile);
-    console.log("324653456734564356 teszt", profile?.file_path);
-  
+    
     console.log('faszuserauthban',user);
     
-    const {clearCart}=useContext(CartContext);
+    
 
-
-    useEffect(()=>{
-      if (user){
-       fetch(`${import.meta.env.VITE_BASE_URL}/profile/index`,{ 
-         headers:{
-           'Authorization':`Bearer ${token}`,
-           'userId': user.id
-         }
-       })
-       .then(res=>res.json())
-       .then(adat=>{
-        if (adat && adat.file_path) {
-          setProfile(adat);
-          sessionStorage.setItem("profile", JSON.stringify(adat)); // Csak ha van file_path
-        } else {
-          console.log("Nincs érvényes profil adat:", adat);
-        }
-       })
-       .catch(err=>alert(err));
-        }
-       },[refresh]);
-
-      /* useEffect(()=>{
+      useEffect(()=>{
        if (user){
         fetch(`${import.meta.env.VITE_BASE_URL}/profile/index`,{ 
           headers:{
@@ -65,12 +39,11 @@ export const AuthProvider=({children})=>{
         .then(adat=>{
           setProfile(adat);
           //console.log(adat.file_path);
-          secureStorage.setItem('profile',JSON.stringify(adat));
           
         })
         .catch(err=>alert(err));
          }
-        },[refresh]); */
+        },[refresh]);
 
         useEffect(()=>{
             if (user){
@@ -108,17 +81,16 @@ export const AuthProvider=({children})=>{
 
     const logout=()=>{
         sessionStorage.removeItem('usertoken');
-        //sessionStorage.removeItem('user');
-        //sessionStorage.removeItem('profile');
         secureStorage.removeItem('user');
-        sessionStorage.removeItem('profile');
+        secureStorage.removeItem('profile');
         secureStorage.removeItem('roles');
         sessionStorage.removeItem('cartItems');
         clearCart();
         setIsLoggedIn(false);
-        setUser(null);
+        //setUser(null);
         setProfile(null);
         update();
+
         toast.success('Logged out successfully');
     }
 

@@ -68,8 +68,7 @@ function Register2() {
     <div className="bg-base-200 flex items-center justify-center min-h-screen mt-2">
       <div className="card w-96 bg-base-100 shadow-xl mt-5">
         <div className="card-body">
-          <img src="src/img/Szirony2.png" alt="" />
-          <h2 className="text-2xl font-bold text-center">Regisztráció</h2>
+          <h2 className="text-2xl font-bold text-center text-primary">Regisztráció</h2>
           <form onSubmit={onSubmit}>
             <div className="form-control">
               <label className="label">
@@ -129,7 +128,7 @@ function Register2() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
-                  fill="currentColor"
+                  fill="#00aab3"
                   className="w-4 h-4 opacity-70"
                 >
                   <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
@@ -155,7 +154,7 @@ function Register2() {
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
-                  fill="currentColor"
+                  fill="#00aab3"
                   className="w-4 h-4 opacity-70"
                 >
                   <path
@@ -183,7 +182,7 @@ function Register2() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
-                  fill="currentColor"
+                  fill="#00aab3"
                   className="w-4 h-4 opacity-70"
                 >
                   <path
@@ -204,7 +203,7 @@ function Register2() {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary text-white">
                 Regisztráció
               </button>
             </div>

@@ -32,6 +32,9 @@ import PaymentMethodList from "./components/Payments/PaymentMethodList";
 import UserOrder from "./components/Cart/UserOrder";
 import NewRole from "./components/Roles/NewRole";
 import RolesList from "./components/Roles/RolesList";
+import NewLocker from "./components/Lockers/NewLocker";
+import LockersList from "./components/Lockers/LockersList";
+import Profile2 from "./components/Auth/Profile2";
 
 
 
@@ -59,6 +62,7 @@ function App() {
         <Route path="/" element={<Main/>}/>
         <Route path="/register2" element={<Register2/>}/>
         <Route path="/login2" element={<Login2/>}/>
+        {/* <Route path="/profile" element={<Profile/>}/> Régi */}
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/cart" element={<CartView/>}/>
         <Route path="/checkout" element={<OrderCheckout/>}/>
@@ -70,8 +74,10 @@ function App() {
         <Route path="/newpublicarea" element={<NewPublicArea/>}/>
         <Route path="/publicareas" element={<PublicAreaList/>}/>
         <Route path="/newcategory" element={<NewCategory/>}/>
+        <Route path="/newlocker" element={<NewLocker/>}/>
         <Route path="/categories" element={<CategoriesList/>}/>
         <Route path="/newproduct" element={<NewProduct/>}/>
+        <Route path="/lockers" element={<LockersList/>}/>
         <Route path="/products" element={<ProductsList/>}/>
         <Route path="/productsinfo" element={<ProductsInfo/>}/> 
         <Route path="/admindashboard" element={<AdminDashboard/>}/>

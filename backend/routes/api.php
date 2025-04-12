@@ -10,6 +10,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LockerController;
 
 
 
@@ -37,7 +38,7 @@ Route::delete('/product/delete', [ServiceController::class, 'productDestroy'])->
 Route::get('/category', [ServiceController::class, 'index']);
 Route::delete('/category/delete', [ServiceController::class, 'destroy'])->middleware('auth:sanctum');
 Route::patch('/category', [ServiceController::class, 'update']);
-Route::get('/users', [AdminController::class, 'index']);
+Route::get('/users', [AdminController::class, 'index'])->middleware('auth:sanctum');
 
 Route::post('/publicareaname', [AddressController::class, 'publicAreaStore']);
 Route::get('/publicareaname', [AddressController::class, 'publicAreaIndex']);
@@ -63,6 +64,13 @@ Route::post('/role', [RegisterController::class, 'roleStore'])->middleware('auth
 Route::get('/role', [RegisterController::class, 'roleIndex'])->middleware('auth:sanctum');
 Route::patch('/role', [RegisterController::class, 'roleUpdate'])->middleware('auth:sanctum');
 Route::delete('/role/delete', [RegisterController::class, 'roleDestroy'])->middleware('auth:sanctum');
+
+
+//Locker API's
+Route::post('/locker', [LockerController::class, 'lockerStore']);
+Route::get('/locker', [LockerController::class, 'lockerIndex']);
+Route::patch('/locker', [LockerController::class, 'lockerUpdate']);
+Route::delete('/locker/delete', [LockerController::class, 'lockerDestroy']);
 
 //Role management
 Route::group(['middleware' => ['auth', 'checkadmin:70']], function () {

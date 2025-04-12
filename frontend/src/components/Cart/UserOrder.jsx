@@ -26,11 +26,6 @@ function UserOrder() {
   , [])
 
  console.log(orders);
-
-
-
-
-
   return (
 //     <div className="card bg-base-100 w-96 shadow-sm">
 //   <figure>

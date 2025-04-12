@@ -43,7 +43,7 @@ class ProfileController extends Controller
 
     {
          // Get the user_id from the request headers
-         $userId = $request->header('user_id');
+         $userId = $request->header('userId');
 
         $profile = Profile::where('user_id', $userId)->first();
 
@@ -57,7 +57,7 @@ class ProfileController extends Controller
     public function update(Request $request)
 {
      // Get the user_id from the request headers
-     $userId = $request->header('user_id');
+     $userId = $request->header('userId');
     
     $profile = Profile::where('user_id', $userId)->first();
 
@@ -121,7 +121,7 @@ class ProfileController extends Controller
 public function destroy(Request $request)
 {
      // Get the user_id from the request headers
-     $userId = $request->header('user_id');
+     $userId = $request->header('userId');
     
     $profile = Profile::where('user_id', $userId)->first();
 

@@ -294,7 +294,7 @@ function CartCheckout() {
                 type="submit"
                 className="btn btn-primary w-full py-3 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                Cim mentese
+                Cím mentése
               </button>
             </div>
   )}

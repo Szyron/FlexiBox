@@ -156,13 +156,12 @@ console.log("Product data from form:", formData);
     <div className="bg-base-200 flex items-center justify-center min-h-screen">
     <div className="card w-96 bg-base-100 shadow-xl">
       <div className="card-body">
-        <img src="src/img/Szirony2.png" alt="" />
-        <h2 className="text-2xl font-bold text-center">{cim}</h2>
+        <h2 className="text-2xl font-bold text-center text-primary">{cim}</h2>
         <form onSubmit={onSubmit}>
           <div className="form-control">
 
           <label className="label">
-              <span className="label-text">Termék kép</span>
+              
             </label>
             {state && <img src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${state.product.file_path}`} alt="Preview" className="w-10 h-10 rounded-full object-cover" />}
           <input 
@@ -173,7 +172,6 @@ console.log("Product data from form:", formData);
           
           />
             <label className="label">
-              <span className="label-text">Termék neve</span>
             </label>
             <label className="input input-bordered flex items-center gap-2">
               <input className="grow"
@@ -186,7 +184,6 @@ console.log("Product data from form:", formData);
               />
             </label>
             <label className="label">
-              <span className="label-text">Leirás</span>
             </label>
             <label className="flex items-center gap-2">
               <textarea className="textarea textarea-bordered h-24 textarea-auto w-full"
@@ -198,7 +195,6 @@ console.log("Product data from form:", formData);
               />
             </label>
             <label className="label">
-              <span className="label-text">Bérlési ára</span>
             </label>
             <label className="input input-bordered flex items-center gap-2">
               <input className="grow"
@@ -219,7 +215,6 @@ console.log("Product data from form:", formData);
                 } 
                 </select>
             <label className="label">
-              <span className="label-text">Bérlési ára</span>
             </label>
                 <select className="select select-bordered w-full" id="available" onChange={writeData} value={formData.available}>
                     <option value="1">Elérhető</option>
@@ -227,7 +222,7 @@ console.log("Product data from form:", formData);
                 </select>  
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary text-white">
               Felvitel
             </button>
           </div>

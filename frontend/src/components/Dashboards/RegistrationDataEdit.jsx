@@ -69,13 +69,13 @@ function RegistrationDataEdit({user, closeFunction}) {
 
 
   return (
-    <div className="modal modal-open">
+    <div className="modal modal-open ">
       <div className="modal-box">
 
       <form onSubmit={onSubmit}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Vezetéknév</span>
+                <span className="label-text text-primary">Vezetéknév</span>
               </label>
               <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -100,7 +100,7 @@ function RegistrationDataEdit({user, closeFunction}) {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Keresztnév</span>
+                <span className="label-text text-primary">Keresztnév</span>
               </label>
               <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -125,7 +125,7 @@ function RegistrationDataEdit({user, closeFunction}) {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email cím</span>
+                <span className="label-text text-primary">Email cím</span>
               </label>
               <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -150,7 +150,7 @@ function RegistrationDataEdit({user, closeFunction}) {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Jogosultság</span>
+                <span className="label-text text-primary">Jogosultság</span>
               </label>
               {/* <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -180,9 +180,9 @@ function RegistrationDataEdit({user, closeFunction}) {
 
             </div>
             <div className="modal-action">
-              <button className="btn">Save</button>
-              <button className="btn" onClick={closeFunction}>
-            Close
+              <button className="btn btn-primary text-white">Mentés</button>
+              <button className="btn btn-info text-white" onClick={closeFunction}>
+            Bezárás
           </button>
             </div>
             </form>

@@ -7,6 +7,7 @@ export const ServiceProvider=({children})=>{
     const [ refresh , setRefresh]=useState(false);
     const [ categories , setCategories ] = useState([]);
     const [ products , setProducts ] = useState([]);
+    const [ lockers , setLockers ] = useState([]);
 
     const update =()=>{
         setRefresh(prev=>!prev)
@@ -23,6 +24,13 @@ export const ServiceProvider=({children})=>{
         fetch(`${import.meta.env.VITE_BASE_URL}/product`)
         .then(res=>res.json())
         .then(adat=>setProducts(adat.products))
+        .catch(err=>alert(err));
+    },[refresh]);
+
+    useEffect(()=>{
+        fetch(`${import.meta.env.VITE_BASE_URL}/locker`)
+        .then(res=>res.json())
+        .then(adat=>setLockers(adat.lockers))
         .catch(err=>alert(err));
     },[refresh]);
    
@@ -84,6 +92,8 @@ export const ServiceProvider=({children})=>{
         refresh,
         categories,
         products,
+        lockers,
+        setLockers,
         setCategories,
         setProducts,
         backendMuvelet,

@@ -63,8 +63,7 @@ function NewRole() {
     <div className="bg-base-200 flex items-center justify-center min-h-screen">
     <div className="card w-96 bg-base-100 shadow-xl">
       <div className="card-body">
-        
-        <h2 className="text-2xl font-bold text-center pb-5">{cim}</h2>
+        <h2 className="text-2xl font-bold text-center pb-5 text-primary">{cim}</h2>
         <form onSubmit={onSubmit}>
           <div className="form-control">
             <label className="input input-bordered flex items-center gap-2">
@@ -94,7 +93,7 @@ function NewRole() {
           </div>
 
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary text-white">
               Felvitel
             </button>
           </div>

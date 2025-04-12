@@ -70,8 +70,7 @@ function Login2() {
     <div className="bg-base-200 flex items-center justify-center min-h-screen">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
-          <img src="src/img/Szirony2.png" alt="" />
-          <h2 className="text-2xl font-bold text-center">Bejelentkezés</h2>
+          <h2 className="text-2xl font-bold text-center text-primary">Bejelentkezés</h2>
           <form onSubmit={onSubmit}>
             <div className="form-control">
               <label className="label">
@@ -111,7 +110,7 @@ function Login2() {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary text-white ">
                 Bejelentkezés
               </button>
             </div>

@@ -11,6 +11,7 @@ use App\Models\Profile;
 use App\Models\Role;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Address;
 
 
 class RegisterController extends Controller
@@ -166,10 +167,10 @@ class RegisterController extends Controller
         }
     }
 
-    public function destroy(Request $request)
+    /* public function destroy(Request $request) RÉGI
     {
          // Get the user_id from the request headers
-         $userId = $request->header('user_id');
+         $userId = $request->header('userId');
         try {
 
             // Find the user by id
@@ -211,7 +212,87 @@ class RegisterController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    } */
+
+    public function destroy(Request $request)
+	{
+    	try {
+        	Log::info('--- Törlés indult ---');
+        	Log::info('Request headers:', $request->headers->all());
+        	Log::info('Request body:', $request->all());
+
+        	$authUser = Auth::user();
+        	if (!$authUser) {
+            		Log::warning('Nincs bejelentkezett felhasználó!');
+            		return response()->json([
+                	'message' => 'Nincs bejelentkezett felhasználó.'
+            	], 401);
+        }
+
+        Log::info('Bejelentkezett felhasználó:', ['id' => $authUser->id]);
+
+        // Azonosítsd a törlendő felhasználót
+        $userId = $request->id ?? $userId = $request->header('userId'); // próbáljuk mindkettőt
+        Log::info('Törlendő user ID:', ['id' => $userId]);
+
+        $user = User::with('role', 'profile')->find($userId);
+        if (!$user) {
+            Log::warning("Felhasználó nem található ID: {$userId}");
+            return response()->json(['message' => 'Felhasználó nem található.'], 404);
+        }
+
+        if (!$user->role) {
+            Log::warning("Felhasználónak nincs szerepköre. ID: {$user->id}");
+            return response()->json(['message' => 'A felhasználónak nincs szerepköre.'], 400);
+        }
+
+        if ($authUser->role->power < $user->role->power) {
+            Log::warning("Jogosultság hiány törléshez. Auth user: {$authUser->id}, Target user: {$user->id}");
+            return response()->json([
+                'message' => 'Nincs jogosultság a felhasználó törléséhez.'
+            ], 403);
+        }
+
+        // Töröljük a profilt, ha van
+        if ($user->profile) {
+            if ($user->profile->file_name) {
+                Storage::disk('public')->delete('images/' . $user->profile->file_name);
+                Log::info("Profilkép törölve: " . $user->profile->file_name);
+            }
+
+            $user->profile->delete();
+            Log::info("Profil törölve.");
+        }
+	// Töröljük a kapcsolódó címeket
+	Address::where('user_id', $user->id)->delete();
+	Log::info("Kapcsolódó címek törölve.");
+
+        // Felhasználó törlése
+        $user->delete();
+        Log::info("Felhasználó törölve. ID: {$userId}");
+
+        return response()->json([
+            'message' => 'Sikeres törlés!'
+        ], 200);
+
+    } catch (\Exception $e) {
+        //Log::error('Hiba törlés közben: ' . $e->getMessage());
+
+        /*return response()->json([
+            'message' => 'Törlés sikertelen.',
+	    'error' => utf8_encode($e->getMessage())
+            //'error' => $e->getMessage()
+	    //'error' => mb_convert_encoding($e->getMessage(), 'UTF-8', 'UTF-8')
+        ], 500);*/
+	Log::error('Hiba törlés közben: ' . $e->getMessage());
+
+	return response()->json([
+    		'message' => 'Törlés sikertelen.',
+    		'error' => $e->getMessage()
+	])->header('Content-Type', 'application/json; charset=UTF-8');
     }
+}
+
 
     public function roleStore(Request $request)
     {
