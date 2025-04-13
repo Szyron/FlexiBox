@@ -5,20 +5,21 @@ export const CartContext = createContext()
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(sessionStorage.getItem('cartItems') ? JSON.parse(sessionStorage.getItem('cartItems')) : [])
 
-  const addToCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
-    
+  const addToCart = (item, selectedLocker) => {
+    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id && cartItem.lockerId === selectedLocker);
+
+    console.log("Selected Locker: VIEW", selectedLocker); // Log the selected locker ID
 
     if (isItemInCart) {
       setCartItems(
         cartItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.id === item.id && cartItem.lockerId === selectedLocker
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         )
       );
     } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+      setCartItems([...cartItems, { ...item, quantity: 1, lockerId: selectedLocker }]);
     }
   };
 

@@ -4,10 +4,13 @@ import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import OrderContext from "../../context/OrderContext";
 import TermofUseInfo from "./TermofUseInfo";
+import ServiceContext from "../../context/ServiceContext";
 
 function CartView() {
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
     useContext(CartContext);
+
+  const { lockers } = useContext(ServiceContext);
 
     
     const {isPrivacyInfo, openPrivacyInfo, closePrivacyInfo} = useContext(OrderContext);
@@ -29,6 +32,11 @@ function CartView() {
             <div className="flex flex-col">
               <h1 className="text-lg font-bold">{item.name}</h1>
               <p className="text-gray-600">{item.price_per_day}</p>
+              <p className="text-gray-600">
+                {
+                  lockers.find(locker => locker.id === Number(item.lockerId))?.locker_name || "Ismeretlen átvevőpont"
+                }
+              </p>
             </div>
           </div>
           <div className="flex gap-4 mt-4 md:mt-0">

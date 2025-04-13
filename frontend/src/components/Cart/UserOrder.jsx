@@ -49,55 +49,55 @@ function UserOrder() {
 //     </div>
 //   </div>
 // </div>
+<div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
+  <div className="card w-full max-w-xl bg-base-100 shadow-lg rounded-2xl p-4">
 
-<div className="card bg-base-100 w-96 shadow-sm">
-<figure>
-  <img
-    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-    alt="Shoes"
-  />
-</figure>
-<div className="card-body">
-  <h2 className="card-title">Megrendelés Adatai:</h2>
+    <div className="card-body space-y-4">
+      <h2 className="card-title text-xl font-bold text-primary">Megrendelés Adatai</h2>
 
-  {/* Ellenőrizzük, hogy az orders tömb nem üres */}
-  {Array.isArray(orders) && orders.length > 0 ? (
-    orders.map((order, index) => (
-      <div key={index}>
-        {/* Felhasználói adatok */}
-        <p>Megrendelő neve: {order.user.first_name} {order.user.last_name}</p>
-        <p>Megrendelő email címe: {order.user.email}</p>
-        
-        {/* Cím adatai */}
-        <p>Megrendelő címe: {order.address.street} {order.address.house_number}, {order.address.zip}</p>
-        
-        {/* Rendelés összeg */}
-        <p>Összeg: {order.total}</p>
-        
-        {/* A rendeléshez tartozó tételek */}
-        {order.order_item && order.order_item.length > 0 && (
-          <div>
-            <h3>Rendelési tételek:</h3>
-            {order.order_item.map((item, idx) => (
-              <div key={idx}>
-                <p>Termék ID: {item.product_id}</p>
-                <p>Ár: {item.item_price} Ft</p>
-                <p>Darab: {item.quantity}</p>
-                <p>Rendelési összeg: {item.line_total} Ft</p>
+      {Array.isArray(orders) && orders.length > 0 ? (
+        orders.map((order, index) => (
+          <div key={index} className="border-t border-base-200 pt-4 space-y-3">
+            <div>
+              <p className="font-semibold">👤 Megrendelő:</p>
+              <p>{order.user.first_name} {order.user.last_name}</p>
+              <p className="text-sm text-gray-500">{order.user.email}</p>
+            </div>
+
+            <div>
+              <p className="font-semibold">📍 Szállítási cím:</p>
+              <p>{order.address.street} {order.address.house_number}, {order.address.zip}</p>
+            </div>
+
+            <div className="text-lg font-semibold text-primary">
+              Összeg: {order.total} Ft
+            </div>
+
+            {order.order_item && order.order_item.length > 0 && (
+              <div className="bg-white rounded-lg p-3 border border-base-200">
+                <h3 className="font-semibold mb-2">🧾 Rendelési tételek:</h3>
+                {order.order_item.map((item, idx) => (
+                  <div key={idx} className="mb-2 border-b border-dashed pb-2 last:border-none last:pb-0">
+                    <p><span className="font-medium">Csomagautómata:</span> {item.locker ? item.locker.locker_name : 'Nincs hozzárendelt locker'}</p>
+                    <p><span className="font-medium">Termék ID:</span> {item.product_id}</p>
+                    <p><span className="font-medium">Ár:</span> {item.item_price} Ft</p>
+                    <p><span className="font-medium">Darab:</span> {item.quantity}</p>
+                    <p><span className="font-medium">Összeg:</span> {item.line_total} Ft</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
-      </div>
-    ))
-  ) : (
-    <p>Nincs rendelés.</p>
-  )}
+        ))
+      ) : (
+        <p className="text-error">❌ Nincs rendelés.</p>
+      )}
 
-  <div className="card-actions justify-end">
-    <button className="btn btn-primary">Bezárás</button>
+      <div className="card-actions justify-end">
+        <button className="btn btn-primary text-white">Bezárás</button>
+      </div>
+    </div>
   </div>
-</div>
 </div>
   )
 }

@@ -32,7 +32,7 @@ function LockersCard({ locker }) {
   const closeInfo = () => setInfo(false);
 
   return user?.isadmin >= 70 ? (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <div className="card bg-base-100 w-96 shadow-sm m-5">
       <figure className="px-10 pt-10">
         <img src={LockerKep} alt="Shoes" className="rounded-xl" />
       </figure>

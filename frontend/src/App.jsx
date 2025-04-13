@@ -58,35 +58,35 @@ function App() {
       <AddressProvider>
      <BrowserRouter>
       <Menu/>
-      <Routes>
-        <Route path="/" element={<Main/>}/>
-        <Route path="/register2" element={<Register2/>}/>
-        <Route path="/login2" element={<Login2/>}/>
-        {/* <Route path="/profile" element={<Profile/>}/> Régi */}
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/cart" element={<CartView/>}/>
-        <Route path="/checkout" element={<OrderCheckout/>}/>
-        <Route path="/userorder" element={<UserOrder/>}/>
-        <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
-        <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
-        <Route path="/newrole" element={<NewRole/>}/>
-        <Route path="/roles" element={<RolesList/>}/>
-        <Route path="/newpublicarea" element={<NewPublicArea/>}/>
-        <Route path="/publicareas" element={<PublicAreaList/>}/>
-        <Route path="/newcategory" element={<NewCategory/>}/>
-        <Route path="/newlocker" element={<NewLocker/>}/>
-        <Route path="/categories" element={<CategoriesList/>}/>
-        <Route path="/newproduct" element={<NewProduct/>}/>
-        <Route path="/lockers" element={<LockersList/>}/>
-        <Route path="/products" element={<ProductsList/>}/>
-        <Route path="/productsinfo" element={<ProductsInfo/>}/> 
-        <Route path="/admindashboard" element={<AdminDashboard/>}/>
-        <Route path="/userdashboard" element={<UserDashboard/>}/>
-        <Route path="*" element={<Navigate to ="/"/>}/>
-        <Route path="/registrationdataedit" element={<RegistrationDataEdit/>}/>
-      </Routes>
-      </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main/>}/>
+          <Route path="/register2" element={<Register2/>}/>
+          <Route path="/login2" element={<Login2/>}/>
+          {/* <Route path="/profile" element={<Profile/>}/> Régi */}
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/cart" element={<CartView/>}/>
+          <Route path="/checkout" element={<OrderCheckout/>}/>
+          <Route path="/userorder" element={<UserOrder/>}/>
+          <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
+          <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
+          <Route path="/newrole" element={<NewRole/>}/>
+          <Route path="/roles" element={<RolesList/>}/>
+          <Route path="/newpublicarea" element={<NewPublicArea/>}/>
+          <Route path="/publicareas" element={<PublicAreaList/>}/>
+          <Route path="/newcategory" element={<NewCategory/>}/>
+          <Route path="/newlocker" element={<NewLocker/>}/>
+          <Route path="/categories" element={<CategoriesList/>}/>
+          <Route path="/newproduct" element={<NewProduct/>}/>
+          <Route path="/lockers" element={<LockersList/>}/>
+          <Route path="/products" element={<ProductsList/>}/>
+          <Route path="/productsinfo" element={<ProductsInfo/>}/> 
+          <Route path="/admindashboard" element={<AdminDashboard/>}/>
+          <Route path="/userdashboard" element={<UserDashboard/>}/>
+          <Route path="*" element={<Navigate to ="/"/>}/>
+          <Route path="/registrationdataedit" element={<RegistrationDataEdit/>}/>
+        </Routes>
       <Footer/>
+    </BrowserRouter>
       </AddressProvider>
       </ServiceProvider>
       </AuthProvider>

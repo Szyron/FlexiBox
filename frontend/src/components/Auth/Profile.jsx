@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import secureStorage from '../../utils/secureStorage';
 import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react';
+import CartCheckout from '../Cart/CartCheckout';
 
 
 
@@ -16,9 +17,6 @@ function Profile() {
     file_path : null // Replace with actual profile data from your authentication context or state
     }
 
-/*      const user = {
-        user_id: 1
-    };  */
     let url = `${import.meta.env.VITE_BASE_URL}/profile/update`;
     let method = 'POST';
     let header = {
@@ -95,18 +93,17 @@ function Profile() {
         try {
             const response = await axios.post(url, formData, { headers: header });
             console.log(response.data);
-            toast.success('Profile Updated');
             update();
             navigate('/');
         } catch (error) {
         console.error('There was an error updating the profile!', error);
         }
-        toast.success('Profile teszt');
+        toast.success('Sikeresen módosítva/feltöltve!');
         navigate('/');
     }
 
   return (
-    <div className='text-3xl text-center font-bold text-sky-500 m-5'>Profile
+    <div className='text-3xl bg-base-200 text-center font-bold text-primary w-full'>Profile
     <form className='flex flex-col gap-4 items-center m-5' onSubmit={onSubmit}>
       {/* Profilkép megjelenítése és feltöltés */}
       <div className="flex flex-col items-center">
@@ -147,6 +144,9 @@ function Profile() {
         Back
       </button>
     </form>
+    <div className="p-4 flex-[3] w-full">
+      <CartCheckout />
+    </div>
   </div>
   )
 }

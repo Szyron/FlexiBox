@@ -36,7 +36,9 @@ class ServiceController extends Controller
             'description' => 'required|string',
             'price_per_day' => 'required|integer',
             'category_id' => 'required|integer|exists:categories,id',
-            'available' => 'required|boolean'
+            'available' => 'required|boolean',
+            'locker_ids' => 'required|array',
+            'locker_ids.*' => 'exists:lockers,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -58,10 +60,24 @@ class ServiceController extends Controller
         $product->save();
 
        // $product = Product::create($validatedData);
+       // Kapcsolat mentése
+        //$product->lockers()->attach($request->locker_ids);
+
+        // Pivot tábla adatok időbélyeggel
+        $now = now();
+        $lockerData = collect($request->locker_ids)->mapWithKeys(function ($id) use ($now) {
+            return [
+                $id => ['created_at' => $now, 'updated_at' => $now]
+            ];
+        })->toArray();
+
+        // Kapcsolatok mentése a pivot táblába
+        $product->lockers()->attach($lockerData);
 
         return response()->json([
             'message' => 'Product created successfully',
-            'product' => $product
+            //'product' => $product Régi
+            'product' => $product->load('lockers')
         ], 201);
     }
 
@@ -77,7 +93,7 @@ class ServiceController extends Controller
     public function productIndex()
     {
         //$products = Product::all();
-        $products = Product::with('category')->get();
+        $products = Product::with(['category', 'lockers'])->get();
 
         /* $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
             ->select('products.*', 'categories.name as category_name')
@@ -104,7 +120,9 @@ class ServiceController extends Controller
             'description' => 'sometimes|string',
             'price_per_day' => 'sometimes|integer',
             'category_id' => 'sometimes|integer|exists:categories,id',
-            'available' => 'sometimes|boolean'
+            'available' => 'sometimes|boolean',
+            'locker_ids' => 'sometimes|array',
+            'locker_ids.*' => 'exists:lockers,id',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error('Validation failed', ['errors' => $e->errors()]);
@@ -141,10 +159,23 @@ class ServiceController extends Controller
             $product->file_name = $validatedData['file_name'];
         }
         $product->save();
+
+
+        if ($request->has('locker_ids')) {
+            $now = now();
+            $lockerData = collect($request->locker_ids)->mapWithKeys(function ($id) use ($now) {
+                return [
+                    $id => ['created_at' => $now, 'updated_at' => $now]
+                ];
+            })->toArray();
+        
+            $product->lockers()->sync($lockerData);
+        }
     
         return response()->json([
             'message' => 'Product updated successfully',
-            'product' => $product
+            /* 'product' => $product */
+            'product' => $product->load('lockers')
         ], 200);
     }
 

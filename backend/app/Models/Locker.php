@@ -16,4 +16,13 @@ class Locker extends Model
     {
         return $this->hasMany(Locker::class);
     } */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

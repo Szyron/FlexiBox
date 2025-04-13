@@ -10,6 +10,7 @@ export const OrderProvider = ({ children }) => {
     const [refresh,setRefresh]=useState(false);
     //const user = JSON.parse(sessionStorage.getItem("user"));
     const user = secureStorage.getItem('user');
+    console.log("order test user ---------------------------------------------------",user);
     //const orderUser= sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
     const [isPrivacyInfo, setPrivacyInfo] = useState(false);
     const [formDataPayment, setFormDataPayment] = useState({ card_type: "" });
@@ -56,6 +57,7 @@ export const OrderProvider = ({ children }) => {
         product_id: item.id,
         item_price: item.price_per_day,
         line_total: item.price_per_day * item.quantity,
+        lockerId: item.lockerId,
     }));
     console.log("GECI",formObjCartItems);
     console.log("Isaddress",formDataAddress);
@@ -120,6 +122,8 @@ export const OrderProvider = ({ children }) => {
           cart_items: formObjCartItems,
        }; 
 
+       console.log("Order Tesztelése... lockerId-val",orderData);
+
        const url = `${import.meta.env.VITE_BASE_URL}/neworderisaddress`;
 
        const method = 'POST';
@@ -128,6 +132,8 @@ export const OrderProvider = ({ children }) => {
        };
 
        backendOrder(orderData, method, url, header);
+
+       
        
    };
 

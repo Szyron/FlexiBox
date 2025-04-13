@@ -1,15 +1,49 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import FooterInfoUse from "./Term/FooterInfoUse";
+import FooterPrivacyInfo from "./Term/FooterPrivacyInfo";
+import { useState } from "react";
+
 
 function Footer() {
+    const [isTermInfo, setTermInfo] = useState(false);
+    const [isPolicyInfo, setPolicyInfo] = useState(false);
+
+    const openTermInfo = () => {
+        setTermInfo(true);
+      };
+    
+    const openPolicyInfo = () => {
+        setPolicyInfo(true); // Adatvédelmi irányelvek modális megnyitása
+    }
+    
+      const closeInfo = () => {
+        setTermInfo(false);
+        /* setTermInfo(false); */ // Info modális bezárása
+      };
+
+      const closePolicy = () => {
+        setPolicyInfo(false);
+        /* setTermInfo(false); */ // Info modális bezárása
+      };
+
     return (
+
         <div>
+            {isTermInfo && (
+            <FooterInfoUse
+              closeFunction={() => closeInfo()}
+            />
+          )}
+            {isPolicyInfo && (
+            <FooterPrivacyInfo
+                closeFunction={() => closePolicy()}
+            />
+          )}
             <footer className="footer bg-base-100 text-base-content p-10">
                 <nav>
                     <h6 className="footer-title text-secondary">Szolgáltatások</h6>
-                    <a className="link link-hover">Branding</a>
-                    <a className="link link-hover">Design</a>
-                    <a className="link link-hover">Marketing</a>
-                    <a className="link link-hover">Advertisement</a>
+                    <Link to="/lockers" className="link link-hover">Csomagautómata</Link>
+                    <Link to="/products" className="link link-hover">Összes Termék</Link>
                 </nav>
 {/*                 <nav>
                     <h6 className="footer-title">Cég Infók</h6>
@@ -18,9 +52,8 @@ function Footer() {
                 </nav> */}
                 <nav>
                     <h6 className="footer-title text-secondary">Jogi információk</h6>
-                    <a className="link link-hover">Felhasználási feltételek</a>
-                    <a className="link link-hover">Adatvédelmi irányelvek</a>
-                    <a className="link link-hover">Sütikre vonatkozó irányelvek</a>
+                    <a><button className="" onClick={() => openTermInfo()}>Felhasználási feltételek</button></a>
+                    <a><button className="" onClick={() => openPolicyInfo()}>Adatvédelmi irányelvek</button></a>
                 </nav>
             </footer>
             <footer className="footer bg-base-100 text-base-content border-base-300 border-t px-10 py-4">

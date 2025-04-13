@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Address;
+use Illuminate\Support\Facades\Log;
+
 
 
 class OrderController extends Controller
@@ -13,7 +15,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        \Log::info('Received data:', $request->all());
+        Log::info('Received data: Hello', $request->all());
         // Validate the request data
         $validatedData = $request->validate([
             'city' => 'required|string',
@@ -28,6 +30,7 @@ class OrderController extends Controller
             'cart_items.*.quantity' => 'required|integer',
             'cart_items.*.product_id' => 'required|integer',
             'cart_items.*.item_price' => 'required|numeric',
+            'cart_items.*.lockerId' => 'required|integer', // Update validation to reflect 'lockerId'
         ]);
 
         // Create the address
@@ -57,14 +60,18 @@ class OrderController extends Controller
 
         // Create the order items
         foreach ($validatedData['cart_items'] as $item) {
+            \Log::info('Creating OrderItem with data:', $item);
             OrderItem::create([
                 'order_id' => $order->id,
                 'quantity' => $item['quantity'],
                 'product_id' => $item['product_id'],
                 'item_price' => $item['item_price'],
                 'line_total' => $item['item_price'] * $item['quantity'],
+                'locker_id' => $item['lockerId'],  // Map 'lockerId' from frontend to 'locker_id' in DB
             ]);
+
         }
+
         
         return response()->json(['message' => 'Order created successfully'], 201);
     }
@@ -78,7 +85,7 @@ class OrderController extends Controller
         
 
        // Fetch orders for the authenticated user with related data
-       $orders = Order::with(['orderItem', 'address', 'user'])
+       $orders = Order::with(['orderItem.locker', 'address', 'user',])
            ->where('user_id', $user_id)
            ->orderBy('created_at', 'desc')
         ->first();
@@ -100,6 +107,7 @@ class OrderController extends Controller
             'cart_items.*.quantity' => 'required|integer',
             'cart_items.*.product_id' => 'required|integer',
             'cart_items.*.item_price' => 'required|numeric',
+            'cart_items.*.lockerId' => 'required|integer', // Update validation to reflect 'lockerId'
         ]);
 
         // Calculate the total for the order
@@ -124,6 +132,7 @@ class OrderController extends Controller
                 'product_id' => $item['product_id'],
                 'item_price' => $item['item_price'],
                 'line_total' => $item['item_price'] * $item['quantity'],
+                'locker_id' => $item['lockerId'], // Map 'lockerId' from frontend to 'locker_id' in DB
             ]);
         }
         

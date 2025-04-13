@@ -27,4 +27,8 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    public function lockers()
+    {
+    return $this->belongsToMany(Locker::class);
+    }
 }
