@@ -9,6 +9,7 @@ import secureStorage from "../utils/secureStorage";
 function Menu() {
   //const user = JSON.parse(sessionStorage.getItem("user"));
   const user = secureStorage.getItem("user");
+  //const user = JSON.parse(secureStorage.getItem('user'));
   const { logout, update ,profile} = useContext(AuthContext);
   const { cartItems, getCartTotal } = useContext(CartContext);
   //const [profile , setProfile] = useState(null);

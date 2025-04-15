@@ -2,6 +2,8 @@ import React, { createContext, useState,useContext } from 'react';
 import { toast } from 'react-toastify';
 import  {CartContext}  from './CartContext';
 import secureStorage from '../utils/secureStorage';
+import  AuthContext  from './AuthContext';
+
 
 
 const OrderContext = createContext();
@@ -10,7 +12,10 @@ export const OrderProvider = ({ children }) => {
     const [refresh,setRefresh]=useState(false);
     //const user = JSON.parse(sessionStorage.getItem("user"));
     const user = secureStorage.getItem('user');
-    console.log("order test user ---------------------------------------------------",user);
+
+    
+   // const { user } = useContext(AuthContext); // Hivatkozás az AuthContext user adatára
+    //console.log("order test user ---------------------------------------------------",user);
     //const orderUser= sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
     const [isPrivacyInfo, setPrivacyInfo] = useState(false);
     const [formDataPayment, setFormDataPayment] = useState({ card_type: "" });
@@ -18,9 +23,9 @@ export const OrderProvider = ({ children }) => {
 
     const {cartItems,setCartItems} = useContext(CartContext);
     
-    console.log("order test cartitems",sessionStorage.getItem('cartItems'));
+    //console.log("order test cartitems",sessionStorage.getItem('cartItems'));
     
-    console.log("isAddress",formDataAddress);
+    //console.log("isAddress",formDataAddress);
 
     //console.log("order test payment",formDataPayment);
     const update=()=>{
@@ -37,6 +42,12 @@ export const OrderProvider = ({ children }) => {
         user_id: user ? user.id : null,
     });
     //console.log("order test",formData);
+
+    // Hibakezelés a submitOrder-ben
+// if (!formData.user_id) {
+//     toast.error('A felhasználói azonosító hiányzik!');
+//     return;
+// }
 
     const formObjPayment={
         payments_method_id:formDataPayment.card_type,
@@ -57,10 +68,11 @@ export const OrderProvider = ({ children }) => {
         product_id: item.id,
         item_price: item.price_per_day,
         line_total: item.price_per_day * item.quantity,
-        lockerId: item.lockerId,
+        //lockerId: item.lockerId,
+        lockerId: Number(item.lockerId), // Konvertálás számra
     }));
-    console.log("GECI",formObjCartItems);
-    console.log("Isaddress",formDataAddress);
+    //console.log("GECI",formObjCartItems);
+    //console.log("Isaddress",formDataAddress);
 
     const backendOrder = async (data, method, url, header) => {
         try {
@@ -73,21 +85,28 @@ export const OrderProvider = ({ children }) => {
             const valasz = await keres.json();
 
             if (keres.ok) {
-                toast.success('Sikeres adatfelvitel!');          
+                toast.success('Sikeres adatfelvitel!');  
+                update();
+                return true;        
             } else {
                 toast.error(valasz.error || 'Valami hiba történt!');
+                return false;
             }
 
-            update();
+          //  update();
 
         } catch (error) {
             toast.error('Hálózati hiba történt!');
             console.error(error);
+            return false;
         }
     }
 
-    const submitOrder = () => {
-       
+    const submitOrder = async () => {
+        if (!formData.user_id) {
+            toast.error('A felhasználói azonosító hiányzik!');
+            return false;
+        }
 
          const orderData = {
              ...formObjPayment,
@@ -106,14 +125,17 @@ export const OrderProvider = ({ children }) => {
             'Content-Type': 'application/json',
         };
 
-        backendOrder(orderData, method, url, header);
+        return await  backendOrder(orderData, method, url, header);
         console.log("order test",orderData);
         console.log("order test",method);
     };
 
 
-    const submitOrderisAddress = () => {
-       
+    const submitOrderisAddress = async() => {
+        if (!formData.user_id) {
+            toast.error('A felhasználói azonosító hiányzik!');
+            return;
+        }
 
         const orderData = {
             ...formObjPayment,
@@ -131,7 +153,7 @@ export const OrderProvider = ({ children }) => {
            'Content-Type': 'application/json',
        };
 
-       backendOrder(orderData, method, url, header);
+       return await backendOrder(orderData, method, url, header);
 
        
        

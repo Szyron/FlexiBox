@@ -52,8 +52,9 @@ function App() {
     <PaymentProvider>
     <AdminProvider>
     <CartProvider>
+    <AuthProvider>
      <OrderProvider>
-     <AuthProvider>
+     
      <ServiceProvider>
       <AddressProvider>
      <BrowserRouter>
@@ -89,12 +90,14 @@ function App() {
     </BrowserRouter>
       </AddressProvider>
       </ServiceProvider>
-      </AuthProvider>
-      <ToastContainer/>
       </OrderProvider>
+      
+      </AuthProvider>
+     
       </CartProvider>
       </AdminProvider>
       </PaymentProvider>
+      <ToastContainer/>
     
     
    </div>

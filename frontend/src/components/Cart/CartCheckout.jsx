@@ -13,21 +13,38 @@ function CartCheckout() {
   const { formData, setFormData, formDataAddress, setFormDataAddress} = useContext(OrderContext);
   //const user = JSON.parse(sessionStorage.getItem("user"));
   const user = secureStorage.getItem("user");
+  //const user = JSON.parse(secureStorage.getItem('user'));
   const token = sessionStorage.getItem("usertoken");
   const location = useLocation();
 
+  // useEffect(() => {
+  //   if (user) {
+  //     setFormData((prev) => ({
+  //       ...prev,
+  //       user_id: user.id,
+  //     }));
+  //   }
+  // }, [user]);
+
+  useEffect(() => {
+    if (user && formData.user_id !== user.id) {
+      setFormData((prev) => ({
+        ...prev,
+        user_id: user.id,
+      }));
+    }
+  }, [user, formData.user_id]);
 
 
-
-  /* const [formData, setFormData] = useState({
-    city: "",
-    zip: "",
-    email: "",
-    street_id: "",
-    street: "",
-    house_number: "",
-    user_id: user ? user.id : null,
-  }); */
+  // /* const [formData, setFormData] = useState({
+  //   city: "",
+  //   zip: "",
+  //   email: "",
+  //   street_id: "",
+  //   street: "",
+  //   house_number: "",
+  //   user_id: user ? user.id : null,
+  // }); */
 
   const [formData2, setFormData2] = useState({
     address_id: null,
@@ -61,14 +78,11 @@ function CartCheckout() {
       });
   }, [refresh]);
 
- 
-
-  
-
   const handleCheckboxChange = (e) => {
-    setIsNewAddress(e.target.checked);
-    if (!e.target.checked) {
-      // Reset the form data to default when switching to existing address mode
+    const checked = e.target.checked;
+    setIsNewAddress(checked);
+  
+    if (!checked) {
       setFormData({
         city: "",
         zip: "",
@@ -78,8 +92,32 @@ function CartCheckout() {
         house_number: "",
         user_id: user ? user.id : null,
       });
+    } else {
+      // ha új címre vált, itt is biztosítjuk a user_id frissítését
+      setFormData((prev) => ({
+        ...prev,
+        user_id: user ? user.id : null,
+      }));
     }
   };
+
+  
+
+  // const handleCheckboxChange = (e) => {
+  //   setIsNewAddress(e.target.checked);
+  //   if (!e.target.checked) {
+  //     // Reset the form data to default when switching to existing address mode
+  //     setFormData({
+  //       city: "",
+  //       zip: "",
+  //       email: "",
+  //       street_id: "",
+  //       street: "",
+  //       house_number: "",
+  //       user_id: user ? user.id : null,
+  //     });
+  //   }
+  // };
 
   const writeData = (e) => {
     setFormData((prevState) => ({
@@ -107,6 +145,10 @@ function CartCheckout() {
       return;
     }
 
+    if (!isNewAddress) {
+      toast.error("Kérjük, válasszon egy címet!");
+      return;
+    }
     const dataToSend = {
       city: formData.city,
       zip: formData.zip,
@@ -158,7 +200,8 @@ function CartCheckout() {
           </div>
 
           {/* Form based on address selection */}
-          <form className="space-y-6" onSubmit={onSubmit}>
+          {/* <form className="space-y-6" onSubmit={onSubmit}> */}
+          <div className="space-y-6">
             {/* New address form */}
             {isNewAddress ? (
               <div>
@@ -291,14 +334,17 @@ function CartCheckout() {
             {isProfilePage && isNewAddress && (
             <div className="form-control mt-6">
               <button
-                type="submit"
+                //type="submit"
+                type="button"
+                onClick={onSubmit}
                 className="btn btn-primary w-full py-3 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Cím mentése
               </button>
             </div>
   )}
-          </form>
+          {/* </form> */}
+          </div>
         </div>
       </div>
     </div>

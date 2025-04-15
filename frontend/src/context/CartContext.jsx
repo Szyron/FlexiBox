@@ -6,10 +6,12 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(sessionStorage.getItem('cartItems') ? JSON.parse(sessionStorage.getItem('cartItems')) : [])
 
   const addToCart = (item, selectedLocker) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id && cartItem.lockerId === selectedLocker);
-
+    const isItemInCart = cartItems.find(
+      (cartItem) => cartItem.id === item.id && cartItem.lockerId === selectedLocker
+    );
+  
     console.log("Selected Locker: VIEW", selectedLocker); // Log the selected locker ID
-
+  
     if (isItemInCart) {
       setCartItems(
         cartItems.map((cartItem) =>
@@ -23,19 +25,28 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
-
-    if (isItemInCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
-    } else {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem
-        )
-      );
+  const removeFromCart = (item, selectedLocker) => {
+    const isItemInCart = cartItems.find(
+      (cartItem) => cartItem.id === item.id && cartItem.lockerId === selectedLocker
+    );
+  
+    if (isItemInCart) {
+      if (isItemInCart.quantity === 1) {
+        setCartItems(
+          cartItems.filter(
+            (cartItem) =>
+              !(cartItem.id === item.id && cartItem.lockerId === selectedLocker)
+          )
+        );
+      } else {
+        setCartItems(
+          cartItems.map((cartItem) =>
+            cartItem.id === item.id && cartItem.lockerId === selectedLocker
+              ? { ...cartItem, quantity: cartItem.quantity - 1 }
+              : cartItem
+          )
+        );
+      }
     }
   };
 

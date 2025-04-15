@@ -1,12 +1,17 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import secureStorage from '../../utils/secureStorage';
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
+import { useContext } from 'react';
+
 
 function UserOrder() {
-
+  const navigate = useNavigate();
   //const user = JSON.parse(sessionStorage.getItem('user'))
   const user = secureStorage.getItem('user');
   const [orders, setOrders] = useState([])
+  const { clearCart } = useContext(CartContext); // clearCart függvény a CartContext-ből
   
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BASE_URL}/order`, {
@@ -18,7 +23,11 @@ function UserOrder() {
       }
     })
     .then(response => response.json())
-    .then(data => setOrders(data))
+    .then(data => {setOrders(data);
+      // Automatikusan töröljük a cartItems-t
+      //sessionStorage.removeItem('cartItems');
+      clearCart(); // A kosár ürítése a CartContext segítségével
+    })
     .catch((error) => {
       console.error('Error:', error)
     })
@@ -26,6 +35,10 @@ function UserOrder() {
   , [])
 
  console.log(orders);
+
+ const handleClose = () => {
+  navigate('/'); // Navigálás a főoldalra vagy másik oldalra
+};
   return (
 //     <div className="card bg-base-100 w-96 shadow-sm">
 //   <figure>
@@ -94,7 +107,7 @@ function UserOrder() {
       )}
 
       <div className="card-actions justify-end">
-        <button className="btn btn-primary text-white">Bezárás</button>
+        <button className="btn btn-primary text-white" onClick={handleClose}>Bezárás</button>
       </div>
     </div>
   </div>
