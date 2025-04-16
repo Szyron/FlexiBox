@@ -96,6 +96,7 @@ function Menu() {
                     <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
                     <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
                     <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Autómaták</Link></li>
+                    <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
                     {user.isadmin >= 90 && (
                       <>
                         <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Jogosultság</Link></li>

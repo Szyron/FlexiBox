@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Address;
+//use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -95,6 +98,36 @@ class OrderController extends Controller
         
     }
 
+    public function orderindex(Request $request)
+    {
+       // Get the user_id from the request headers
+       //$user_id = $request->header('userId');
+
+         // Az autentikált felhasználó lekérése
+    $authUser = Auth::user();
+
+    // Ellenőrizzük, hogy a felhasználónak van-e kapcsolata a role modellel
+    if ($authUser->role && $authUser->role->power < 70) {
+        return response()->json([
+            'message' => 'No permission to view orders'
+        ], 403);  // 403-as válasz, ha nincs jogosultság
+    }
+
+    // Az összes rendelés lekérése
+    $orders = Order::with(['orderItem.locker', 'address', 'user'])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json($orders);  // Visszaadjuk az adatokat
+        
+
+     
+
+      
+
+      
+    }
+
     public function storeIsAddress(Request $request)
     {
         \Log::info('Received data:', $request->all());
@@ -138,4 +171,48 @@ class OrderController extends Controller
         
         return response()->json(['message' => 'Order created successfully'], 201);
     }
+
+    public function deleteOrder(Request $request)
+{
+     // Az autentikált felhasználó lekérése
+     $authUser = Auth::user();
+
+     // Ellenőrizzük, hogy a felhasználónak van-e kapcsolata a role modellel
+     if ($authUser->role && $authUser->role->power < 70) {
+         return response()->json([
+             'message' => 'Nincs jogosultság a rendelés törléséhez'
+         ], 403);  // 403-as válasz, ha nincs jogosultság
+     }
+     
+    try {
+       
+        // A body-ból kiolvassuk az order_id-t
+        $orderId = $request->input('order_id');
+
+        Log::info('Bejövő order ID törléshez: ' . $orderId);
+
+        // Keresd meg a rendelést
+        $order = Order::findOrFail($orderId);
+        Log::info('Order megtalálva: ID = ' . $order->id);
+
+        // Töröld a rendelés tételeket
+       // $order->orderItems()->delete();
+        $deletedItems = $order->orderItem()->delete();
+    Log::info("Törölt order_items száma: $deletedItems");
+
+        // Töröld a rendelést
+        $order->delete();
+        Log::info("Order törölve: ID = " . $order->id);
+
+        return response()->json([
+            'message' => 'Rendelés sikeresen törölve!'
+        ], 200);
+    } catch (\Exception $e) {
+        Log::error('Törlési hiba: ' . $e->getMessage());
+        return response()->json([
+            'message' => 'Hiba történt a törlés során.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 }

@@ -35,7 +35,7 @@ import RolesList from "./components/Roles/RolesList";
 import NewLocker from "./components/Lockers/NewLocker";
 import LockersList from "./components/Lockers/LockersList";
 import Profile2 from "./components/Auth/Profile2";
-
+import AdminOrders from "./components/Dashboards/AdminOrders";
 
 
 
@@ -68,6 +68,7 @@ function App() {
           <Route path="/cart" element={<CartView/>}/>
           <Route path="/checkout" element={<OrderCheckout/>}/>
           <Route path="/userorder" element={<UserOrder/>}/>
+          <Route path="/adminorders" element={<AdminOrders/>}/>
           <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
           <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
           <Route path="/newrole" element={<NewRole/>}/>

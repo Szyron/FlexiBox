@@ -24,6 +24,8 @@ Route::put('/user/edit', [RegisterController::class, 'edit'])->middleware('auth:
 Route::delete('/user/delete', [RegisterController::class, 'destroy'])->middleware('auth:sanctum');
 Route::patch('/profile', [RegisterController::class, 'update']);
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/orderslist', [OrderController::class, 'orderindex'])->middleware('auth:sanctum');
+Route::delete('/orders', [OrderController::class, 'deleteOrder'])->middleware('auth:sanctum');
 
 Route::post('/profile', [ProfileController::class, 'store']);
 Route::get('/profile/index', [ProfileController::class, 'index'])->middleware('auth:sanctum');
