@@ -9,8 +9,8 @@ function CategoriesList() {
 
 
   return (
-    <div className="bg-base-200 min-h-screen">
-         <h1 className="text text-3xl font-bold text-center p-10 text-secondary">Kategória Lista</h1>
+    <div className="bg-base-200 min-h-screen p-4">
+         <h1 className="text-3xl font-bold text-center mb-4 text-primary">Kategória Lista</h1>
          <div className="flex flex-row flex-wrap items-center justify-center">
         {
             categories.map((category)=>(<CategoriesCard key={category.id} category={category}/>))

@@ -17,7 +17,7 @@ function AdminOrders() {
   const [searchLockerName, setSearchLockerName] = useState(''); // Szűrés locker név alapján
   const [searchLockerAddress, setSearchLockerAddress] = useState(''); // Szűrés locker cím alapján
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(5); // Oldalonkénti rendelések száma
+  const [ordersPerPage] = useState(2); // Oldalonkénti rendelések száma
 
   useEffect(() => {
     // Fetch rendeléseket
@@ -244,8 +244,8 @@ function AdminOrders() {
 
       {/* Bezárás gomb */}
       <div className="card-actions justify-end mt-6">
-        <button className="btn btn-primary text-white" onClick={handleClose}>
-          Bezárás
+        <button className="btn btn-primary btn-circle absolute right-2 top-20 text-info" onClick={handleClose}>
+        ✕
         </button>
       </div>
     </div>

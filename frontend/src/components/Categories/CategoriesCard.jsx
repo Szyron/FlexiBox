@@ -26,14 +26,14 @@ function CategoriesCard({ category }) {
 
 
     return (
-        <div className="card w-96 shadow-xl m-5 bg-secondary">
+        <div className="card w-96 shadow-xl m-5 bg-base-100">
             <div className="card-body text-center">
                 <h2 className="card-title justify-center text-primary">{category.name}</h2>
                 <div className="card-actions justify-center">
                     {user ? (
                         <>
                             {user.isadmin >= 70 && <button className='btn btn-primary text-white' onClick={() => modosit(category)}>Módosítás</button>}
-                            {user.isadmin >= 70 && <button className='btn btn-error text-white' onClick={() => torles(category)}>Törlés</button>}
+                            {user.isadmin >= 70 && <button className='btn btn-info text-white' onClick={() => torles(category)}>Törlés</button>}
                         </>
                     ) : null}
 

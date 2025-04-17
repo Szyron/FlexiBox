@@ -60,13 +60,16 @@ function AdminDashboard() {
   
   }, [user, token, setUsers]);  */
 
+  const handleClose = () => {
+    navigate('/'); // Navigálás a főoldalra vagy másik oldalra
+  };
     
     
   return (
-    <div className="min-h-screen overflow-x-auto bg-base-200">
-      <h1 className="font-bold  text text-primary text-3xl text-center p-10">Regisztált Felhasználói Adatok</h1>
-        <table className="table table-xs">
-        <thead>
+    <div className="min-h-screen overflow-x-auto bg-base-200 p-4">
+      <h1 className="font-bold  text text-primary text-3xl text-center pb-10 mb-4">Regisztált Felhasználói Adatok</h1>
+        <table className="table w-full bg-base-100 text-info font-bold">
+        <thead className="bg-primary text-white">
       <tr>
         <th>Id</th>
         <th>Vezetéknév</th>
@@ -79,17 +82,23 @@ function AdminDashboard() {
       {
           users.map((user) => <AdminDashboardCard key={user.id} user={user} />)
       }
-        <tfoot>
+        <tfoot className="bg-primary text-white">
       <tr>
         <th>Id</th>
         <th>Vezetéknév</th>
         <th>Keresztnév</th>
         <th>Email cím</th>
+        <th>Jogosultság</th>
         <th>Létrehozva</th>
       </tr>
     </tfoot>
   </table>
+    <div className="card-actions justify-end mt-6">
+        <button className="btn btn-primary btn-circle absolute right-2 top-20 text-info"  onClick={handleClose}>
+        ✕
+        </button>
     </div>
+  </div>
   )
 }
 

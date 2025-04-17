@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext()
 
@@ -8,7 +9,9 @@ export const CartProvider = ({ children }) => {
   const addToCart = (item, selectedLocker) => {
     const isItemInCart = cartItems.find(
       (cartItem) => cartItem.id === item.id && cartItem.lockerId === selectedLocker
+      
     );
+     
   
     console.log("Selected Locker: VIEW", selectedLocker); // Log the selected locker ID
   
@@ -23,6 +26,7 @@ export const CartProvider = ({ children }) => {
     } else {
       setCartItems([...cartItems, { ...item, quantity: 1, lockerId: selectedLocker }]);
     }
+    toast.success('Termék hozzáadva a kosárhoz!')
   };
 
   const removeFromCart = (item, selectedLocker) => {

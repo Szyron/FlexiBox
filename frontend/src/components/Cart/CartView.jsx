@@ -18,10 +18,9 @@ function CartView() {
     
 
   return (
-    <div className="min-h-screen mx-auto bg-base-200">
+    <div className="min-h-screen mx-auto bg-base-200 p-4">
   <div className="flex flex-col items-center">
-    <h1 className="text-3xl font-bold mt-10 text-primary">Kosár</h1>
-
+    <h1 className="text text-4xl font-bold text-center pb-10 mb-4 text-primary">Kosár</h1>
   </div>
   <div className="flex flex-col md:flex-row justify-center items-start">
     <div className="w-full md:w-3/4">
@@ -34,7 +33,9 @@ function CartView() {
               <p className="text-gray-600">{item.price_per_day}</p>
               <p className="text-gray-600">
                 {
-                  lockers.find(locker => locker.id === Number(item.lockerId))?.locker_name || "Ismeretlen átvevőpont"
+                  lockers.find(locker => locker.id === Number(item.lockerId))
+                      ? `${lockers.find(locker => locker.id === Number(item.lockerId))?.locker_name} – ${lockers.find(locker => locker.id === Number(item.lockerId))?.address}`
+                      : "Ismeretlen átvevőpont"
                 }
               </p>
             </div>
@@ -58,14 +59,14 @@ function CartView() {
           {cartItems.length > 0 ? (
             <div className="flex flex-col justify-between items-center">
               <h1 className="text-lg font-bold">Összesen: {getCartTotal()} Ft</h1>
-              <button className="px-4 py-2 bg-red-700 text-white text-xs font-bold uppercase rounded hover:bg-red-700 focus:outline-none focus:bg-red-700" onClick={() => { clearCart() }}>
+              <button className="px-4 py-2 bg-info text-white text-xs font-bold uppercase rounded " onClick={() => { clearCart() }}>
                 Teljes kosár kiürítése
               </button>
-              <button onClick={()=>openPrivacyInfo()} className="m-2 px-4 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700" >
+              <button onClick={()=>openPrivacyInfo()} className="m-2 px-4 py-2 bg-success text-white text-xs font-bold uppercase rounded" >
                 Tovább a pénztárhoz
               </button>
-              <Link to="/" className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
-              Kosár bezárása
+              <Link to="/" className="px-4 py-2 btn-circle absolute right-2 top-2 text-info" >
+              ✕
             </Link>
               {
             isPrivacyInfo && (<TermofUseInfo  closeFunction={()=>closePrivacyInfo()} />)
@@ -73,9 +74,8 @@ function CartView() {
         }
             </div>
           ) : (
-            <h1 className="text-lg font-bold">Kosarad üres jelenleg.</h1>
+            <h1 className="text-lg font-bold text-primary text-center">Kosarad üres jelenleg.</h1>
           )}
-          <div className="card-actions justify-end"></div>
         </div>
       </div>
     </div>

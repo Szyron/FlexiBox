@@ -9,7 +9,7 @@ function NewLocker() {
   const { backendMuvelet } = useContext(ServiceContext);
 
   const { state } = useLocation();
-  let cim = "Új Csomagautómata Felvitele";
+  let cim = "Új Csomagautomata Felvitele";
   let method = "POST";
   let header = {"Content-type": "application/json"};
 
@@ -56,7 +56,7 @@ function NewLocker() {
 
 
   return (
-    <div className="bg-base-200 flex items-center justify-center min-h-screen">
+    <div className="bg-base-200 flex items-center justify-center min-h-screen text-info">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="text-2xl font-bold text-center text-primary">{cim}</h2>
@@ -64,7 +64,7 @@ function NewLocker() {
             <div className="form-control">
               <label className="label">
               </label>
-              <label className="input input-bordered flex items-center gap-2">
+              <label className="input input-bordered flex items-center gap-2 border-primary">
                 <input className="grow"
                   type="text"
                   id="locker_name"
@@ -76,7 +76,7 @@ function NewLocker() {
               </label>
               <label className="label">
               </label>
-              <label className="input input-bordered flex items-center gap-2">
+              <label className="input input-bordered flex items-center gap-2 border-primary">
                 <input className="grow"
                   type="text"
                   id="address"
@@ -90,7 +90,7 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-              <textarea className="textarea textarea-bordered h-24 textarea-auto w-full"
+              <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary"
                 id="description"
                 placeholder="Csomagautómata leirása"
                 required

@@ -65,25 +65,16 @@ function Register2() {
   };
 
   return (
-    <div className="bg-base-200 flex items-center justify-center min-h-screen mt-2">
+    <div className="bg-base-200 flex items-center justify-center min-h-screen mt-2 text-info">
       <div className="card w-96 bg-base-100 shadow-xl mt-5">
         <div className="card-body">
           <h2 className="text-2xl font-bold text-center text-primary">Regisztráció</h2>
           <form onSubmit={onSubmit}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Vezetéknév</span>
               </label>
-              <label className="input input-bordered flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="w-4 h-4 opacity-70"
-                >
-                  <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                  <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                </svg>
+              <label className="input input-bordered flex items-center gap-2 border-primary">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 <input
                   type="text"
                   id="last_name"
@@ -97,18 +88,9 @@ function Register2() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Keresztnév</span>
               </label>
-              <label className="input input-bordered flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="w-4 h-4 opacity-70"
-                >
-                  <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                  <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                </svg>
+              <label className="input input-bordered flex items-center gap-2 border-primary">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 <input
                   type="text"
                   id="first_name"
@@ -122,18 +104,12 @@ function Register2() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email cím</span>
               </label>
-              <label className="input input-bordered flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="#00aab3"
-                  className="w-4 h-4 opacity-70"
-                >
-                  <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                  <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                </svg>
+              <label className="input input-bordered flex items-center gap-2 border-primary">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="1" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M20.62,5.22l-8,6.29a1,1,0,0,1-1.24,0l-8-6.29A1,1,0,0,1,4,5H20A1,1,0,0,1,20.62,5.22Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
                 <input
                   type="email"
                   id="email"
@@ -146,23 +122,11 @@ function Register2() {
               </label>
             </div>
 
-            <div className="form-control mt-4">
+            <div className="form-control">
               <label className="label">
-                <span className="label-text">Jelszó</span>
               </label>
-              <label className="input input-bordered flex items-center gap-2">
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="#00aab3"
-                  className="w-4 h-4 opacity-70"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+              <label className="input input-bordered flex items-center gap-2 border-primary">
+              <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="3" y="11" width="18" height="11" rx="2" stroke="#00aab3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></rect> <path d="M7 10.9999V6.99988C7 4.23845 9.23858 1.99988 12 1.99988V1.99988C14.7614 1.99988 17 4.23845 17 6.99988V10.9999" stroke="#00aab3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 <input
                   type="password"
                   id="password"
@@ -174,23 +138,11 @@ function Register2() {
                 />
               </label>
             </div>
-            <div className="form-control mt-4">
+            <div className="form-control">
               <label className="label">
-                <span className="label-text">Jelszó újra</span>
               </label>
-              <label className="input input-bordered flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="#00aab3"
-                  className="w-4 h-4 opacity-70"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+              <label className="input input-bordered flex items-center gap-2 border-primary">
+<svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="3" y="11" width="18" height="11" rx="2" stroke="#00aab3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></rect> <path d="M7 10.9999V6.99988C7 4.23845 9.23858 1.99988 12 1.99988V1.99988C14.7614 1.99988 17 4.23845 17 6.99988V10.9999" stroke="#00aab3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 <input
                   type="password"
                   id="passwordAgain"
@@ -208,9 +160,9 @@ function Register2() {
               </button>
             </div>
           </form>
-          <div className="divider">VAGY</div>
+          <div className="divider divider-info text-primary">VAGY</div>
           <div className="text-center">
-            <p>Van fiókja?</p>
+            <p className="text-info">Van fiókja?</p>
             <Link to="/login2" className="link link-primary">
               Jelentkezzen be
             </Link>

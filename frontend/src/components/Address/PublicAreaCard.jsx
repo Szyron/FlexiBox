@@ -26,14 +26,14 @@ function PublicAreaCard({publicarea}) {
     }
 
   return (
-    <div className="card w-96 shadow-xl m-5 bg-secondary">
+    <div className="card w-96 shadow-xl m-5 bg-base-100">
     <div className="card-body text-center">
         <h2 className="card-title justify-center">{publicarea.public_area_name}</h2>
         <div className="card-actions justify-center">
             {user ? (
                 <>
-                    {user.isadmin >= 70 && <button className='btn btn-primary' onClick={() => modosit(publicarea)}>Módosítás</button>}
-                    {user.isadmin >= 70 && <button className='btn btn-error' onClick={() => torles(publicarea)}>Törlés</button>}
+                    {user.isadmin >= 70 && <button className='btn btn-primary text-white' onClick={() => modosit(publicarea)}>Módosítás</button>}
+                    {user.isadmin >= 70 && <button className='btn btn-info text-white' onClick={() => torles(publicarea)}>Törlés</button>}
                 </>
             ) : null}
 

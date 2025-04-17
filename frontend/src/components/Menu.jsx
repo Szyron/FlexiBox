@@ -70,7 +70,7 @@ function Menu() {
       </div>
       <div className="flex-none">
         <Link to="/lockers" className="btn btn-ghost text-primary font-bold">
-          Csomagautómaták
+          Csomagautomaták
         </Link>
       </div>
       <div className="flex-none">
@@ -140,10 +140,10 @@ function Menu() {
             className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
           >
             <div className="card-body">
-              <span className="text-lg font-bold">Termék: {cartItems.length} Darab</span>
+              <span className="text-lg font-bold text-primary">Termék: {cartItems.length} db</span>
               <span className="text-info">Összesen: {getCartTotal()} Ft</span>
               <div className="card-actions">
-                <Link to="/cart" className="btn btn-primary btn-block">
+                <Link to="/cart" className="btn btn-primary btn-block text-white">
                   Kosár megtekintése
                 </Link>
               </div>

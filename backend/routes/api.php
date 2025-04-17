@@ -42,7 +42,7 @@ Route::delete('/category/delete', [ServiceController::class, 'destroy'])->middle
 Route::patch('/category', [ServiceController::class, 'update']);
 Route::get('/users', [AdminController::class, 'index'])->middleware('auth:sanctum');
 
-Route::post('/publicareaname', [AddressController::class, 'publicAreaStore']);
+
 Route::get('/publicareaname', [AddressController::class, 'publicAreaIndex']);
 Route::patch('/publicareaname', [AddressController::class, 'publicAreaUpdate']);
 Route::delete('/publicareaname/delete', [AddressController::class, 'publicAreaDestroy'])->middleware('auth:sanctum');
@@ -79,8 +79,7 @@ Route::group(['middleware' => ['auth', 'checkadmin:70']], function () {
     Route::get('/admindashboard', function (Request $request) {
         return response()->json(['message' => 'Admin access granted']);
     });
-    
-    
+    Route::post('/publicareaname', [AddressController::class, 'publicAreaStore']);    
 });
 
 Route::group(['middleware' => ['auth', 'checkadmin:100']], function () {

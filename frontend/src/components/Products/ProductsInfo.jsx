@@ -2,14 +2,13 @@ function ProductsInfo({ product, closeFunction }) {
   return (
     <div className="modal modal-open">
       <div className="modal-box">
-        
-        <h3 className="font-semibold text-lg">Terméknév: {product.name}</h3>
-        <h2 className="font-bold text-center">Termék leírás</h2>
-        <p className="py-4">{product.description}</p>
+        <h2 className="text-primary font-bold text-center text-lg">Termék leírás</h2>
+        <div className="divider divider-primary text-primary"></div>
+        <p className="text-info text-left">{product.description}</p>
         <div className="modal-action">
           {/* Close button */}
-          <button className="btn btn-info" onClick={closeFunction}>
-            Bezárás
+          <button className="btn btn-ghost btn-circle absolute right-2 top-2 text-info" onClick={closeFunction}>
+          ✕
           </button>
         </div>
       </div>

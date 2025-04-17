@@ -2,11 +2,13 @@ function LockerInfo({ locker, closeFunction }) {
     return (
       <div className="modal modal-open">
         <div className="modal-box">
-          <p className="py-4">{locker.description}</p>
+        <h2 className="text-primary font-bold text-center text-lg">Csomagautomata leírás</h2>
+        <div className="divider divider-primary text-primary"></div>
+          <p className="text-left text-info">{locker.description}</p>
           <div className="modal-action">
             {/* Close button */}
-            <button className="btn btn-info" onClick={closeFunction}>
-              Bezárás
+            <button className="btn btn-ghost btn-circle absolute right-2 top-2 text-info" onClick={closeFunction}>
+            ✕
             </button>
           </div>
         </div>

@@ -64,7 +64,8 @@ function UserOrder() {
 // </div>
 <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
   <div className="card w-full max-w-xl bg-base-100 shadow-lg rounded-2xl p-4">
-
+    <p className="text-info text-xl font-bold">Azonosító: #{order.id}</p>
+    <div className="divider divider-primary text-primary"></div>
     <div className="card-body space-y-4">
       <h2 className="card-title text-xl font-bold text-primary">Megrendelés Adatai</h2>
 
@@ -72,17 +73,18 @@ function UserOrder() {
         orders.map((order, index) => (
           <div key={index} className="border-t border-base-200 pt-4 space-y-3">
             <div>
-              <p className="font-semibold">👤 Megrendelő:</p>
-              <p>{order.user.first_name} {order.user.last_name}</p>
-              <p className="text-sm text-gray-500">{order.user.email}</p>
+              <p className="font-semibold text-info">Megrendelő:</p>
+              <p className="text-secondary">{order.user.first_name} {order.user.last_name}</p>
+              <p className="text-sm text-secondary">{order.user.email}</p>
             </div>
 
             <div>
-              <p className="font-semibold">📍 Szállítási cím:</p>
-              <p>{order.address.street} {order.address.house_number}, {order.address.zip}</p>
+              <p className="font-semibold text-info">Számlázási cím</p>
+              <p className="text-secondary">{order.address.zip} {order.address.city}, {order.address.street} {order.address.house_number}. {order.address.streettype.public_area_name}</p>
             </div>
 
-            <div className="text-lg font-semibold text-primary">
+            <div className="text-lg font-semibold text-secondary">
+              <p className="font-semibold text-info">Rendelés összesen:</p>
               Összeg: {order.total} Ft
             </div>
 
@@ -91,8 +93,9 @@ function UserOrder() {
                 <h3 className="font-semibold mb-2">🧾 Rendelési tételek:</h3>
                 {order.order_item.map((item, idx) => (
                   <div key={idx} className="mb-2 border-b border-dashed pb-2 last:border-none last:pb-0">
-                    <p><span className="font-medium">Csomagautómata:</span> {item.locker ? item.locker.locker_name : 'Nincs hozzárendelt locker'}</p>
-                    <p><span className="font-medium">Termék ID:</span> {item.product_id}</p>
+                    <p><span className="font-medium">Csomagautómata neve:</span> {item.locker ? item.locker.locker_name : 'Nincs hozzárendelt locker'}</p>
+                    <p><span className="font-medium">Csomagautómata címe:</span> {item.locker ? item.locker.address : 'Nincs hozzárendelt locker'}</p>
+                    <p><span className="font-medium">Termék azonosító :</span> {item.product_id}</p>
                     <p><span className="font-medium">Ár:</span> {item.item_price} Ft</p>
                     <p><span className="font-medium">Darab:</span> {item.quantity}</p>
                     <p><span className="font-medium">Összeg:</span> {item.line_total} Ft</p>

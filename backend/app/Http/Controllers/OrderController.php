@@ -88,7 +88,7 @@ class OrderController extends Controller
         
 
        // Fetch orders for the authenticated user with related data
-       $orders = Order::with(['orderItem.locker', 'address', 'user',])
+       $orders = Order::with(['orderItem.locker', 'address.streettype', 'user'])
            ->where('user_id', $user_id)
            ->orderBy('created_at', 'desc')
         ->first();
@@ -114,18 +114,10 @@ class OrderController extends Controller
     }
 
     // Az összes rendelés lekérése
-    $orders = Order::with(['orderItem.locker', 'address', 'user'])
+    $orders = Order::with(['orderItem.locker', 'address.streettype', 'user'])
         ->orderBy('created_at', 'desc')
         ->get();
-
     return response()->json($orders);  // Visszaadjuk az adatokat
-        
-
-     
-
-      
-
-      
     }
 
     public function storeIsAddress(Request $request)

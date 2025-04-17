@@ -3,8 +3,6 @@ import secureStorage from "../utils/secureStorage";
 import { useEffect,useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
-
-
 function Main() {
 
   const { user } = useContext(AuthContext);
@@ -18,19 +16,20 @@ function Main() {
             className="divider divider-secondary text-2xl font-extrabold leading-9 tracking-tight mb-10 text-primary dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
           </div>
           <h1 class="text-3xl font-bold text-primary text-center w-full mb-5">Üdvözlünk a FlexiStore demóban!</h1>
-          <p className="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300 text-center w-full ">
+          <p className="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300 text-center w-full text-info ">
             Egy modern platform, ahol a jövő automatizált bérlési rendszere épül.
-            <br />
-            Fedezd fel a legújabb technológiákat és innovációkat, amelyek megkönnyítik az életedet.
+            <br/>
+            Fedezd fel a legújabb technológiákat és innovációkat, amelyek jobbá teszik az életedet!
           </p>
-          Készítette: Szirony Balázs Gábor és Gombkötő Gábor
-            <br />
+          <span className="text-info font-bold">Készítette: Szirony Balázs Gábor és Gombkötő Gábor
+            <br/>
             © Minden jog fenntartva.
+          </span>
           <div
             className="divider divider-secondary text-2xl font-extrabold leading-9 tracking-tight mb-10 text-primary dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
           </div>
           <div className="flex gap-4 justify-center w-full">
-            <Link to="/lockers" className="btn btn-primary text-white">Csomagautómaták</Link>
+            <Link to="/lockers" className="btn btn-primary text-white">Csomagautomaták</Link>
             {user ? (
               null
             ) : (

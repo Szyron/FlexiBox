@@ -31,14 +31,14 @@ function LockersCard({ locker }) {
   const openInfo = () => setInfo(true);
   const closeInfo = () => setInfo(false);
 
-  return user?.isadmin >= 70 ? (
-    <div className="card bg-base-100 w-96 shadow-sm m-5">
+  return (
+    <div className="card bg-base-100 w-96 shadow-sm m-10">
       <figure className="px-10 pt-10">
         <img src={LockerKep} alt="Shoes" className="rounded-xl" />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{locker.locker_name}</h2>
-        <p>{locker.address}</p>
+        <h2 className="card-title text-primary">{locker.locker_name}</h2>
+        <p className="text-info">{locker.address}</p>
         <div className="card-actions">
           {isInfo && (
             <LockerInfo
@@ -46,23 +46,22 @@ function LockersCard({ locker }) {
               closeFunction={closeInfo}
             />
           )}
+          {user?.isadmin >= 70 && (
+            <>
           <button className="btn btn-primary text-white" onClick={() => modosit(locker)}>
             Módosítás
           </button>
           <button className="btn btn-info text-white" onClick={() => torles(locker)}>
             Törlés
           </button>
-          <button className="btn btn-primary">Elérhető Termékek</button>
+          </>
+          )}
+          <button className="btn btn-primary text-white">Elérhető Termékek</button>
           <button className="btn btn-secondary text-white" onClick={openInfo}>
             Info
           </button>
         </div>
       </div>
-    </div>
-  ) : (
-    <div className="flex flex-col items-center justify-center h-screen bg-base-200 text-gray-800 text-center px-4">
-      <h1 className="text-4xl font-bold mb-4">🔧 Fejlesztés alatt</h1>
-      <p className="text-lg">Az autómaták oldal jelenleg fejlesztés alatt áll. Nézz vissza később! 🚧</p>
     </div>
   );
 }

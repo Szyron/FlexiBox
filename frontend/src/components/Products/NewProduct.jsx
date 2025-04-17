@@ -160,7 +160,7 @@ function NewProduct() {
 
   return (
     <div className="bg-base-200 flex items-center justify-center min-h-screen">
-      <div className="card w-96 bg-base-100 shadow-xl text-3xl text-center font-bold text-primary">
+      <div className="card w-96 bg-base-100 shadow-xl text-3xl text-center text-info">
         <div className="card-body">
           <h2 className="text-2xl font-bold text-center text-primary">{cim}</h2>
           <form onSubmit={onSubmit}>
@@ -174,12 +174,12 @@ function NewProduct() {
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="file-input file-input-bordered w-full max-w-xs"
+                className="file-input file-input-bordered w-full max-w-xs border-primary"
 
               />
               <label className="label">
               </label>
-              <label className="input input-bordered flex items-center gap-2">
+              <label className="input input-bordered flex items-center gap-2 border-primary">
                 <input className="grow"
                   type="text"
                   id="name"
@@ -192,7 +192,7 @@ function NewProduct() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full"
+                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary"
                   id="description"
                   placeholder="Termék leirása"
                   required
@@ -202,11 +202,11 @@ function NewProduct() {
               </label>
               <label className="label">
               </label>
-              <label className="input input-bordered flex items-center gap-2">
+              <label className="input input-bordered flex items-center gap-2 border-primary">
                 <input className="grow"
                   type="number"
                   id="price_per_day"
-                  placeholder="Termék Bérlési ára"
+                  placeholder="Termék Bérlési ára Ft/nap"
                   required
                   onChange={writeData}
                   value={formData.price_per_day}
@@ -215,7 +215,7 @@ function NewProduct() {
               <label className="label">
                 <span className="label-text">Kategória</span>
               </label>
-              <select className="select select-bordered w-full" id="category_id" onChange={writeData} value={formData.category_id}>
+              <select className="select select-bordered w-full border-primary" id="category_id" onChange={writeData} value={formData.category_id}>
                 {
                   categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))
                 }
@@ -229,10 +229,10 @@ function NewProduct() {
                 } 
                 </select> */}
               <label className="label">
-                <span className="label-text">Csomagautómata</span>
+                <span className="label-text">Csomagautomata</span>
               </label>
               <select
-                className="select select-bordered w-full"
+                className="select select-bordered w-full border-primary"
                 id="locker_ids"
                 multiple
                 onChange={(e) => {
@@ -242,7 +242,7 @@ function NewProduct() {
                 value={formData.locker_ids || []}
               >
                 {lockers.map((locker) => (
-                  <option key={locker.id} value={locker.id}>
+                  <option className="m-1" key={locker.id} value={locker.id}>
                     {locker.locker_name}
                   </option>
                 ))}
@@ -250,7 +250,7 @@ function NewProduct() {
 
               <label className="label">
               </label>
-              <select className="select select-bordered w-full" id="available" onChange={writeData} value={formData.available}>
+              <select className="select select-bordered w-full border-primary" id="available" onChange={writeData} value={formData.available}>
                 <option value="1">Elérhető</option>
                 <option value="0">Nem elérhető</option>
               </select>
