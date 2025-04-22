@@ -55,7 +55,7 @@ function CartView() {
                   <button className="px-4 py-2 bg-info text-white text-xs font-bold uppercase rounded " onClick={() => { clearCart() }}>
                     Teljes kosár kiürítése
                   </button>
-                  <button onClick={() => openPrivacyInfo()} className="m-2 px-4 py-2 bg-success text-white text-xs font-bold uppercase rounded" >
+                  <button id="next-to-checkout" onClick={() => openPrivacyInfo()} className="m-2 px-4 py-2 bg-success text-white text-xs font-bold uppercase rounded" >
                     Tovább a pénztárhoz
                   </button>
                   <Link to="/" className="px-4 py-2 btn-circle absolute right-2 top-2 text-info" >

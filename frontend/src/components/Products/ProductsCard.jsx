@@ -105,7 +105,7 @@ function ProductsCard({ product }) {
             </>
           )}
           {user?.isadmin >= 11 && (
-            <button className="btn btn-success text-white" onClick={() => addToCart(product, selectedLocker)}>
+            <button className="btn btn-success text-white" id="add-to-cart-button" onClick={() => addToCart(product, selectedLocker)}>
               Kosárba
             </button>
           )}

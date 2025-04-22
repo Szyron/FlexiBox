@@ -40,7 +40,7 @@ function TermofUseInfo({ closeFunction }) {
           <button className="btn" onClick={closeFunction}>
             Bezárás
           </button>
-          <button className="btn" onClick={openOrder} >
+          <button id="accepted-term" className="btn" onClick={openOrder} >
             Tovább a pénztárhoz
           </button>
         </div>
