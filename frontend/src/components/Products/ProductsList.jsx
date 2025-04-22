@@ -3,10 +3,11 @@ import { useContext } from "react";
 import ProductsCard from "./ProductsCard";
 import ServiceContext from "../../context/ServiceContext";
 import { useState, useEffect } from "react";
+import InitialContext from "../../context/InitialContext";
 
 function ProductsList() {
-  const { products, lockers, categories } = useContext(ServiceContext);
-
+  //const { products, lockers, categories } = useContext(ServiceContext);
+  const { products, lockers, categories} = useContext(InitialContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filteredCitys, setFilteredCities] = useState("");
@@ -76,6 +77,8 @@ function ProductsList() {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
+
+
 
 
 

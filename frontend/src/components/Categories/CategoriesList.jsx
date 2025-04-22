@@ -2,11 +2,13 @@ import React from 'react'
 import { useContext } from 'react';
 import CategoriesCard from './CategoriesCard'
 import ServiceContext from '../../context/ServiceContext';
+import InitialContext from '../../context/InitialContext';
 
 function CategoriesList() {
 
-    const {categories}=useContext(ServiceContext);
-
+   
+//const {categories}=useContext(ServiceContext);
+const { categories } = useContext(InitialContext);
 
   return (
     <div className="bg-base-200 min-h-screen p-4">

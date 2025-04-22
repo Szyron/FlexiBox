@@ -1,29 +1,36 @@
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import AddressContext from '../../context/AddressContext';
-import secureStorage from '../../utils/secureStorage';
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AddressContext from "../../context/AddressContext";
+import secureStorage from "../../utils/secureStorage";
+import CrudContext from "../../context/CrudContext";
+import InitialContext from "../../context/InitialContext";
+
+
 
 function PublicAreaCard({publicarea}) {
-    //const user = JSON.parse(sessionStorage.getItem('user'));
-    //const user = JSON.parse(secureStorage.getItem('user'));
-    const user = secureStorage.getItem('user');
+    const user = secureStorage.getItem("user");
     const navigate = useNavigate();
-    const { backendMuvelet } = useContext(AddressContext);
-
+    //const { backendMuvelet } = useContext(AddressContext);
+    const { backendMuvelet } = useContext(CrudContext);
+    const { updatePublicAreaName } = useContext(InitialContext);
+  
     const modosit = () => {
-        navigate("/newpublicarea", { state: { publicarea } });
-    }
-
+      navigate("/newpublicarea", { state: { publicarea } });
+    };
+  
     const torles = (publicarea) => {
-        backendMuvelet(
-            publicarea,
-             "DELETE", 
-            `${import.meta.env.VITE_BASE_URL}/publicareaname/delete`,
-            { "Content-type": "application/json" , 
-                "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
-              "StreetTypeId" : publicarea.id} 
-        );
-    }
+      const method = "DELETE";
+      const url = `${import.meta.env.VITE_BASE_URL}/publicareaname/delete`;
+      const header = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("usertoken")}`,
+        StreetTypeId: publicarea.id,
+      };
+      const successMessage = "Közterület sikeresen törölve!";
+      const errorMessage = "Nem sikerült a közterület törlése.";
+      updatePublicAreaName();
+      backendMuvelet(null, method, url, header, successMessage, errorMessage);
+    };
 
   return (
     <div className="card w-96 shadow-xl m-5 bg-base-100">

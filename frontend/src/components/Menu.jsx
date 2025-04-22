@@ -114,6 +114,29 @@ function Menu() {
         </>
       ) : null}
 
+{user ? (
+        <>
+        {user.isadmin < 70 && (
+            <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <details className="relative">
+                <summary className="text-primary font-bold">User Dashboard</summary>
+                <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
+                   
+                    <li><Link to="/userdashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
+                   
+                  
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </div>
+        )
+      }
+        </>
+      ) : null}
+
 
 
       <div className="flex-none flex gap-4 items-center">

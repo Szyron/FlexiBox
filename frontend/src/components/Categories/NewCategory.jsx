@@ -2,55 +2,136 @@ import { useState , useContext} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 //import { toast } from "react-toastify";
 import ServiceContext from "../../context/ServiceContext";
+import CrudContext from "../../context/CrudContext";
+import InitialContext from "../../context/InitialContext";
+
 
 function NewCategory() {
 
-    const navigate = useNavigate();
-    
-    const {update,setCategories , backendMuvelet} = useContext(ServiceContext);
-    const {state} = useLocation();
+  const navigate = useNavigate();
+  const { update } = useContext(InitialContext); // Az InitialContext-ből elérjük a frissítési függvényt
+ //const {update,setCategories , backendMuvelet} = useContext(ServiceContext);
+  const {backendMuvelet} = useContext(CrudContext);
+  const {state} = useLocation();
 
-    let cim = "Új Kategória Felvitele";
-    let method = "POST";
-    let header = {"Content-type": "application/json"};
-
-
-    let formObj = {
-        id: "",
-        name: "",
-      };
-    
-    
-    let url = `${import.meta.env.VITE_BASE_URL}/category`;
+  let cim = "Új Kategória Felvitele";
+  let method = "POST";
+  let header = {"Content-type": "application/json"};
 
 
-    if (state!==null)
-    {
-      const {category} = state;
-      formObj = {
-        id : category.id,
-        name : category.name,
-        
-      };
-      method = "PATCH";
-      cim = `${category.name} módosítása`;
+  let formObj = {
+      id: "",
+      name: "",
+    };
+  
+  
+  let url = `${import.meta.env.VITE_BASE_URL}/category`;
+
+
+  if (state!==null)
+  {
+    const {category} = state;
+    formObj = {
+      id : category.id,
+      name : category.name,
+      
+    };
+    method = "PATCH";
+    cim = `${category.name} módosítása`;
+  }
+
+  const [formData, setFormData] = useState(formObj);
+  
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   backendMuvelet(formData,method,url,header);
+  //   navigate("/categories");
+  // };
+
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   // Módosítás vagy új adat felvitelének eldöntése
+  //   const isEdit = !!formData.id; // Ha van ID, akkor módosítás
+  //   const method = isEdit ? "PATCH" : "POST"; // Módosításhoz PATCH, újhoz POST
+  //   const url = isEdit
+  //     ? `${import.meta.env.VITE_BASE_URL}/category/update`
+  //     : `${import.meta.env.VITE_BASE_URL}/category`;
+  
+  //   const successMessage = isEdit
+  //     ? `${formData.name} sikeresen módosítva!`
+  //     : "Új kategória sikeresen létrehozva!";
+  //   const errorMessage = isEdit
+  //     ? `${formData.name} módosítása sikertelen!`
+  //     : "Nem sikerült a kategória létrehozása!";
+  
+  //   try {
+  //     await backendMuvelet(
+  //       JSON.stringify(formData), // Az adatokat JSON formátumban küldjük
+  //       method,
+  //       url,
+  //       { "Content-Type": "application/json", Authorization: `Bearer ${sessionStorage.getItem("usertoken")}` },
+  //       successMessage,
+  //       errorMessage
+  //     );
+  //     update(); // Frissíti a kategórialistát
+  //     navigate("/categories"); // Navigálás a kategóriák listájához
+  //   } catch (error) {
+  //     console.error("Hiba történt:", error);
+  //   }
+  // };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Ellenőrizd, hogy a "name" mező ki van-e töltve
+    if (!formData.name) {
+      toast.error("A 'name' mező kitöltése kötelező!");
+      return;
     }
   
-    const [formData, setFormData] = useState(formObj);
-    
-    const onSubmit = (e) => {
-      e.preventDefault();
-      backendMuvelet(formData,method,url,header);
-      navigate("/categories");
-    };
+    // Módosítás vagy új adat felvitelének eldöntése
+    const isEdit = !!formData.id; // Ha van ID, akkor módosítás
+    const method = isEdit ? "PATCH" : "POST"; // Módosításhoz PATCH, újhoz POST
+    const url = isEdit
+      ? `${import.meta.env.VITE_BASE_URL}/category`
+      : `${import.meta.env.VITE_BASE_URL}/category`;
+  
+    const successMessage = isEdit
+      ? `${formData.name} sikeresen módosítva!`
+      : "Új kategória sikeresen létrehozva!";
+    const errorMessage = isEdit
+      ? `${formData.name} módosítása sikertelen!`
+      : "Nem sikerült a kategória létrehozása!";
+  
+    try {
+      // Hívjuk meg a backendMuvelet függvényt
+      await backendMuvelet(
+        formData, // Az adatokat JSON formátumban küldjük
+        method,
+        url,
+        { "Content-Type": "application/json" }, // Fejléc
+        successMessage,
+        errorMessage
+      );
+  
+      // Frissítjük az adatokat és navigálunk
+      update(); // Frissíti a kategórialistát
+      navigate("/categories"); // Navigálás a kategóriák listájához
+    } catch (error) {
+      console.error("Hiba történt:", error);
+    }
+  };
+  
 
   
-    const writeData = (e) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.id]: e.target.value,
-      }));
-    };
+  const writeData = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
   
   return (
     <div className="bg-base-200 flex items-center justify-center min-h-screen text-info">

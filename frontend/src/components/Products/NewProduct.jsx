@@ -3,11 +3,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ServiceContext from "../../context/ServiceContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import initialContext from "../../context/InitialContext";
+import CrudContext from "../../context/CrudContext";
+
 
 function NewProduct() {
 
   const navigate = useNavigate();
-  const { update, setProducts, backendMuveletFile, categories, lockers } = useContext(ServiceContext);
+  //const { update, setProducts, backendMuveletFile, categories, lockers } = useContext(ServiceContext);
+  const { categories, lockers, update } = useContext(initialContext);
+  const { backendMuveletFile } = useContext(CrudContext);
+
   const { state } = useLocation();
   const [image, setImage] = useState(null);
 
@@ -25,9 +31,7 @@ function NewProduct() {
     locker_ids: [], //many lockers can be selected
   };
 
-
   let url = `${import.meta.env.VITE_BASE_URL}/product`;
-
 
   if (state !== null) {
     const { product } = state;
@@ -38,7 +42,7 @@ function NewProduct() {
       price_per_day: product.price_per_day,
       category_id: product.category_id,
       available: product.available,
-      //locker_id: product.locker_id,
+
       locker_ids: product.lockers.map((locker) => locker.id),
     };
     method = "POST";
@@ -46,110 +50,80 @@ function NewProduct() {
     cim = `${product.name} módosítása`;
   }
 
-
-
-
   const [formData, setFormData] = useState(formObj);
 
   console.log("Product data from formobj:", formData);
 
   const handleFileChange = (e) => {
-
-    // setImage(e.target.files);
     setImage(e.target.files);
-    //  update();
-
   };
-
-
-
-  console.log("Product ID:", formData.id);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(method, url);
-    console.log("Product data from location:", state);
 
-    // Create a new FormData instance
     const formDataToSubmit = new FormData();
-    // Append the product id if it exists
 
-    // if (formData.id) {
-    // formDataToSubmit.append("id", formData.id);
-    // }
-    console.log("formData.id before appending:", formData.id);
-
-    if (method === "POST" && formData.id) {
-      console.log("Appending product ID for PATCH:", formData.id);
-      formDataToSubmit.append("id", formData.id);
-    }
-
-
-    //formDataToSubmit.append("id", formData.id); // Ensure id is included in the form data
+    // Alapvető mezők hozzáadása
     formDataToSubmit.append("name", formData.name);
     formDataToSubmit.append("description", formData.description);
     formDataToSubmit.append("price_per_day", formData.price_per_day);
     formDataToSubmit.append("category_id", formData.category_id);
     formDataToSubmit.append("available", formData.available);
-    //formDataToSubmit.append("locker_id", formData.locker_id); //old code of lockers dont delete
+
+    // Több locker ID hozzáadása
     formData.locker_ids.forEach((id) => {
       formDataToSubmit.append("locker_ids[]", id);
-     });
+    });
 
-
-
-
-    // Append the image to the form data
+    // Kép hozzáadása, ha van
     if (image && image.length > 0) {
       formDataToSubmit.append("image", image[0]);
-    } else if (method === "POST" && !formData.id) {
-      toast.error("No image selected");
-      return; // Prevent form submission if no image is selected
+    } else if (!formData.id) {
+      // Új adat felvitelénél a kép kötelező
+      toast.error("Nincs kép kiválasztva!");
+      return;
     }
 
-    // Log the form data for debugging
-    for (let pair of formDataToSubmit.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
+    // Az ID hozzáadása módosításhoz
+    if (formData.id) {
+      formDataToSubmit.append("id", formData.id);
     }
 
-    //axios backup version
-    // const response = await axios.post(url, formDataToSubmit, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //   },
-    // });
+    // Módosítás vagy új adat felvitelének eldöntése
+    const isEdit = !!formData.id; // Ha van ID, akkor módosítás
+    const method = isEdit ? "POST" : "POST"; // Módosításhoz POST, újhoz is POST
+    const url = isEdit
+      ? `${import.meta.env.VITE_BASE_URL}/product/update`
+      : `${import.meta.env.VITE_BASE_URL}/product`;
 
-    console.log("Product data from form:", formData);
-    // Log the form data for debugging
-    console.log([...formDataToSubmit.entries()]);
+    const successMessage = isEdit
+      ? `${formData.name} sikeresen módosítva!`
+      : "Új termék sikeresen létrehozva!";
+    const errorMessage = isEdit
+      ? `${formData.name} módosítása sikertelen!`
+      : "Nem sikerült a termék létrehozása!";
 
-    console.log("FormData before submit:", [...formDataToSubmit.entries()]);
+    // Logolás a hibakereséshez
+    // for (let pair of formDataToSubmit.entries()) {
+    //     console.log(pair[0] + ': ' + pair[1]);
+    // }
 
     try {
-      const response = await axios({
-        method: method,
-        url: url,
-        data: formDataToSubmit,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      
-      //console.log(response.data);
-      
-      update();
-      toast.success("Sikeres feltöltés!");
+      await backendMuveletFile(
+        formDataToSubmit,
+        method,
+        url,
+        { Authorization: `Bearer ${sessionStorage.getItem("usertoken")}` },
+        successMessage,
+        errorMessage
+      );
+      update(); // Frissíti a terméklistát
+      // Navigálás a termékek listájához
       navigate("/products");
     } catch (error) {
-      toast.error('Please check the image size!', error);
-
+      console.error("Hiba történt:", error);
     }
-    console.log("Submitting form...", formDataToSubmit);
   };
-
-
-
-
 
   const writeData = (e) => {
     setFormData((prevState) => ({

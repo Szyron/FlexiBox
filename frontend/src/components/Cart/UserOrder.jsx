@@ -64,7 +64,7 @@ function UserOrder() {
 // </div>
 <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
   <div className="card w-full max-w-xl bg-base-100 shadow-lg rounded-2xl p-4">
-    <p className="text-info text-xl font-bold">Azonosító: #{order.id}</p>
+    <p className="text-info text-xl font-bold">Azonosító: #{orders.id}</p>
     <div className="divider divider-primary text-primary"></div>
     <div className="card-body space-y-4">
       <h2 className="card-title text-xl font-bold text-primary">Megrendelés Adatai</h2>

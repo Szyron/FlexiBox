@@ -36,7 +36,8 @@ import NewLocker from "./components/Lockers/NewLocker";
 import LockersList from "./components/Lockers/LockersList";
 import Profile2 from "./components/Auth/Profile2";
 import AdminOrders from "./components/Dashboards/AdminOrders";
-
+import { CrudProvider } from "./context/CrudContext";
+import { InitialProvider} from "./context/InitialContext";
 
 
 
@@ -48,7 +49,7 @@ function App() {
 
   return (
    <div>
-    
+    <CrudProvider>
     <PaymentProvider>
     <AdminProvider>
     <CartProvider>
@@ -57,6 +58,7 @@ function App() {
      
      <ServiceProvider>
       <AddressProvider>
+        <InitialProvider>
      <BrowserRouter>
       <Menu/>
         <Routes>
@@ -84,11 +86,13 @@ function App() {
           <Route path="/productsinfo" element={<ProductsInfo/>}/> 
           <Route path="/admindashboard" element={<AdminDashboard/>}/>
           <Route path="/userdashboard" element={<UserDashboard/>}/>
+          <Route path="/userorder" element={<UserOrder/>}/>
           <Route path="*" element={<Navigate to ="/"/>}/>
           <Route path="/registrationdataedit" element={<RegistrationDataEdit/>}/>
         </Routes>
       <Footer/>
     </BrowserRouter>
+    </InitialProvider>
       </AddressProvider>
       </ServiceProvider>
       </OrderProvider>
@@ -98,6 +102,7 @@ function App() {
       </CartProvider>
       </AdminProvider>
       </PaymentProvider>
+      </CrudProvider>
       <ToastContainer/>
     
     

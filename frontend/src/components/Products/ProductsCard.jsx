@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useState ,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import ServiceContext from "../../context/ServiceContext";
 import ProductsInfo from "./ProductsInfo";
 import { CartContext } from "../../context/CartContext";
 import secureStorage from "../../utils/secureStorage";
+
 
 function ProductsCard({ product }) {
   const { cartItems, addToCart } = useContext(CartContext);
@@ -30,20 +31,33 @@ function ProductsCard({ product }) {
     setInfo(false); // Info modális bezárása
   };
 
-
-
+  // const torles = (product) => {
+  //   backendMuvelet(
+  //     null, // A body üres, mert az ID a fejlécben kerül elküldésre
+  //     "DELETE",
+  //     `${import.meta.env.VITE_BASE_URL}/product/delete`,
+  //     {
+  //       "Content-type": "application/json",
+  //       Authorization: `Bearer ${sessionStorage.getItem("usertoken")}`,
+  //       productId: product.id, // Az ID a fejlécben
+  //     },
+  //     `${product.name} sikeresen törölve!`, // Sikeres üzenet
+  //     `${product.name} törlése sikertelen!` // Hibás üzenet
+  //   );
+  // };
 
   const torles = (product) => {
-    backendMuvelet(
-      product,
-      "DELETE",
-      `${import.meta.env.VITE_BASE_URL}/product/delete`,
-      {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
-        "productId": product.id
-      }
-    );
+    const method = "DELETE";
+    const url = `${import.meta.env.VITE_BASE_URL}/product/delete`;
+    const header = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("usertoken")}`,
+      productId: product.id, // Az ID a fejlécben
+    };
+    const successMessage = `${product.name} sikeresen törölve!`; // Sikeres üzenet
+    const errorMessage = `${product.name} törlése sikertelen!`; // Hibás üzenet
+  
+    backendMuvelet(null, method, url, header, successMessage, errorMessage);
   };
 
   // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -59,7 +73,7 @@ function ProductsCard({ product }) {
       setSelectedLocker(product.lockers[0].id); // Pre-select the first locker by default
     }
   }, [product]);
-
+  
   return (
 
 

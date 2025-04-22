@@ -98,6 +98,26 @@ class OrderController extends Controller
         
     }
 
+    public function userorderindex(Request $request)
+    {
+       // Get the user_id from the request headers
+       $user_id = $request->header('userId');
+    
+       if (!$user_id) {
+        return response()->json(['message' => 'User ID hiányzik a kérésből'], 400);
+    }
+        
+
+       // Fetch orders for the authenticated user with related data
+       $orders = Order::with(['orderItem.locker', 'address.streettype', 'user'])
+           ->where('user_id', $user_id)
+           ->orderBy('created_at', 'desc')
+           ->get();  // ->first();
+
+       return response()->json($orders);
+        
+    }
+
     public function orderindex(Request $request)
     {
        // Get the user_id from the request headers
@@ -191,6 +211,56 @@ class OrderController extends Controller
        // $order->orderItems()->delete();
         $deletedItems = $order->orderItem()->delete();
     Log::info("Törölt order_items száma: $deletedItems");
+
+        // Töröld a rendelést
+        $order->delete();
+        Log::info("Order törölve: ID = " . $order->id);
+
+        return response()->json([
+            'message' => 'Rendelés sikeresen törölve!'
+        ], 200);
+    } catch (\Exception $e) {
+        Log::error('Törlési hiba: ' . $e->getMessage());
+        return response()->json([
+            'message' => 'Hiba történt a törlés során.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+public function userdeleteOrder(Request $request)
+{
+    // Az autentikált felhasználó lekérése
+    $authUser = Auth::user();
+
+    // Ellenőrizzük, hogy a felhasználónak van-e kapcsolata a role modellel és a power értéke 11
+    if (!$authUser->role || $authUser->role->power != 11) {
+        return response()->json([
+            'message' => 'Nincs jogosultság a rendelés törléséhez'
+        ], 403);  // 403-as válasz, ha nincs jogosultság
+    }
+
+    try {
+        // A body-ból kiolvassuk az order_id-t
+        $orderId = $request->input('order_id');
+
+        Log::info('Bejövő order ID törléshez: ' . $orderId);
+
+        // Keresd meg a rendelést
+        $order = Order::findOrFail($orderId);
+
+        // Ellenőrizzük, hogy a rendelés a bejelentkezett felhasználóhoz tartozik-e
+        if ($order->user_id !== $authUser->id) {
+            return response()->json([
+                'message' => 'Csak a saját rendeléseit törölheti'
+            ], 403);  // 403-as válasz, ha a rendelés nem a felhasználóé
+        }
+
+        Log::info('Order megtalálva: ID = ' . $order->id);
+
+        // Töröld a rendelés tételeket
+        $deletedItems = $order->orderItem()->delete();
+        Log::info("Törölt order_items száma: $deletedItems");
 
         // Töröld a rendelést
         $order->delete();

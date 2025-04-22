@@ -6,25 +6,60 @@ use Illuminate\Http\Request;
 use App\Models\StreetType;
 use App\Models\Address;
 use App\Models\User;
+//use Illuminate\Support\Facades\Log;
+use Log;
 
 
 class AddressController extends Controller
 {
+    // public function publicAreaStore(Request $request)
+    // {
+    //     $request->validate([
+    //         'public_area_name' => 'required|string',
+    //     ]);
+
+    //     $publicArea = new StreetType();
+    //     $publicArea->public_area_name = $request->public_area_name;
+    //     $publicArea->save();
+
+    //     return response()->json([
+    //         'message' => 'Public Area created successfully',
+    //         'publicArea' => $publicArea
+    //     ], 201);
+    // }
     public function publicAreaStore(Request $request)
     {
-        $request->validate([
-            'public_area_name' => 'required|string',
+        \Log::info('publicAreaStore called', [
+            'request_data' => $request->all(),
+            'timestamp' => now()
         ]);
-
-        $publicArea = new StreetType();
-        $publicArea->public_area_name = $request->public_area_name;
-        $publicArea->save();
-
-        return response()->json([
-            'message' => 'Public Area created successfully',
-            'publicArea' => $publicArea
-        ], 201);
+    
+        $request->validate([
+            'public_area_name' => 'required|string|unique:street_types,public_area_name',
+        ]);
+    
+        try {
+            $publicArea = new StreetType();
+            $publicArea->public_area_name = $request->public_area_name;
+            $publicArea->save();
+            
+            return response()->json([
+                'message' => 'Public Area created successfully',
+                'publicArea' => $publicArea->toArray()
+            ], 201);
+        } catch (\Exception $e) {
+            \Log::error('Error saving public area', [
+                'error' => $e->getMessage(),
+                'request_data' => $request->all(),
+            ]);
+            
+            return response()->json([
+                'message' => 'An error occurred while creating the public area.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
+    
 
     public function publicAreaIndex()
     {

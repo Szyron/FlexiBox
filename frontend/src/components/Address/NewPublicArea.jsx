@@ -1,59 +1,74 @@
-import React from 'react'
-import { useState , useContext} from "react";
+import React from "react";
+import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import AddressContext from '../../context/AddressContext';
+import AddressContext from "../../context/AddressContext";
+import CrudContext from "../../context/CrudContext";
+import InitialContext from "../../context/InitialContext";
 
 function NewPublicArea() {
-    const navigate = useNavigate();
-    
-    const {backendMuvelet} = useContext(AddressContext);
-    const {state} = useLocation();
+  const navigate = useNavigate();
+  const { updatePublicAreaName } = useContext(InitialContext); // Az InitialContext-ből elérjük a frissítési függvényt
+  // const {backendMuvelet} = useContext(AddressContext);
+  const { backendMuvelet, update } = useContext(CrudContext);
+  const { state } = useLocation();
 
-    let cim = "Új Közterület Felvitele";
-    let method = "POST";
-    let header = { "Content-type": "application/json" };
+  let cim = "Új Közterület Felvitele";
+  let method = "POST";
+  let header = {
+    "Content-type": "application/json",
+    Authorization: `Bearer ${sessionStorage.getItem("usertoken")}`,
+  };
 
-    let formObj = {
-        id: "",
-        public_area_name: "",
-      };
-    
-    
-    let url = `${import.meta.env.VITE_BASE_URL}/publicareaname`;
+  let formObj = {
+    //id: "",
+    public_area_name: "",
+  };
 
+  let url = `${import.meta.env.VITE_BASE_URL}/publicareaname`;
 
-    if (state!==null)
-    {
-      const {publicarea} = state;
-      formObj = {
-        id : publicarea.id,
-        public_area_name : publicarea.public_area_name
-        
-      };
-      method = "PATCH"; 
-      cim = `${publicarea.public_area_name} módosítása`;
-      header = { "Content-type": "application/json" , 
-        "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
-      "StreetTypeId" : publicarea.id} ;
-  
-    }
-  
-    const [formData, setFormData] = useState(formObj);
-    
-    const onSubmit = (e) => {
-      e.preventDefault();
-        console.log(formData);
-     backendMuvelet(formData,method,url,header);
-     navigate("/publicareas");
+  if (state !== null) {
+    const { publicarea } = state;
+    formObj = {
+      id: publicarea.id,
+      public_area_name: publicarea.public_area_name,
     };
-
-  
-    const writeData = (e) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.id]: e.target.value,
-      }));
+    method = "PATCH";
+    cim = `${publicarea.public_area_name} módosítása`;
+    header = {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("usertoken")}`,
+      StreetTypeId: publicarea.id,
     };
+  }
+
+  const [formData, setFormData] = useState(formObj);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const successMessage =
+      method === "POST"
+        ? "Új közterület sikeresen felvéve!"
+        : `${formData.public_area_name} sikeresen módosítva!`;
+
+    const errorMessage =
+      method === "POST"
+        ? "Nem sikerült a közterület felvétele!"
+        : `${formData.public_area_name} módosítása sikertelen!`;
+
+    backendMuvelet(formData, method, url, header, successMessage, errorMessage);
+
+    updatePublicAreaName();
+
+    navigate("/publicareas");
+  };
+
+  const writeData = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
   return (
     <div className="bg-base-200 flex items-center justify-center min-h-screen text-info">
     <div className="card w-96 bg-base-100 shadow-xl">

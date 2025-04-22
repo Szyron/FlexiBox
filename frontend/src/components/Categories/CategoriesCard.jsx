@@ -2,27 +2,51 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import ServiceContext from '../../context/ServiceContext';
 import secureStorage from '../../utils/secureStorage';
+import InitialContext from "../../context/InitialContext";
+import CrudContext from '../../context/CrudContext';
 
 function CategoriesCard({ category }) {
-    //const user = JSON.parse(sessionStorage.getItem('user'));
-    const user = secureStorage.getItem('user');
-    const navigate = useNavigate();
-    const { backendMuvelet } = useContext(ServiceContext);
-
-    const modosit = () => {
-        navigate("/newcategory", { state: { category } });
-    }
-
-    const torles = (category) => {
-        backendMuvelet(
-            category,
-             "DELETE", 
-            `${import.meta.env.VITE_BASE_URL}/category/delete`,
-            { "Content-type": "application/json" , 
-                "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
-              "categoryId" : category.id} 
-        );
-    }
+     //const user = JSON.parse(sessionStorage.getItem('user'));
+     const user = secureStorage.getItem('user');
+     const navigate = useNavigate();
+     //const { backendMuvelet } = useContext(ServiceContext);
+     const { backendMuvelet } = useContext(CrudContext);
+     const {update} = useContext(InitialContext);
+ 
+     const modosit = () => {
+         navigate("/newcategory", { state: { category } });
+     }
+ 
+     // const torles = (category) => {
+     //     backendMuvelet(
+     //         category,
+     //          "DELETE", 
+     //         `${import.meta.env.VITE_BASE_URL}/category/delete`,
+     //         { "Content-type": "application/json" , 
+     //             "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
+     //           "categoryId" : category.id} 
+     //     );
+         
+     // }
+ 
+     const torles = (category) => {
+         const method = "DELETE";
+         const url = `${import.meta.env.VITE_BASE_URL}/category/delete`;
+         const header = {
+           "Content-Type": "application/json",
+           "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}`,
+           "categoryId" : category.id,
+         };
+         const successMessage = "Kategória sikeresen törölve!";
+         const errorMessage = "Nem sikerült a kategória törlése.";
+         backendMuvelet(null, method, url, header, successMessage, errorMessage)
+         .then(() => {
+             update(); // Frissíti a kategórialistát a sikeres törlés után
+           })
+           .catch((error) => {
+             console.error("Hiba történt a törlés során:", error);
+           });
+     };
 
 
     return (
