@@ -1,7 +1,7 @@
-import LockerKep from '../../img/test_locker.png';
-import LockerInfo from './LockerInfo';
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import LockerKep from '../../img/locker_def5.png';
+import LockerInfo from './LockerInfo';
 import secureStorage from "../../utils/secureStorage";
 import ServiceContext from "../../context/ServiceContext";
 
@@ -48,13 +48,13 @@ function LockersCard({ locker }) {
           )}
           {user?.isadmin >= 70 && (
             <>
-          <button className="btn btn-primary text-white" onClick={() => modosit(locker)}>
-            Módosítás
-          </button>
-          <button className="btn btn-info text-white" onClick={() => torles(locker)}>
-            Törlés
-          </button>
-          </>
+              <button className="btn btn-primary text-white" onClick={() => modosit(locker)}>
+                Módosítás
+              </button>
+              <button className="btn btn-info text-white" onClick={() => torles(locker)}>
+                Törlés
+              </button>
+            </>
           )}
           <button className="btn btn-primary text-white">Elérhető Termékek</button>
           <button className="btn btn-secondary text-white" onClick={openInfo}>

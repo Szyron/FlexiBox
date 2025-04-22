@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import secureStorage from '../utils/secureStorage';
 
@@ -13,94 +13,26 @@ export const AdminProvider = ({ children }) => {
         setRefresh(prev => !prev);
     }
 
-/*     useEffect(() => {
-        if(user.isadmin>70){
-        fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(adat => {
-                setUsers(adat);
-                //console.log(adat);
-            })
-            .catch(err => alert(err));
-        }else{
-            toast.error('Access Denied')
-        }
-    }, [refresh,user]); */
-
-
-/*     const deleteUser = async (id) => {
-        try {
-            const token = sessionStorage.getItem('usertoken');
-            const keres = await fetch(`${import.meta.env.VITE_BASE_URL}/user/delete`, {
-                method: 'DELETE',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                 //'user_id': id
-                 },
-                 body: JSON.stringify({ id })
-            });
-
-            const valasz = await keres.json();
-
-            console.log("LÁTOD? UTF8",valasz); 
-
-            if (keres.ok) {
-                toast.success('Felhasználó törölve!');
-            } else {
-                toast.error(valasz.error || 'Valami hiba történt!');
-            }
-
-            update();
-
-        } catch (error) {
-            toast.error('Hálózati hiba történt!');
-            console.error(error);
-        }
-    }
- */
-
     const deleteUser = async (id) => {
         try {
-            // 1. console log a token ellenőrzésére
             const token = sessionStorage.getItem('usertoken');
-            console.log("Token: ", token); // Ellenőrizd, hogy valóban van-e token
-    
-            // 2. Ellenőrizd, hogy az id is jól van-e átadva
-            console.log("Törölni kívánt felhasználó ID: ", id); // Ellenőrizd, hogy az id helyes
-    
             const keres = await fetch(`${import.meta.env.VITE_BASE_URL}/user/delete`, {
                 method: 'DELETE',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json; charset=UTF-8',
                     'Authorization': `Bearer ${token}`,
-                    'userId': id // Az id-t küldjük a törléshez
+                    'userId': id
                 },
-                //body: JSON.stringify({ id }) // Az id-t küldjük a törléshez
             });
-    
-            // 3. console log, hogy lássuk, mit válaszol a backend
-            console.log("Backend válasz: ", keres);
-    
             const valasz = await keres.json();
-    
-            // 4. console log, hogy mi van a válaszban
-            console.log("Backend JSON válasz: ", valasz); 
-    
             if (keres.ok) {
                 toast.success('Felhasználó törölve!');
             } else {
                 toast.error(valasz.error || 'Valami hiba történt!');
             }
-    
             update();
-    
         } catch (error) {
-            console.log("Hiba történt a törlésnél: ", error); // További hibák nyomon követése
+            console.log("Hiba történt a törlésnél: ", error);
             toast.error('Hálózati hiba történt!');
         }
     }
@@ -116,7 +48,6 @@ export const AdminProvider = ({ children }) => {
                 },
                 body: JSON.stringify(data)
             });
-
             const valasz = await keres.json();
 
             if (keres.ok) {
@@ -124,9 +55,7 @@ export const AdminProvider = ({ children }) => {
             } else {
                 toast.error(valasz.error || 'Valami hiba történt!');
             }
-
             update();
-
         } catch (error) {
             toast.error('Hálózati hiba történt!');
             console.error(error);
@@ -134,14 +63,13 @@ export const AdminProvider = ({ children }) => {
     }
 
     return (
-        <AdminContext.Provider value={{ 
+        <AdminContext.Provider value={{
             users,
             update,
             setUsers,
             backendMuvelet,
             deleteUser
-
-            }}>{children}
+        }}>{children}
         </AdminContext.Provider>
     )
 }

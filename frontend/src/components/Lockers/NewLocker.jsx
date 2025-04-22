@@ -1,17 +1,15 @@
-import { useState , useContext} from "react";
+import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ServiceContext from "../../context/ServiceContext";
-import { toast } from "react-toastify";
 
 function NewLocker() {
   const navigate = useNavigate();
-
   const { backendMuvelet } = useContext(ServiceContext);
 
   const { state } = useLocation();
   let cim = "Új Csomagautomata Felvitele";
   let method = "POST";
-  let header = {"Content-type": "application/json"};
+  let header = { "Content-type": "application/json" };
 
   let formObj = {
     id: "",
@@ -22,38 +20,32 @@ function NewLocker() {
 
   let url = `${import.meta.env.VITE_BASE_URL}/locker`;
 
-  if (state!==null)
-    {
-      const {locker} = state;
-      formObj = {
-        id : locker.id,
-        locker_name : locker.locker_name,
-        address : locker.address,
-        description : locker.description,     
-      };
-      method = "PATCH";
-      cim = `${locker.locker_name} módosítása`;
-    }
-  
-    const [formData, setFormData] = useState(formObj);
-    
-    const onSubmit = (e) => {
-      e.preventDefault();
-      backendMuvelet(formData,method,url,header);
-      navigate("/lockers");
-      console.log(formData);
+  if (state !== null) {
+    const { locker } = state;
+    formObj = {
+      id: locker.id,
+      locker_name: locker.locker_name,
+      address: locker.address,
+      description: locker.description,
     };
+    method = "PATCH";
+    cim = `${locker.locker_name} módosítása`;
+  }
 
-    const writeData = (e) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.id]: e.target.value,
-      }));
-    };
+  const [formData, setFormData] = useState(formObj);
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    backendMuvelet(formData, method, url, header);
+    navigate("/lockers");
+  };
 
-
-
+  const writeData = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
 
   return (
     <div className="bg-base-200 flex items-center justify-center min-h-screen text-info">
@@ -90,14 +82,14 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-              <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary"
-                id="description"
-                placeholder="Csomagautómata leirása"
-                required
-                onChange={writeData}
-                value={formData.description}
-              />
-            </label>
+                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary"
+                  id="description"
+                  placeholder="Csomagautómata leirása"
+                  required
+                  onChange={writeData}
+                  value={formData.description}
+                />
+              </label>
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary text-white">

@@ -4,7 +4,6 @@ import PaymentContext from '../../context/PaymentContext';
 import secureStorage from '../../utils/secureStorage';
 
 function PaymentMethodCard({ payment }) {
-  //const user = JSON.parse(sessionStorage.getItem('user'));
   const user = secureStorage.getItem('user');
   const navigate = useNavigate();
   const { backendMuvelet } = useContext(PaymentContext);
@@ -25,6 +24,7 @@ function PaymentMethodCard({ payment }) {
       }
     );
   }
+
   return (
     <div className="card w-96 shadow-xl m-5 bg-base-100">
       <div className="card-body text-center">
@@ -36,7 +36,6 @@ function PaymentMethodCard({ payment }) {
               {user.isadmin >= 70 && <button className='btn btn-info text-white' onClick={() => torles(payment)}>Törlés</button>}
             </>
           ) : null}
-
         </div>
       </div>
     </div>

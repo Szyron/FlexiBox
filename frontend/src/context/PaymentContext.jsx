@@ -1,9 +1,6 @@
-import { use, useContext } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import secureStorage from '../utils/secureStorage';
-
-
 
 
 const PaymentContext = createContext();
@@ -13,7 +10,6 @@ export const PaymentProvider = ({ children }) => {
     const [refresh, setRefresh] = useState(false);
     const [payments, setPayments] = useState([]);
     const token = sessionStorage.getItem('usertoken');
-    //const user = JSON.parse(sessionStorage.getItem('user'));
     const user = secureStorage.getItem('user');
 
     const update = () => {
@@ -32,7 +28,7 @@ export const PaymentProvider = ({ children }) => {
             })
             .catch(err => alert(err));
     }, [refresh]);
-        
+
 
 
     const backendMuvelet = async (data, method, url, header) => {
@@ -41,7 +37,6 @@ export const PaymentProvider = ({ children }) => {
                 method: method,
                 headers: header,
                 body: JSON.stringify(data),
-                //body:data
             });
 
             const valasz = await keres.json();
@@ -62,18 +57,15 @@ export const PaymentProvider = ({ children }) => {
 
 
     return (
-        <PaymentContext.Provider value={{ 
+        <PaymentContext.Provider value={{
             backendMuvelet,
             update,
             refresh,
             payments,
             setPayments
-            }}>{children}
+        }}>{children}
         </PaymentContext.Provider>
     )
 }
 
 export default PaymentContext;
-
-
-

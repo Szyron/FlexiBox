@@ -12,7 +12,6 @@ export const CrudProvider = ({ children }) => {
         setRefresh((prev) => !prev);
     };
 
-
     useEffect(() => {
         fetch(`${import.meta.env.VITE_BASE_URL}/publicareaname`, {
             headers: {
@@ -26,9 +25,6 @@ export const CrudProvider = ({ children }) => {
             .catch(err => alert(err));
     }, [refresh]);
 
-    
-   
-
     const backendMuvelet = async (data, method, url, header, successMessage, errorMessage) => {
         try {
             const keres = await fetch(url, {
@@ -36,7 +32,6 @@ export const CrudProvider = ({ children }) => {
                 headers: header,
                 body: JSON.stringify(data),
             });
-
             const valasz = await keres.json();
 
             if (keres.ok) {
@@ -90,7 +85,7 @@ export const CrudProvider = ({ children }) => {
     const deleteItem = async (url, headers, successMessage, errorMessage) => {
         try {
             await backendMuvelet(
-                null, // Nincs törzsadat a törléshez
+                null,
                 "DELETE",
                 url,
                 headers,
@@ -113,9 +108,6 @@ export const CrudProvider = ({ children }) => {
                 deleteItem,
                 setRefresh,
                 areas,
-
-
-                
             }}
         >
             {children}

@@ -9,11 +9,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = (item, selectedLocker) => {
     const isItemInCart = cartItems.find(
       (cartItem) => cartItem.id === item.id && cartItem.lockerId === selectedLocker
-      
     );
-     
-  
-    console.log("Selected Locker: VIEW", selectedLocker); // Log the selected locker ID
   
     if (isItemInCart) {
       setCartItems(

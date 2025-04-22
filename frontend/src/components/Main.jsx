@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import secureStorage from "../utils/secureStorage";
-import { useEffect,useContext } from "react";
+import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
 function Main() {
-
   const { user } = useContext(AuthContext);
 
   return (
@@ -15,14 +13,14 @@ function Main() {
           <div
             className="divider divider-secondary text-2xl font-extrabold leading-9 tracking-tight mb-10 text-primary dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
           </div>
-          <h1 class="text-3xl font-bold text-primary text-center w-full mb-5">Üdvözlünk a FlexiStore demóban!</h1>
+          <h1 className="text-3xl font-bold text-primary text-center w-full mb-5">Üdvözlünk a FlexiStore demóban!</h1>
           <p className="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300 text-center w-full text-info ">
             Egy modern platform, ahol a jövő automatizált bérlési rendszere épül.
-            <br/>
+            <br />
             Fedezd fel a legújabb technológiákat és innovációkat, amelyek jobbá teszik az életedet!
           </p>
           <span className="text-info font-bold">Készítette: Szirony Balázs Gábor és Gombkötő Gábor
-            <br/>
+            <br />
             © Minden jog fenntartva.
           </span>
           <div
@@ -34,7 +32,7 @@ function Main() {
               null
             ) : (
               <Link to="/register2" className="btn btn-info text-white">Regisztráció</Link>
-            )} 
+            )}
           </div>
         </div>
         <div className="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">

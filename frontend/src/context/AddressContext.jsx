@@ -1,8 +1,5 @@
-import { use, useContext } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import AuthContext from './AuthContext';
-
 
 
 const AddressContext = createContext();
@@ -12,36 +9,31 @@ export const AddressProvider = ({ children }) => {
     const [areas, setAreas] = useState([]);
     const [address, setAddress] = useState([]);
     const token = localStorage.getItem('userToken');
-    //const {user} = useContext(AuthContext);
     const user = JSON.parse(localStorage.getItem('user'));
-
-
 
     const update = () => {
         setRefresh(prev => !prev);
     }
 
     useEffect(() => {
-        // Ellenőrizzük, hogy a felhasználó létezik-e
         if (user && user.id) {
-            fetch(`${import.meta.env.VITE_BASE_URL}/address/${user.id}`, { // user.id az, amit a backendhez küldünk
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // JWT token a fejléchez
-                }
-            })
+            fetch(`${import.meta.env.VITE_BASE_URL}/address/${user.id}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                })
                 .then(res => res.json())
                 .then(data => {
-                    setAddress(data.addresses); // Címek beállítása
-                    console.log('Address', data.addresses); // Debug log
+                    setAddress(data.addresses);
                 })
                 .catch(err => {
                     toast.error('Hiba történt a címek lekérésekor!');
-                    console.error(err); // Hiba logolás
+                    console.error(err);
                 });
         }
-    }, [refresh, user]); // Csak akkor frissítjük, ha a felhasználó változik, vagy a frissítés kérése megtörtént
-
+    }, [refresh, user]);
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_BASE_URL}/publicareaname`, {
@@ -62,9 +54,7 @@ export const AddressProvider = ({ children }) => {
                 method: method,
                 headers: header,
                 body: JSON.stringify(data),
-                //body:data
             });
-
             const valasz = await keres.json();
 
             if (keres.ok) {
@@ -72,9 +62,7 @@ export const AddressProvider = ({ children }) => {
             } else {
                 toast.error(valasz.error || 'Valami hiba történt!');
             }
-
             update();
-
         } catch (error) {
             toast.error('Hálózati hiba történt!');
             console.error(error);
@@ -82,15 +70,14 @@ export const AddressProvider = ({ children }) => {
     }
 
     return (
-        <AddressContext.Provider value={{ 
+        <AddressContext.Provider value={{
             areas,
             refresh,
             address,
             backendMuvelet,
             update,
             setAddress
-
-            }}>{children}
+        }}>{children}
         </AddressContext.Provider>
     )
 }

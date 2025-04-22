@@ -1,16 +1,12 @@
 import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ServiceContext from "../../context/ServiceContext";
-import axios from "axios";
 import { toast } from "react-toastify";
 import initialContext from "../../context/InitialContext";
 import CrudContext from "../../context/CrudContext";
 
 
 function NewProduct() {
-
   const navigate = useNavigate();
-  //const { update, setProducts, backendMuveletFile, categories, lockers } = useContext(ServiceContext);
   const { categories, lockers, update } = useContext(initialContext);
   const { backendMuveletFile } = useContext(CrudContext);
 
@@ -28,7 +24,7 @@ function NewProduct() {
     price_per_day: "",
     category_id: 1,
     available: 1,
-    locker_ids: [], //many lockers can be selected
+    locker_ids: [],
   };
 
   let url = `${import.meta.env.VITE_BASE_URL}/product`;
@@ -52,46 +48,37 @@ function NewProduct() {
 
   const [formData, setFormData] = useState(formObj);
 
-  console.log("Product data from formobj:", formData);
-
   const handleFileChange = (e) => {
     setImage(e.target.files);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const formDataToSubmit = new FormData();
 
-    // Alapvető mezők hozzáadása
     formDataToSubmit.append("name", formData.name);
     formDataToSubmit.append("description", formData.description);
     formDataToSubmit.append("price_per_day", formData.price_per_day);
     formDataToSubmit.append("category_id", formData.category_id);
     formDataToSubmit.append("available", formData.available);
 
-    // Több locker ID hozzáadása
     formData.locker_ids.forEach((id) => {
       formDataToSubmit.append("locker_ids[]", id);
     });
 
-    // Kép hozzáadása, ha van
     if (image && image.length > 0) {
       formDataToSubmit.append("image", image[0]);
     } else if (!formData.id) {
-      // Új adat felvitelénél a kép kötelező
       toast.error("Nincs kép kiválasztva!");
       return;
     }
 
-    // Az ID hozzáadása módosításhoz
     if (formData.id) {
       formDataToSubmit.append("id", formData.id);
     }
 
-    // Módosítás vagy új adat felvitelének eldöntése
-    const isEdit = !!formData.id; // Ha van ID, akkor módosítás
-    const method = isEdit ? "POST" : "POST"; // Módosításhoz POST, újhoz is POST
+    const isEdit = !!formData.id;
+    const method = isEdit ? "POST" : "POST";
     const url = isEdit
       ? `${import.meta.env.VITE_BASE_URL}/product/update`
       : `${import.meta.env.VITE_BASE_URL}/product`;
@@ -103,10 +90,6 @@ function NewProduct() {
       ? `${formData.name} módosítása sikertelen!`
       : "Nem sikerült a termék létrehozása!";
 
-    // Logolás a hibakereséshez
-    // for (let pair of formDataToSubmit.entries()) {
-    //     console.log(pair[0] + ': ' + pair[1]);
-    // }
 
     try {
       await backendMuveletFile(
@@ -117,8 +100,7 @@ function NewProduct() {
         successMessage,
         errorMessage
       );
-      update(); // Frissíti a terméklistát
-      // Navigálás a termékek listájához
+      update();
       navigate("/products");
     } catch (error) {
       console.error("Hiba történt:", error);
@@ -139,9 +121,7 @@ function NewProduct() {
           <h2 className="text-2xl font-bold text-center text-primary">{cim}</h2>
           <form onSubmit={onSubmit}>
             <div className="form-control">
-
               <label className="label">
-
               </label>
               {state && <img src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${state.product.file_path}`} alt="Preview" className="w-10 h-10 rounded-full object-cover" />}
               <input
@@ -149,7 +129,6 @@ function NewProduct() {
                 accept="image/*"
                 onChange={handleFileChange}
                 className="file-input file-input-bordered w-full max-w-xs border-primary"
-
               />
               <label className="label">
               </label>
@@ -194,14 +173,6 @@ function NewProduct() {
                   categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))
                 }
               </select>
-              {/*<label className="label">
-              <span className="label-text">Csomagautómata</span>
-            </label>
-                <select className="select select-bordered w-full" id="locker_id" onChange={writeData} value={formData.locker_id}>
-                {
-                    lockers.map((locker) => ( <option key={locker.id} value={locker.id}>{locker.locker_name}</option>))
-                } 
-                </select> */}
               <label className="label">
                 <span className="label-text">Csomagautomata</span>
               </label>
@@ -210,7 +181,7 @@ function NewProduct() {
                 id="locker_ids"
                 multiple
                 onChange={(e) => {
-                  const selected = Array.from(e.target.selectedOptions, (option)=> option.value);
+                  const selected = Array.from(e.target.selectedOptions, (option) => option.value);
                   setFormData((prev) => ({ ...prev, locker_ids: selected }));
                 }}
                 value={formData.locker_ids || []}

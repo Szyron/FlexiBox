@@ -1,11 +1,9 @@
-import React from 'react'
-
 function TermOfUse() {
   return (
     <div className="">
-        <div className="">
-         <h1 className="font-bold text-lg">Felhasználási Feltételek – FlexiStore</h1>
-          <p className="py-4">
+      <div className="">
+        <h1 className="font-bold text-lg">Felhasználási Feltételek – FlexiStore</h1>
+        <p className="py-4">
           Hatályos: 2025.04.08.
           <br />
           Üdvözlünk a FlexiStore-nál! A FlexiStore egy olyan szolgáltatás, amely automatákból történő termékbérlést tesz lehetővé. Jelenleg a platform fejlesztési szakaszban van, és a szolgáltatás funkciói még változhatnak.
@@ -32,9 +30,9 @@ function TermOfUse() {
 
           <h3>5. Módosítás</h3>
           A feltételeket bármikor módosíthatjuk. A változásokról értesítést teszünk közzé ezen az oldalon.
-          </p>
-        </div>
+        </p>
       </div>
+    </div>
   )
 }
 

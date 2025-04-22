@@ -26,7 +26,6 @@ function RoleCard({ role }) {
     );
   }
 
-  
   return (
     <div className="card w-96 shadow-xl m-5 bg-base-100">
       <div className="card-body text-center">
@@ -38,7 +37,6 @@ function RoleCard({ role }) {
               {user.isadmin >= 70 && <button className='btn btn-info text-white' onClick={() => torles(role)}>Törlés</button>}
             </>
           ) : null}
-
         </div>
       </div>
     </div>

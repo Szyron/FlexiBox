@@ -1,30 +1,16 @@
-import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import AddressContext from "../../context/AddressContext";
-import { useLocation, useNavigate } from "react-router-dom";
 import OrderContext from "../../context/OrderContext";
 import secureStorage from "../../utils/secureStorage";
-import { use } from "react";
 
 function CartCheckout() {
-  const navigate = useNavigate();
-  const { areas, address, backendMuvelet, refresh } = useContext(AddressContext);
-  const { formData, setFormData, formDataAddress, setFormDataAddress} = useContext(OrderContext);
-  //const user = JSON.parse(sessionStorage.getItem("user"));
+  const { areas, backendMuvelet, refresh } = useContext(AddressContext);
+  const { formData, setFormData, setFormDataAddress } = useContext(OrderContext);
   const user = secureStorage.getItem("user");
-  //const user = JSON.parse(secureStorage.getItem('user'));
   const token = sessionStorage.getItem("usertoken");
   const location = useLocation();
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       user_id: user.id,
-  //     }));
-  //   }
-  // }, [user]);
 
   useEffect(() => {
     if (user && formData.user_id !== user.id) {
@@ -35,26 +21,14 @@ function CartCheckout() {
     }
   }, [user, formData.user_id]);
 
-
-  // /* const [formData, setFormData] = useState({
-  //   city: "",
-  //   zip: "",
-  //   email: "",
-  //   street_id: "",
-  //   street: "",
-  //   house_number: "",
-  //   user_id: user ? user.id : null,
-  // }); */
-
   const [formData2, setFormData2] = useState({
     address_id: null,
   });
 
   const [addressess, setAddressess] = useState([]);
   const [minAddressId, setMinAddressId] = useState(null);
-  const [isNewAddress, setIsNewAddress] = useState(false); // State for new address checkbox
+  const [isNewAddress, setIsNewAddress] = useState(false);
 
-  // Fetch addresses based on user id
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BASE_URL}/address/${user.id}`, {
       headers: {
@@ -81,7 +55,7 @@ function CartCheckout() {
   const handleCheckboxChange = (e) => {
     const checked = e.target.checked;
     setIsNewAddress(checked);
-  
+
     if (!checked) {
       setFormData({
         city: "",
@@ -100,24 +74,6 @@ function CartCheckout() {
       }));
     }
   };
-
-  
-
-  // const handleCheckboxChange = (e) => {
-  //   setIsNewAddress(e.target.checked);
-  //   if (!e.target.checked) {
-  //     // Reset the form data to default when switching to existing address mode
-  //     setFormData({
-  //       city: "",
-  //       zip: "",
-  //       email: "",
-  //       street_id: "",
-  //       street: "",
-  //       house_number: "",
-  //       user_id: user ? user.id : null,
-  //     });
-  //   }
-  // };
 
   const writeData = (e) => {
     setFormData((prevState) => ({
@@ -159,8 +115,8 @@ function CartCheckout() {
       user_id: formData.user_id,
     };
 
-    
-    
+
+
 
     if (isNewAddress) {
       backendMuvelet(dataToSend, "POST", `${import.meta.env.VITE_BASE_URL}/address`, {
@@ -168,16 +124,16 @@ function CartCheckout() {
       });
     } else {
       // For existing address
-     // backendMuvelet(formData2, "POST", `${import.meta.env.VITE_BASE_URL}/order`, {
+      // backendMuvelet(formData2, "POST", `${import.meta.env.VITE_BASE_URL}/order`, {
       //  "Content-type": "application/json",
-    //  });
-   
+      //  });
+
     }
   };
 
   const isProfilePage = location.pathname === "/profile";
 
-  
+
 
   return (
     <div className="bg-base-200 flex items-center justify-center min-h-screen">
@@ -185,8 +141,6 @@ function CartCheckout() {
         <div className="card-body">
           <h2 className="text-2xl font-bold text-left">Számlázási cím</h2>
           <div className="divider"></div>
-
-          {/* Checkbox for selecting new address */}
           <div className="form-control">
             <label className="label cursor-pointer">
               <span className="label-text font-bold">Új címet adok meg</span>
@@ -198,11 +152,7 @@ function CartCheckout() {
               />
             </label>
           </div>
-
-          {/* Form based on address selection */}
-          {/* <form className="space-y-6" onSubmit={onSubmit}> */}
           <div className="space-y-6">
-            {/* New address form */}
             {isNewAddress ? (
               <div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -306,7 +256,6 @@ function CartCheckout() {
                 </div>
               </div>
             ) : (
-              // Existing address selection
               <div>
                 <div className="divider mt-10"></div>
                 <div className="form-control">
@@ -332,18 +281,16 @@ function CartCheckout() {
               </div>
             )}
             {isProfilePage && isNewAddress && (
-            <div className="form-control mt-6">
-              <button
-                //type="submit"
-                type="button"
-                onClick={onSubmit}
-                className="btn btn-primary w-full py-3 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Cím mentése
-              </button>
-            </div>
-  )}
-          {/* </form> */}
+              <div className="form-control mt-6">
+                <button
+                  type="button"
+                  onClick={onSubmit}
+                  className="btn btn-primary w-full py-3 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Cím mentése
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -4,12 +4,10 @@ import ServiceContext from '../../context/ServiceContext';
 
 function LockersList() {
   const { lockers } = useContext(ServiceContext);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredLockers, setFilteredLockers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
-
   const totalPages = Math.ceil(filteredLockers.length / itemsPerPage);
 
   const paginatedLockers = filteredLockers.slice(
@@ -31,7 +29,7 @@ function LockersList() {
       String(locker.address).toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredLockers(filtered);
-    setCurrentPage(1); // reset to page 1 on search
+    setCurrentPage(1);
   }, [searchQuery, lockers]);
 
   const handleSearch = (e) => {
@@ -42,7 +40,6 @@ function LockersList() {
     <div className="bg-base-200 min-h-screen p-4">
       <h1 className="text text-3xl font-bold text-center pb-10 mb-4 text-primary">Összes Csomagautomata</h1>
       <div className="flex flex-row">
-        {/* Bal oldali kereső + Szűrők szöveg */}
         <div className="w-[20%] p-4">
           <h2 className="text-xl font-bold mb-2 text-center text-primary">Szűrők</h2>
           <div className="form-control">
@@ -55,16 +52,12 @@ function LockersList() {
             />
           </div>
         </div>
-
-        {/* Jobb oldali lista */}
         <div className="flex flex-row flex-wrap items-start justify-start w-[80%]">
           {paginatedLockers.map((locker) => (
             <LockersCard key={locker.id} locker={locker} />
           ))}
         </div>
       </div>
-
-      {/* Lapozás */}
       <div className="join flex justify-center mt-6">
         <button
           className="join-item btn btn-secondary"

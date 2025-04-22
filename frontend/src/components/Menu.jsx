@@ -1,44 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
-import AuthContext from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import AuthContext from "../context/AuthContext";
 import secureStorage from "../utils/secureStorage";
 
 function Menu() {
-  //const user = JSON.parse(sessionStorage.getItem("user"));
   const user = secureStorage.getItem("user");
-  //const user = JSON.parse(secureStorage.getItem('user'));
-  const { logout, update ,profile} = useContext(AuthContext);
+  const { logout, update, profile } = useContext(AuthContext);
   const { cartItems, getCartTotal } = useContext(CartContext);
-  //const [profile , setProfile] = useState(null);
-
-/*   useEffect(() => {
-    if (user) {
-      fetch(`${import.meta.env.VITE_BASE_URL}/profile/index`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("usertoken")}`,
-          user_id: user.id,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setProfile(data);
-          sessionStorage.setItem("profile", JSON.stringify(data));
-        })
-        .catch((err) => alert(err));
-    }
-  }, []); */
-
-  //console.log(profile);
 
   useEffect(() => {
     if (profile) {
       sessionStorage.setItem("profile", JSON.stringify(profile));
-      //secureStorage.setItem("profile", profile);
     }
-    
   }, [profile]);
 
   const navigate = useNavigate();
@@ -55,10 +29,6 @@ function Menu() {
       details.removeAttribute("open");
     }
   };
-
-
-
-  
 
   return (
     <div className="navbar bg-base-100">
@@ -80,60 +50,60 @@ function Menu() {
       </div>
       {user ? (
         <>
-        {user.isadmin >= 70 && (
+          {user.isadmin >= 70 && (
             <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <details className="relative">
-                <summary className="text-primary font-bold">Admin Dashboard</summary>
-                <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
-                    <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Felhasználó Kezelő</Link></li>
-                    <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Termék</Link></li>
-                    <li><Link to="/newcategory" className="btn btn-ghost text-primary onClick={closeDropdown}">Új Kategória</Link></li>
-                    <li><Link to="/categories" className="btn btn-ghost text-primary"onClick={closeDropdown}>Kategóriák</Link></li>
-                    <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Közterület</Link></li>
-                    <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
-                    <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
-                    <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
-                    <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Autómaták</Link></li>
-                    <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
-                    {user.isadmin >= 90 && (
-                      <>
-                        <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Jogosultság</Link></li>
-                        <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={closeDropdown}>Jogosultságok</Link></li>
-                      </>
-                    )}
-                  
-                </ul>
-              </details>
-            </li>
-          </ul>
-        </div>
-        )
-      }
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <details className="relative">
+                    <summary className="text-primary font-bold">Admin Dashboard</summary>
+                    <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
+                      <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Felhasználó Kezelő</Link></li>
+                      <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Termék</Link></li>
+                      <li><Link to="/newcategory" className="btn btn-ghost text-primary onClick={closeDropdown}">Új Kategória</Link></li>
+                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={closeDropdown}>Kategóriák</Link></li>
+                      <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Közterület</Link></li>
+                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
+                      <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
+                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
+                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Autómaták</Link></li>
+                      <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
+                      {user.isadmin >= 90 && (
+                        <>
+                          <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Jogosultság</Link></li>
+                          <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={closeDropdown}>Jogosultságok</Link></li>
+                        </>
+                      )}
+
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </div>
+          )
+          }
         </>
       ) : null}
 
-{user ? (
+      {user ? (
         <>
-        {user.isadmin < 70 && (
+          {user.isadmin < 70 && (
             <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <details className="relative">
-                <summary className="text-primary font-bold">User Dashboard</summary>
-                <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
-                   
-                    <li><Link to="/userdashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
-                   
-                  
-                </ul>
-              </details>
-            </li>
-          </ul>
-        </div>
-        )
-      }
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <details className="relative">
+                    <summary className="text-primary font-bold">User Dashboard</summary>
+                    <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
+
+                      <li><Link to="/userdashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
+
+
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </div>
+          )
+          }
         </>
       ) : null}
 
@@ -158,8 +128,7 @@ function Menu() {
               </span>
             </div>
           </div>
-          <div
-            tabIndex={0}
+          <div tabIndex={0}
             className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
           >
             <div className="card-body">
@@ -175,69 +144,63 @@ function Menu() {
         </div>
 
         {user ? (
-            <div className="flex items-center gap-4 m-5">
-              
-              {/* Köszöntő */}
-              <Link to="/profile" className="text-primary font-bold">
-                Hello, {user.first_name}
-              </Link>
-
-              {/* Profilkép + lenyíló menü */}
-              <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full overflow-hidden">
-                    <img
-                      src={
-                        profile?.file_path
-                          ? `${import.meta.env.VITE_LARAVEL_IMAGE_URL}${profile.file_path}`
-                          : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      }
-                      alt="Profilkép"
-                    />
-                  </div>
+          <div className="flex items-center gap-4 m-5">
+            <Link to="/profile" className="text-primary font-bold">
+              Hello, {user.first_name}
+            </Link>
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full overflow-hidden">
+                  <img
+                    src={
+                      profile?.file_path
+                        ? `${import.meta.env.VITE_LARAVEL_IMAGE_URL}${profile.file_path}`
+                        : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    }
+                    alt="Profilkép"
+                  />
                 </div>
-
-                {/* Menü, ha kell */}
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
-                >
-                  <li>
-                    <Link to="/profile">Profil adatok</Link>
-                  </li>
-                  <li>
-                    <a onClick={handleLogout}>Kijelentkezés</a>
-                  </li>
-                </ul>
               </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <Link to="/profile">Profil adatok</Link>
+                </li>
+                <li>
+                  <a onClick={handleLogout}>Kijelentkezés</a>
+                </li>
+              </ul>
             </div>
-          ) : (user !== null ? (
-              <>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                >
-                  <li>
-                    <Link to="/profile" className="justify-between">
-                      Profil adatok
-                    </Link>
-                  </li>
-
-                  <li>
-                    <a onClick={handleLogout}>Kijelentkezés</a>
-                  </li>
-                </ul>
-              </>
-            ) : (
-              <>
-                    <Link to="/register2" className="btn btn-info text-white">
-                      Regisztráció
-                    </Link>
-                    <Link className="btn btn-primary text-white" to="/login2">Bejelentkezés</Link>
-              </>
-            ))}
           </div>
-        </div>
+        ) : (user !== null ? (
+          <>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <Link to="/profile" className="justify-between">
+                  Profil adatok
+                </Link>
+              </li>
+
+              <li>
+                <a onClick={handleLogout}>Kijelentkezés</a>
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <Link to="/register2" className="btn btn-info text-white">
+              Regisztráció
+            </Link>
+            <Link className="btn btn-primary text-white" to="/login2">Bejelentkezés</Link>
+          </>
+        ))}
+      </div>
+    </div>
   );
 }
 

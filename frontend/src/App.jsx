@@ -1,14 +1,20 @@
-
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
+import { OrderProvider } from "./context/OrderContext";
+import { AdminProvider } from "./context/AdminContext";
+import { AddressProvider } from "./context/AddressContext";
+import { PaymentProvider } from "./context/PaymentContext";
+import { AuthProvider } from "./context/AuthContext";
+import { ServiceProvider } from "./context/ServiceContext";
+import { CrudProvider } from "./context/CrudContext";
+import { InitialProvider } from "./context/InitialContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Main from "./components/Main";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
-import { AuthProvider } from "./context/AuthContext";
-import { ServiceProvider } from "./context/ServiceContext";
 import Register2 from "./components/Auth/Register2";
 import Login2 from "./components/Auth/Login2";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./components/Auth/Profile";
 import AdminDashboard from "./components/Dashboards/AdminDashboard";
 import UserDashboard from "./components/Dashboards/UserDashboard";
@@ -18,15 +24,10 @@ import NewProduct from "./components/Products/NewProduct";
 import ProductsList from "./components/Products/ProductsList";
 import ProductsInfo from "./components/Products/ProductsInfo";
 import CartView from "./components/Cart/CartView";
-import { CartProvider } from "./context/CartContext";
-import { OrderProvider } from "./context/OrderContext";
 import RegistrationDataEdit from "./components/Dashboards/RegistrationDataEdit";
-import { AdminProvider } from "./context/AdminContext";
 import NewPublicArea from "./components/Address/NewPublicArea";
-import { AddressProvider } from "./context/AddressContext";
 import PublicAreaList from "./components/Address/PublicAreaList";
 import OrderCheckout from "./components/Cart/OrderCheckout";
-import { PaymentProvider } from "./context/PaymentContext";
 import NewPaymentMethod from "./components/Payments/NewPaymentMethod";
 import PaymentMethodList from "./components/Payments/PaymentMethodList";
 import UserOrder from "./components/Cart/UserOrder";
@@ -34,79 +35,65 @@ import NewRole from "./components/Roles/NewRole";
 import RolesList from "./components/Roles/RolesList";
 import NewLocker from "./components/Lockers/NewLocker";
 import LockersList from "./components/Lockers/LockersList";
-import Profile2 from "./components/Auth/Profile2";
 import AdminOrders from "./components/Dashboards/AdminOrders";
-import { CrudProvider } from "./context/CrudContext";
-import { InitialProvider} from "./context/InitialContext";
-
-
-
-
 
 
 function App() {
-  
 
   return (
-   <div>
-    <CrudProvider>
-    <PaymentProvider>
-    <AdminProvider>
-    <CartProvider>
-    <AuthProvider>
-     <OrderProvider>
-     
-     <ServiceProvider>
-      <AddressProvider>
-        <InitialProvider>
-     <BrowserRouter>
-      <Menu/>
-        <Routes>
-          <Route path="/" element={<Main/>}/>
-          <Route path="/register2" element={<Register2/>}/>
-          <Route path="/login2" element={<Login2/>}/>
-          {/* <Route path="/profile" element={<Profile/>}/> Régi */}
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/cart" element={<CartView/>}/>
-          <Route path="/checkout" element={<OrderCheckout/>}/>
-          <Route path="/userorder" element={<UserOrder/>}/>
-          <Route path="/adminorders" element={<AdminOrders/>}/>
-          <Route path="/newpaymentmethod" element={<NewPaymentMethod/>}/>
-          <Route path="/paymentmethods" element={<PaymentMethodList/>}/>
-          <Route path="/newrole" element={<NewRole/>}/>
-          <Route path="/roles" element={<RolesList/>}/>
-          <Route path="/newpublicarea" element={<NewPublicArea/>}/>
-          <Route path="/publicareas" element={<PublicAreaList/>}/>
-          <Route path="/newcategory" element={<NewCategory/>}/>
-          <Route path="/newlocker" element={<NewLocker/>}/>
-          <Route path="/categories" element={<CategoriesList/>}/>
-          <Route path="/newproduct" element={<NewProduct/>}/>
-          <Route path="/lockers" element={<LockersList/>}/>
-          <Route path="/products" element={<ProductsList/>}/>
-          <Route path="/productsinfo" element={<ProductsInfo/>}/> 
-          <Route path="/admindashboard" element={<AdminDashboard/>}/>
-          <Route path="/userdashboard" element={<UserDashboard/>}/>
-          <Route path="/userorder" element={<UserOrder/>}/>
-          <Route path="*" element={<Navigate to ="/"/>}/>
-          <Route path="/registrationdataedit" element={<RegistrationDataEdit/>}/>
-        </Routes>
-      <Footer/>
-    </BrowserRouter>
-    </InitialProvider>
-      </AddressProvider>
-      </ServiceProvider>
-      </OrderProvider>
-      
-      </AuthProvider>
-     
-      </CartProvider>
-      </AdminProvider>
-      </PaymentProvider>
+    <div>
+      <CrudProvider>
+        <PaymentProvider>
+          <AdminProvider>
+            <CartProvider>
+              <AuthProvider>
+                <OrderProvider>
+                  <ServiceProvider>
+                    <AddressProvider>
+                      <InitialProvider>
+                        <BrowserRouter>
+                          <Menu />
+                          <Routes>
+                            <Route path="/" element={<Main />} />
+                            <Route path="/register2" element={<Register2 />} />
+                            <Route path="/login2" element={<Login2 />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/cart" element={<CartView />} />
+                            <Route path="/checkout" element={<OrderCheckout />} />
+                            <Route path="/userorder" element={<UserOrder />} />
+                            <Route path="/adminorders" element={<AdminOrders />} />
+                            <Route path="/newpaymentmethod" element={<NewPaymentMethod />} />
+                            <Route path="/paymentmethods" element={<PaymentMethodList />} />
+                            <Route path="/newrole" element={<NewRole />} />
+                            <Route path="/roles" element={<RolesList />} />
+                            <Route path="/newpublicarea" element={<NewPublicArea />} />
+                            <Route path="/publicareas" element={<PublicAreaList />} />
+                            <Route path="/newcategory" element={<NewCategory />} />
+                            <Route path="/newlocker" element={<NewLocker />} />
+                            <Route path="/categories" element={<CategoriesList />} />
+                            <Route path="/newproduct" element={<NewProduct />} />
+                            <Route path="/lockers" element={<LockersList />} />
+                            <Route path="/products" element={<ProductsList />} />
+                            <Route path="/productsinfo" element={<ProductsInfo />} />
+                            <Route path="/admindashboard" element={<AdminDashboard />} />
+                            <Route path="/userdashboard" element={<UserDashboard />} />
+                            <Route path="/userorder" element={<UserOrder />} />
+                            <Route path="/registrationdataedit" element={<RegistrationDataEdit />} />
+                            <Route path="*" element={<Navigate to="/" />} />  
+                          </Routes>
+                          <Footer />
+                        </BrowserRouter>
+                      </InitialProvider>
+                    </AddressProvider>
+                  </ServiceProvider>
+                </OrderProvider>
+              </AuthProvider>
+            </CartProvider>
+          </AdminProvider>
+        </PaymentProvider>
       </CrudProvider>
-      <ToastContainer/>
-    
-    
-   </div>
+      <ToastContainer />
+    </div>
   )
 }
 

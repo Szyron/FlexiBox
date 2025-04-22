@@ -8,7 +8,7 @@ function ProductsInfo({ product, closeFunction }) {
         <div className="modal-action">
           {/* Close button */}
           <button className="btn btn-ghost btn-circle absolute right-2 top-2 text-info" onClick={closeFunction}>
-          ✕
+            ✕
           </button>
         </div>
       </div>

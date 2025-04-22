@@ -14,30 +14,19 @@ function OrderCheckout() {
     setPaymentMethod(paymentType);
   };
 
-  // A form submit függvénye
   const finalSubmit = async (e) => {
     e.preventDefault();
-    console.log("⬇️ finalSubmit meghívva!");
-
     let success = false;
-
-    // Ellenőrizzük, hogy van-e cím, és megfelelően meghívjuk a megfelelő függvényt
     if (formDataAddress.length === 0) {
-      success = await submitOrder();  // Feltételezve, hogy a submitOrder aszinkron függvény
+      success = await submitOrder();
     } else {
-      success = await submitOrderisAddress();  // Feltételezve, hogy a submitOrderisAddress aszinkron függvény
+      success = await submitOrderisAddress();
     }
-
-    // Ha sikeres a rendelés mentése, akkor navigálunk a rendelés oldalra
     if (success) {
-      console.log("Navigálás előtt");
       navigate('/userorder');
     } else {
-      // Hibakezelés, ha nem sikerült a rendelés mentése
       console.error('Rendelés mentése nem sikerült');
     }
-
-    console.log("Kiválasztott fizetési mód: ", paymentMethod);
   };
 
   return (
@@ -49,8 +38,7 @@ function OrderCheckout() {
           <button
             type="submit"
             className="btn btn-primary py-3 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            VEGLEGESITES
+          >Rendelés véglegesítése
           </button>
         </div>
       </form>
