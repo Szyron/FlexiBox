@@ -48,59 +48,6 @@ function Menu() {
 
       {/* Jobb oldal – Mobilon ikonok + hamburger */}
       <div className="md:hidden">
-      {/* Hamburger ikon */}
-      <button onClick={() => setMenuOpen(true)} className="btn btn-ghost btn-circle">
-        <svg fill="none" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <line x1="3" y1="12" x2="21" y2="12" className="stroke-[#50c6c9]" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
-          <path d="M3,18H21M3,6H21" className="stroke-[#50c6c9]" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
-        </svg>
-      </button>
-
-      {/* Beúszó overlay és menü */}
-      <div className={`fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity duration-300 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={() => setMenuOpen(false)} />
-
-      <div className={`fixed top-0 right-0 h-full w-64 bg-base-100 shadow-lg z-50 transform transition-transform duration-300 ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-        <div className="flex justify-end p-4">
-          <button onClick={() => setMenuOpen(false)} className="text-xl font-bold text-primary">✕</button>
-        </div>
-        <ul className="menu p-4 gap-2">
-          <li><Link to="/lockers" className="text-primary font-medium" onClick={() => setMenuOpen(false)}>Csomagautomaták</Link></li>
-          <li><Link to="/products" className="text-primary font-medium" onClick={() => setMenuOpen(false)}>Termékek</Link></li>
-          {user && user.isadmin < 70 && (
-            <li><Link to="/userdashboard" className="text-primary font-medium" onClick={() => setMenuOpen(false)}>User Dashboard</Link></li>
-          )}
-        </ul>
-      </div>
-        {user ? (
-           <>
-           {user.isadmin >= 70 && (
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-              <svg fill="none" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3" className="stroke-[#50c6c9] fill-none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/><path d="M7.94,20a1,1,0,0,1-.87-.51l-3.94-7a1,1,0,0,1,0-1l3.94-7A1,1,0,0,1,7.94,4h8.12a1,1,0,0,1,.87.51l3.94,7a1,1,0,0,1,0,1l-3.94,7a1,1,0,0,1-.87.51Z" className="stroke-[#005c6a] fill-none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/></svg>
-            </div>
-            <ul tabIndex={0} className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-56">
-            <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Felhasználó Kezelő</Link></li>
-                      <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Termék</Link></li>
-                      <li><Link to="/newcategory" className="btn btn-ghost text-primary onClick={closeDropdown}">Új Kategória</Link></li>
-                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={closeDropdown}>Kategóriák</Link></li>
-                      <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Közterület</Link></li>
-                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
-                      <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
-                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
-                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Autómaták</Link></li>
-                      <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
-                      {user.isadmin >= 90 && (
-                        <>
-                          <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Jogosultság</Link></li>
-                          <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={closeDropdown}>Jogosultságok</Link></li>
-                        </>
-                      )}
-                </ul>
-            </div>
-      )}
-      </>
-      ) : null}
-      
         {!user && (
           <>
           {/* Hamburger ikon */}
@@ -129,9 +76,42 @@ function Menu() {
       <div className="hidden md:flex md:items-center md:gap-4">
         <Link to="/lockers" className="btn btn-ghost text-primary font-bold">Csomagautomaták</Link>
         <Link to="/products" className="btn btn-ghost text-primary font-bold">Termékek</Link>
-        {user && user.isadmin >= 70 && (
-          <Link to="/admindashboard" className="btn btn-ghost text-primary font-bold">Admin Dashboard</Link>
-        )}
+        {user ? (
+        <>
+          {user.isadmin >= 70 && (
+            <div className="flex-none">
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <details className="relative">
+                    <summary className="text-primary font-bold">Admin Dashboard</summary>
+                    <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
+                      <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Felhasználó Kezelő</Link></li>
+                      <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Termék</Link></li>
+                      <li><Link to="/newcategory" className="btn btn-ghost text-primary onClick={closeDropdown}">Új Kategória</Link></li>
+                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={closeDropdown}>Kategóriák</Link></li>
+                      <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Közterület</Link></li>
+                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
+                      <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
+                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
+                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Autómaták</Link></li>
+                      <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
+                      {user.isadmin >= 90 && (
+                        <>
+                          <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Jogosultság</Link></li>
+                          <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={closeDropdown}>Jogosultságok</Link></li>
+                        </>
+                      )}
+
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </div>
+          )
+          }
+        </>
+      ) : null}
+
         {user && user.isadmin < 70 && (
           <Link to="/userdashboard" className="btn btn-ghost text-primary font-bold">User Dashboard</Link>
         )}
@@ -139,27 +119,28 @@ function Menu() {
 
       {/* Kosár + Profil / Auth gombok desktopon */}
       <div className="flex-none flex gap-4 items-center ml-4">
-        {/* Kosár ikon */}
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <div className="indicator">
-              <svg className="w-6 h-6" fill="none" stroke="#50c6c9" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" />
-              </svg>
-              <span className="badge badge-sm indicator-item">{user ? cartItems?.length || 0 : 0}</span>
+        <div className="hidden md:flex flex-none gap-4 items-center ml-4">
+          {/* Kosár ikon */}
+          <div className="dropdown dropdown-end">
+            <div id="cart-button" tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+              <div className="indicator">
+                <svg className="w-6 h-6" fill="none" stroke="#50c6c9" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" />
+                </svg>
+                <span className="badge badge-sm indicator-item">{user ? cartItems?.length || 0 : 0}</span>
+              </div>
             </div>
-          </div>
-          <div tabIndex={0} className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-            <div className="card-body">
-              <span className="text-lg font-bold text-primary">Termék: {cartItems?.length || 0} db</span>
-              <span className="text-info">Összesen: {getCartTotal()} Ft</span>
-              <div className="card-actions">
-                <Link to="/cart" className="btn btn-primary btn-block text-white">Kosár megtekintése</Link>
+            <div tabIndex={0} className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
+              <div className="card-body">
+                <span className="text-lg font-bold text-primary">Termék: {cartItems?.length || 0} db</span>
+                <span className="text-info">Összesen: {getCartTotal()} Ft</span>
+                <div className="card-actions">
+                  <Link to="/cart" id="cart-view" className="btn btn-primary btn-block text-white">Kosár megtekintése</Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
         {/* Profil vagy auth gombok */}
         {user ? (
           <div className="dropdown dropdown-end">

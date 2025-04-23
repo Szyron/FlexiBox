@@ -36,6 +36,7 @@ import RolesList from "./components/Roles/RolesList";
 import NewLocker from "./components/Lockers/NewLocker";
 import LockersList from "./components/Lockers/LockersList";
 import AdminOrders from "./components/Dashboards/AdminOrders";
+import MobileTableInfo from "./components/MobileTableInfo";
 
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
                             <Route path="/userdashboard" element={<UserDashboard />} />
                             <Route path="/userorder" element={<UserOrder />} />
                             <Route path="/registrationdataedit" element={<RegistrationDataEdit />} />
+                            <Route path="/info" element={<MobileTableInfo />} />
                             <Route path="*" element={<Navigate to="/" />} />  
                           </Routes>
                           <Footer />

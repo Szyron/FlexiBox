@@ -7,7 +7,7 @@ function Main() {
 
   return (
     <section className="text-gray-600 body-font bg-base-200 dark:bg-slate-900">
-      <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center px-4 py-10 md:px-12 lg:px-24">
+      <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center px-4 py-10 md:px-12 lg:px-24 pb-28 md:pb-10">
 
         {/* Szöveges rész */}
         <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left mt-10 lg:mt-0">

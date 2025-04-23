@@ -61,13 +61,13 @@ function ProductsList() {
     <div className="bg-base-200 min-h-screen p-4">
     {/* Cím */}
     <h1 className="text-3xl font-bold text-center pb-10 mb-4 text-primary">
-      Elérhető Termékek
+      Elérhető termékek
     </h1>
   
     {/* Hamburger Menü Ikon (mobilon) */}
     <button
       onClick={() => setIsFilterOpen(true)}
-      className="lg:hidden fixed bottom-4 right-4 p-2 rounded-full bg-primary text-white shadow-lg z-50"
+      className="lg:hidden fixed bottom-20 right-1 p-2 rounded-full bg-primary text-white shadow-lg z-50"
     >
       <svg
         fill="none"
@@ -100,13 +100,16 @@ function ProductsList() {
       } lg:hidden`}
     >
       <div className="p-4">
+        <div className="flex justify-end">
         <button
-          className="btn btn-sm btn-circle btn-outline mb-4"
+          className="text-xl font-bold text-primary"
           onClick={() => setIsFilterOpen(false)}
         >
           ✕
         </button>
-        <h2 className="text-xl font-bold mb-4 text-primary">Szűrők</h2>
+        </div>
+        <h2 className="text-xl font-bold mb-4 text-primary text-center">Szűrők</h2>
+        <div className="divider divider-info"></div>
         <div className="form-control mb-4">
           <input
             type="text"
@@ -172,6 +175,7 @@ function ProductsList() {
             onChange={(e) => setMaxPrice(Number(e.target.value))}
             className="range range-secondary"
           />
+          <div className="divider divider-info"></div>
         </div>
       </div>
     </div>
@@ -258,7 +262,7 @@ function ProductsList() {
     </div>
   
     {/* Lapozás */}
-    <div className="join flex justify-center mt-10">
+    <div className="join flex justify-center mt-10 mb-24">
       <button
         className="join-item btn btn-secondary"
         onClick={handlePrevPage}

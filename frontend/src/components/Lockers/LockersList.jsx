@@ -7,7 +7,7 @@ function LockersList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredLockers, setFilteredLockers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 6;
   const totalPages = Math.ceil(filteredLockers.length / itemsPerPage);
   const [isFilterOpen, setIsFilterOpen] = useState(false);//Mobil szűrőpanel beúszása
 
@@ -47,7 +47,7 @@ function LockersList() {
     {/* Hamburger Menü Ikon (mobilon) */}
     <button
       onClick={() => setIsFilterOpen(true)}
-      className="lg:hidden fixed bottom-4 right-4 p-2 rounded-full bg-primary text-white shadow-lg z-50"
+      className="lg:hidden fixed bottom-20 right-1 p-2 rounded-full bg-primary text-white shadow-lg z-50"
     >
       <svg
         fill="none"
@@ -79,14 +79,17 @@ function LockersList() {
     isFilterOpen ? "translate-x-0" : "translate-x-full"
   } lg:hidden`}  // Eltávolítottuk a lg:block osztályt
 >
+  
   <div className="p-4">
+    <div className="flex justify-end">
     <button
-      className="btn btn-sm btn-circle btn-outline mb-4"
+      className="text-primary font-bold text-xl mb-4"
       onClick={() => setIsFilterOpen(false)}
     >
       ✕
     </button>
-    <h2 className="text-xl font-bold mb-4 text-primary">Szűrők</h2>
+    </div>
+    <h2 className="text-xl font-bold mb-4 text-primary text-center">Szűrők</h2>
     <div className="form-control">
       <input
         type="text"
@@ -116,7 +119,7 @@ function LockersList() {
       </div>
   
       {/* Kártyák */}
-      <div className="w-full lg:w-3/4 flex flex-wrap justify-center gap-4">
+      <div className="w-full lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mx-auto pr-6">
         {paginatedLockers.map((locker) => (
           <LockersCard key={locker.id} locker={locker} />
         ))}
@@ -124,7 +127,7 @@ function LockersList() {
     </div>
   
     {/* Lapozás */}
-    <div className="join flex justify-center mt-10">
+    <div className="join flex justify-center mt-10 mb-24">
       <button
         className="join-item btn btn-secondary"
         onClick={handlePrevPage}
