@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users');
-            $table->decimal('total', 10 ,2);
-            //$table->decimal('discount', 10 ,2)->default(0);
+            $table->decimal('total', 10 ,2);     
             $table->foreignId('payments_method_id')->constrained('payment_methods');
             $table->timestamps();
         });

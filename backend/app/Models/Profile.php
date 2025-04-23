@@ -13,9 +13,7 @@ class Profile extends Model
         'user_id',
     ];
 
-     /**
-     * Get the user that owns the profile.
-     */
+    
     public function user()
     {
         return $this->belongsTo(User::class);

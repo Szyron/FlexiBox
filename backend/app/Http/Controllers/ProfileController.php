@@ -42,7 +42,7 @@ class ProfileController extends Controller
     public function index(Request $request)
 
     {
-         // Get the user_id from the request headers
+         
          $userId = $request->header('userId');
 
         $profile = Profile::where('user_id', $userId)->first();
@@ -56,13 +56,13 @@ class ProfileController extends Controller
 
     public function update(Request $request)
 {
-     // Get the user_id from the request headers
+     
      $userId = $request->header('userId');
     
     $profile = Profile::where('user_id', $userId)->first();
 
     if (!$profile) {
-        // Create a new profile if it does not exist
+        
         $validatedData = $request->validate([
             'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
         ]);
@@ -75,7 +75,7 @@ class ProfileController extends Controller
             $validatedData['file_name'] = $fileName;
         }
 
-        $validatedData['user_id'] = $userId;   // Add the user_id to the validated data from request(userId)
+        $validatedData['user_id'] = $userId;   
         $profile = Profile::create($validatedData);
 
         Log::info('Profile created successfully', [
@@ -88,13 +88,13 @@ class ProfileController extends Controller
         return response()->json($profile, 201);
     }
 
-    // Update the existing profile
+    
     $validatedData = $request->validate([
         'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:8192',
     ]);
 
     if ($request->hasFile('image')) {
-        // Delete the old image if it exists
+        
         if ($profile->file_path) {
             Storage::disk('public')->delete(str_replace('/storage/', '', $profile->file_path));
         }
@@ -120,7 +120,7 @@ class ProfileController extends Controller
 
 public function destroy(Request $request)
 {
-     // Get the user_id from the request headers
+    
      $userId = $request->header('userId');
     
     $profile = Profile::where('user_id', $userId)->first();

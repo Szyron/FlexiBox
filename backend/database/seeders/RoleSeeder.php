@@ -16,10 +16,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // \DB::table('roles')->insert([
-        //     'power' => 11,
-        //     'warrant_name' => 'user',
-        // ]);
+      
 
         Role::updateOrCreate(
             ['warrant_name' => 'user'],
