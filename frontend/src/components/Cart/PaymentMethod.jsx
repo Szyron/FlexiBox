@@ -27,7 +27,7 @@ function PaymentMethod({ onPaymentChange }) {
   };
 
   return (
-    <div className="bg-base-200 flex items-center justify-center min-h-screen">
+    <div className="w-full mt-10">
       <div className="card w-full max-w-4xl bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="text-2xl font-bold text-left">Fizetési mód</h2>

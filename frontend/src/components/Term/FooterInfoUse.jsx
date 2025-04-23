@@ -6,7 +6,7 @@ function FooterInfoUse({ closeFunction }) {
       <div className="modal-box">
         <TermOfUse />
         <div className="modal-action">
-          <button className="btn btn-info btn-circle btn-ghost absolute right-2 top-2" onClick={closeFunction}>
+          <button className="btn btn-info btn-circle btn-ghost absolute right-2 top-2 font-bold text-primary text-2xl" onClick={closeFunction}>
             ✕
           </button>
         </div>

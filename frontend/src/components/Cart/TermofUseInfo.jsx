@@ -32,15 +32,15 @@ function TermofUseInfo({ closeFunction }) {
         <TermOfUse />
         <div className="py-4">
           <label className="cursor-pointer">
-            <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} className="checkbox" />
+            <input type="checkbox" className="checkbox checkbox-primary" checked={isChecked} onChange={handleCheckboxChange} />
             <span className={`ml-2 ${hasAttemptedSubmit && !isChecked ? "text-warning" : ""}`}>Elfogadom a felhasználási feltételeket.</span>
           </label>
         </div>
         <div className="modal-action">
-          <button className="btn" onClick={closeFunction}>
+          <button className="btn text-white bg-info" onClick={closeFunction}>
             Bezárás
           </button>
-          <button id="accepted-term" className="btn" onClick={openOrder} >
+          <button id="accepted-term" className="btn text-white bg-primary" onClick={openOrder} >
             Tovább a pénztárhoz
           </button>
         </div>

@@ -136,10 +136,10 @@ function CartCheckout() {
 
 
   return (
-    <div className="bg-base-200 flex items-center justify-center min-h-screen">
+    <div className="w-full">
       <div className="card w-full max-w-4xl bg-base-100 shadow-xl mt-5">
         <div className="card-body">
-          <h2 className="text-2xl font-bold text-left">Számlázási cím</h2>
+          <h2 className="text-2xl text-left text-primary font-bold">Számlázási cím</h2>
           <div className="divider"></div>
           <div className="form-control">
             <label className="label cursor-pointer">

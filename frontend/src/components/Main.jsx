@@ -40,7 +40,7 @@ function Main() {
         {/* Illusztráció */}
         <div className="w-full lg:w-1/2 flex justify-center">
           <svg
-            className="w-3/4 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+            className="w-[60%] max-w-[155px] sm:w-[75%] sm:max-w-sm md:max-w-md lg:max-w-lg"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
