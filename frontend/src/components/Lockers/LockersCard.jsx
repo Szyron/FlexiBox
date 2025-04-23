@@ -32,37 +32,37 @@ function LockersCard({ locker }) {
   const closeInfo = () => setInfo(false);
 
   return (
-    <div className="card bg-base-100 w-96 shadow-sm m-10">
-      <figure className="px-10 pt-10">
-        <img src={LockerKep} alt="Shoes" className="rounded-xl" />
-      </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title text-primary">{locker.locker_name}</h2>
-        <p className="text-info">{locker.address}</p>
-        <div className="card-actions">
-          {isInfo && (
-            <LockerInfo
-              locker={locker}
-              closeFunction={closeInfo}
-            />
-          )}
-          {user?.isadmin >= 70 && (
-            <>
-              <button className="btn btn-primary text-white" onClick={() => modosit(locker)}>
-                Módosítás
-              </button>
-              <button className="btn btn-info text-white" onClick={() => torles(locker)}>
-                Törlés
-              </button>
-            </>
-          )}
-          <button className="btn btn-primary text-white">Elérhető Termékek</button>
-          <button className="btn btn-secondary text-white" onClick={openInfo}>
-            Info
+<div className="card bg-base-100 w-full sm:w-96 shadow-sm m-4 sm:m-10">
+  <figure className="px-10 pt-10">
+    <img src={LockerKep} alt="Shoes" className="rounded-xl" />
+  </figure>
+  <div className="card-body items-center text-center">
+    <h2 className="card-title text-primary">{locker.locker_name}</h2>
+    <p className="text-info">{locker.address}</p>
+    <div className="card-actions flex flex-col gap-2 items-center sm:flex-row sm:gap-4">
+      {isInfo && (
+        <LockerInfo
+          locker={locker}
+          closeFunction={closeInfo}
+        />
+      )}
+      {user?.isadmin >= 70 && (
+        <>
+          <button className="btn btn-primary text-white" onClick={() => modosit(locker)}>
+            Módosítás
           </button>
-        </div>
-      </div>
+          <button className="btn btn-info text-white" onClick={() => torles(locker)}>
+            Törlés
+          </button>
+        </>
+      )}
+      <button className="btn btn-primary text-white">Elérhető Termékek</button>
+      <button className="btn btn-secondary text-white" onClick={openInfo}>
+        Info
+      </button>
     </div>
+  </div>
+</div>
   );
 }
 

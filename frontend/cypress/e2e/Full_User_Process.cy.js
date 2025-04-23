@@ -143,7 +143,3 @@ describe('Termék hozzáadása a kosárhoz', () => {
     cy.scrollTo('top');
   });
 });
-
-
-
-

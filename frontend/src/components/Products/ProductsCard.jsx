@@ -54,67 +54,63 @@ function ProductsCard({ product }) {
   }, [product]);
 
   return (
-    <div className="card bg-base-100 w-96 shadow-sm m-10  hover:shadow-lg transition duration-300 ease-in-out">
-      <figure className="px-8 pt-8 ">
-        <img
-          src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${product.file_path}`}
-          className="rounded-lg w-full h-60 object-cover"
-          alt="Product"
-        />
-      </figure>
-      <div className="card-body flex flex-col justify-between flex-grow">
-        <div className="">
-          <h2 className="card-title line-clamp-2 text-center text-primary font-bold">{product.name}</h2>
-          <h2 className="card-title line-clamp-2 text-center text-info ">{product.price_per_day} Ft/nap</h2>
-          {/* <h2 className="card-title">{product.category.name}</h2>
-              <h2 className="card-title">
-               {product.available ? "Elérhető" : "Nem elérhető"}
-              </h2> */}
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-info mb-2">
-            Válasszon csomagautomatát:
-          </label>
-          <select
-            value={selectedLocker}
-            onChange={handleLockerChange}
-            className="w-full rounded-lg border border-primary bg-base-100 py-2.5 px-3 text-sm text-gray-800 shadow-sm focus:border-secondary focus:ring-2 focus:ring-secondary/50"
-          >
-            {product.lockers.map((locker) => (
-              <option key={locker.id} value={locker.id}>
-                {locker.address}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="card-actions mt-auto flex-wrap gap-2">
-          {isInfo && (
-            <ProductsInfo
-              product={product}
-              closeFunction={() => closeInfo()}
-            />
-          )}
-          {user?.isadmin >= 70 && (
-            <>
-              <button className="btn btn-primary text-white" onClick={() => modosit(product)}>
-                Módosítás
-              </button>
-              <button className="btn btn-info text-white" onClick={() => torles(product)}>
-                Törlés
-              </button>
-            </>
-          )}
-          {user?.isadmin >= 11 && (
-            <button className="btn btn-success text-white" id="add-to-cart-button" onClick={() => addToCart(product, selectedLocker)}>
-              Kosárba
-            </button>
-          )}
-          <button className="btn btn-secondary text-white" onClick={() => openInfo()}>
-            Info
-          </button>
-        </div>
-      </div>
+<div className="card bg-base-100 w-96 shadow-sm m-10 hover:shadow-lg transition duration-300 ease-in-out">
+  <figure className="px-8 pt-8">
+    <img
+      src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${product.file_path}`}
+      className="rounded-lg w-full h-60 object-cover"
+      alt="Product"
+    />
+  </figure>
+  <div className="card-body flex flex-col justify-between flex-grow">
+    <div>
+      <h2 className="card-title line-clamp-2 text-center text-primary font-bold">{product.name}</h2>
+      <h2 className="card-title line-clamp-2 text-center text-info">{product.price_per_day} Ft/nap</h2>
     </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-info mb-2">
+        Válasszon csomagautomatát:
+      </label>
+      <select
+        value={selectedLocker}
+        onChange={handleLockerChange}
+        className="w-full rounded-lg border border-primary bg-base-100 py-2.5 px-3 text-sm text-gray-800 shadow-sm focus:border-secondary focus:ring-2 focus:ring-secondary/50"
+      >
+        {product.lockers.map((locker) => (
+          <option key={locker.id} value={locker.id}>
+            {locker.address}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="card-actions mt-auto flex-wrap gap-2">
+      {isInfo && (
+        <ProductsInfo
+          product={product}
+          closeFunction={() => closeInfo()}
+        />
+      )}
+      {user?.isadmin >= 70 && (
+        <>
+          <button className="btn btn-primary text-white" onClick={() => modosit(product)}>
+            Módosítás
+          </button>
+          <button className="btn btn-info text-white" onClick={() => torles(product)}>
+            Törlés
+          </button>
+        </>
+      )}
+      {user?.isadmin >= 11 && (
+        <button className="btn btn-success text-white" id="add-to-cart-button" onClick={() => addToCart(product, selectedLocker)}>
+          Kosárba
+        </button>
+      )}
+      <button className="btn btn-secondary text-white" onClick={() => openInfo()}>
+        Info
+      </button>
+    </div>
+  </div>
+</div>
   );
 }
 
