@@ -35,7 +35,7 @@ class PaymentController extends Controller
         $request->validate([
             'card_type' => 'required|string',
         ]);
-        // Get the PaymentId from the request headers
+       
         $id = $request->header('PaymentId');
 
         $paymentMethod = PaymentMethod::find($request->id);
@@ -50,7 +50,7 @@ class PaymentController extends Controller
 
     public function destroy(Request $request)
     {
-        // Get the PaymentId from the request headers
+       
         $id = $request->header('PaymentId');
 
         $paymentMethod = PaymentMethod::find($id);

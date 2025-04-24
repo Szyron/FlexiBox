@@ -31,8 +31,7 @@ class LoginController extends Controller
                 'user' => [
                     'id' => $user->id,
                     'first_name' => $user->first_name,
-                   // 'isadmin' => $user->isadmin
-                   'isadmin' => $user->role->power, // Include the power attribute from the role relationship as isadmin
+                   'isadmin' => $user->role->power, 
                 ],
             ]);
         }

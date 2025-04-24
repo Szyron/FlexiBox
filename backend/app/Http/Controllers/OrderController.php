@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         Log::info('Received data: Hello', $request->all());
-        // Validate the request data
+      
         $validatedData = $request->validate([
             'city' => 'required|string',
             'zip' => 'required|string',
@@ -33,10 +33,10 @@ class OrderController extends Controller
             'cart_items.*.quantity' => 'required|integer',
             'cart_items.*.product_id' => 'required|integer',
             'cart_items.*.item_price' => 'required|numeric',
-            'cart_items.*.lockerId' => 'required|integer', // Update validation to reflect 'lockerId'
+            'cart_items.*.lockerId' => 'required|integer', 
         ]);
 
-        // Create the address
+       
         $address = Address::create([
             'city' => $validatedData['city'],
             'zip' => $validatedData['zip'],
@@ -47,21 +47,21 @@ class OrderController extends Controller
             'user_id' => $validatedData['user_id'],
         ]);
 
-        // Calculate the total for the order
+        
         $total = 0;
         foreach ($validatedData['cart_items'] as $item) {
             $total += $item['item_price'] * $item['quantity'];
         }
 
-        // Create the order
+        
         $order = Order::create([
             'address_id' => $address->id,
             'user_id' => $validatedData['user_id'],
-            'payments_method_id' => $validatedData['payments_method_id'], // Add this line
-            'total' => $total, // Set the total value
+            'payments_method_id' => $validatedData['payments_method_id'], 
+            'total' => $total, 
         ]);
 
-        // Create the order items
+       
         foreach ($validatedData['cart_items'] as $item) {
             \Log::info('Creating OrderItem with data:', $item);
             OrderItem::create([
@@ -70,7 +70,7 @@ class OrderController extends Controller
                 'product_id' => $item['product_id'],
                 'item_price' => $item['item_price'],
                 'line_total' => $item['item_price'] * $item['quantity'],
-                'locker_id' => $item['lockerId'],  // Map 'lockerId' from frontend to 'locker_id' in DB
+                'locker_id' => $item['lockerId'],  
             ]);
 
         }
@@ -81,18 +81,18 @@ class OrderController extends Controller
     
     public function index(Request $request)
     {
-       // Get the user_id from the request headers
+       
        $user_id = $request->header('userId');
     
        
         
 
-       // Fetch orders for the authenticated user with related data
+      
        $orders = Order::with(['orderItem.locker', 'address.streettype', 'user'])
            ->where('user_id', $user_id)
            ->orderBy('created_at', 'desc')
         ->first();
-         //  ->get();
+        
 
        return response()->json([$orders]);
         
@@ -100,7 +100,7 @@ class OrderController extends Controller
 
     public function userorderindex(Request $request)
     {
-       // Get the user_id from the request headers
+       
        $user_id = $request->header('userId');
     
        if (!$user_id) {
@@ -108,7 +108,7 @@ class OrderController extends Controller
     }
         
 
-       // Fetch orders for the authenticated user with related data
+       
        $orders = Order::with(['orderItem.locker', 'address.streettype', 'user'])
            ->where('user_id', $user_id)
            ->orderBy('created_at', 'desc')
@@ -120,30 +120,27 @@ class OrderController extends Controller
 
     public function orderindex(Request $request)
     {
-       // Get the user_id from the request headers
-       //$user_id = $request->header('userId');
-
-         // Az autentikált felhasználó lekérése
+      
     $authUser = Auth::user();
 
-    // Ellenőrizzük, hogy a felhasználónak van-e kapcsolata a role modellel
+   
     if ($authUser->role && $authUser->role->power < 70) {
         return response()->json([
             'message' => 'No permission to view orders'
-        ], 403);  // 403-as válasz, ha nincs jogosultság
+        ], 403);  
     }
 
-    // Az összes rendelés lekérése
+    
     $orders = Order::with(['orderItem.locker', 'address.streettype', 'user'])
         ->orderBy('created_at', 'desc')
         ->get();
-    return response()->json($orders);  // Visszaadjuk az adatokat
+    return response()->json($orders);  
     }
 
     public function storeIsAddress(Request $request)
     {
         \Log::info('Received data:', $request->all());
-        // Validate the request data
+       
         $validatedData = $request->validate([
             'address_id' => 'required|integer',
             'user_id' => 'required|integer',
@@ -152,16 +149,16 @@ class OrderController extends Controller
             'cart_items.*.quantity' => 'required|integer',
             'cart_items.*.product_id' => 'required|integer',
             'cart_items.*.item_price' => 'required|numeric',
-            'cart_items.*.lockerId' => 'required|integer', // Update validation to reflect 'lockerId'
+            'cart_items.*.lockerId' => 'required|integer', 
         ]);
 
-        // Calculate the total for the order
+        
         $total = 0;
         foreach ($validatedData['cart_items'] as $item) {
             $total += $item['item_price'] * $item['quantity'];
         }
 
-        // Create the order
+        
         $order = Order::create([
             'address_id' => $validatedData['address_id'],
             'user_id' => $validatedData['user_id'],
@@ -169,7 +166,7 @@ class OrderController extends Controller
             'total' => $total, // Set the total value
         ]);
 
-        // Create the order items
+        
         foreach ($validatedData['cart_items'] as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -177,7 +174,7 @@ class OrderController extends Controller
                 'product_id' => $item['product_id'],
                 'item_price' => $item['item_price'],
                 'line_total' => $item['item_price'] * $item['quantity'],
-                'locker_id' => $item['lockerId'], // Map 'lockerId' from frontend to 'locker_id' in DB
+                'locker_id' => $item['lockerId'], 
             ]);
         }
         
@@ -186,33 +183,32 @@ class OrderController extends Controller
 
     public function deleteOrder(Request $request)
 {
-     // Az autentikált felhasználó lekérése
+     
      $authUser = Auth::user();
 
-     // Ellenőrizzük, hogy a felhasználónak van-e kapcsolata a role modellel
+     
      if ($authUser->role && $authUser->role->power < 70) {
          return response()->json([
              'message' => 'Nincs jogosultság a rendelés törléséhez'
-         ], 403);  // 403-as válasz, ha nincs jogosultság
+         ], 403);  
      }
      
     try {
        
-        // A body-ból kiolvassuk az order_id-t
+       
         $orderId = $request->input('order_id');
 
         Log::info('Bejövő order ID törléshez: ' . $orderId);
 
-        // Keresd meg a rendelést
+       
         $order = Order::findOrFail($orderId);
         Log::info('Order megtalálva: ID = ' . $order->id);
 
-        // Töröld a rendelés tételeket
-       // $order->orderItems()->delete();
+       
         $deletedItems = $order->orderItem()->delete();
     Log::info("Törölt order_items száma: $deletedItems");
 
-        // Töröld a rendelést
+       
         $order->delete();
         Log::info("Order törölve: ID = " . $order->id);
 
@@ -230,39 +226,39 @@ class OrderController extends Controller
 
 public function userdeleteOrder(Request $request)
 {
-    // Az autentikált felhasználó lekérése
+    
     $authUser = Auth::user();
 
     // Ellenőrizzük, hogy a felhasználónak van-e kapcsolata a role modellel és a power értéke 11
     if (!$authUser->role || $authUser->role->power != 11) {
         return response()->json([
             'message' => 'Nincs jogosultság a rendelés törléséhez'
-        ], 403);  // 403-as válasz, ha nincs jogosultság
+        ], 403);  
     }
 
     try {
-        // A body-ból kiolvassuk az order_id-t
+       
         $orderId = $request->input('order_id');
 
         Log::info('Bejövő order ID törléshez: ' . $orderId);
 
-        // Keresd meg a rendelést
+       
         $order = Order::findOrFail($orderId);
 
-        // Ellenőrizzük, hogy a rendelés a bejelentkezett felhasználóhoz tartozik-e
+        
         if ($order->user_id !== $authUser->id) {
             return response()->json([
                 'message' => 'Csak a saját rendeléseit törölheti'
-            ], 403);  // 403-as válasz, ha a rendelés nem a felhasználóé
+            ], 403);  
         }
 
         Log::info('Order megtalálva: ID = ' . $order->id);
 
-        // Töröld a rendelés tételeket
+        
         $deletedItems = $order->orderItem()->delete();
         Log::info("Törölt order_items száma: $deletedItems");
 
-        // Töröld a rendelést
+        
         $order->delete();
         Log::info("Order törölve: ID = " . $order->id);
 

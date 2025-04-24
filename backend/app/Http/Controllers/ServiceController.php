@@ -59,11 +59,7 @@ class ServiceController extends Controller
          $product->available = $request->available;
         $product->save();
 
-       // $product = Product::create($validatedData);
-       // Kapcsolat mentése
-        //$product->lockers()->attach($request->locker_ids);
-
-        // Pivot tábla adatok időbélyeggel
+      
         $now = now();
         $lockerData = collect($request->locker_ids)->mapWithKeys(function ($id) use ($now) {
             return [
@@ -71,12 +67,11 @@ class ServiceController extends Controller
             ];
         })->toArray();
 
-        // Kapcsolatok mentése a pivot táblába
+        
         $product->lockers()->attach($lockerData);
 
         return response()->json([
             'message' => 'Product created successfully',
-            //'product' => $product Régi
             'product' => $product->load('lockers')
         ], 201);
     }
@@ -92,12 +87,10 @@ class ServiceController extends Controller
 
     public function productIndex()
     {
-        //$products = Product::all();
+        
         $products = Product::with(['category', 'lockers'])->get();
 
-        /* $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.*', 'categories.name as category_name')
-            ->get(); */
+        
 
         return response()->json([
             'products' => $products
@@ -109,7 +102,6 @@ class ServiceController extends Controller
         
 
         Log::info('Request data', $request->all());
-        //Log::info('Product ID:', ['id' => $request->id]);
         Log::info('Product ID:', ['id' => $request->input('id')]); 
        
         try {
@@ -137,10 +129,10 @@ class ServiceController extends Controller
         
     
         if ($request->hasFile('image')) {
-            // Delete the old image file
+            
             Storage::disk('public')->delete('product_images/' . $product->file_name);
     
-            // Store the new image file
+            
             $file = $request->file('image');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('product_images', $fileName, 'public');
@@ -148,7 +140,7 @@ class ServiceController extends Controller
             $validatedData['file_name'] = $fileName; // Ensure file_name is set
         }
     
-        // Update the product details
+       
         $product->name = $validatedData['name'] ?? $product->name;
         $product->description = $validatedData['description'] ?? $product->description;
         $product->price_per_day = $validatedData['price_per_day'] ?? $product->price_per_day;
@@ -174,14 +166,13 @@ class ServiceController extends Controller
     
         return response()->json([
             'message' => 'Product updated successfully',
-            /* 'product' => $product */
             'product' => $product->load('lockers')
         ], 200);
     }
 
     public function productDestroy(Request $request)
     {
-       // Get the product_id from the request headers
+       
        $id = $request->header('productId');
        
         $product = Product::find($id);
@@ -195,7 +186,7 @@ class ServiceController extends Controller
 
     public function destroy(Request $request)
     {
-        // Get the category_id from the request headers
+        
        $id = $request->header('categoryId');
 
         $category = Category::find($id);

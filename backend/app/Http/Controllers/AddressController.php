@@ -6,27 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\StreetType;
 use App\Models\Address;
 use App\Models\User;
-//use Illuminate\Support\Facades\Log;
 use Log;
 
 
 class AddressController extends Controller
 {
-    // public function publicAreaStore(Request $request)
-    // {
-    //     $request->validate([
-    //         'public_area_name' => 'required|string',
-    //     ]);
-
-    //     $publicArea = new StreetType();
-    //     $publicArea->public_area_name = $request->public_area_name;
-    //     $publicArea->save();
-
-    //     return response()->json([
-    //         'message' => 'Public Area created successfully',
-    //         'publicArea' => $publicArea
-    //     ], 201);
-    // }
+    
     public function publicAreaStore(Request $request)
     {
         \Log::info('publicAreaStore called', [
@@ -71,10 +56,8 @@ class AddressController extends Controller
     }
 
     public function publicAreaDestroy(Request $request)
-    {
-         
-       // Get the category_id from the request headers
-       $id = $request->header('StreetTypeId');
+    {      
+        $id = $request->header('StreetTypeId');
 
         $publicArea = StreetType::find($id);
         $publicArea->delete();
@@ -90,7 +73,7 @@ class AddressController extends Controller
             'public_area_name' => 'required|string',
         ]);
 
-        // Get the category_id from the request headers
+        
         $id = $request->header('StreetTypeId');
 
         $publicArea = StreetType::find($id);

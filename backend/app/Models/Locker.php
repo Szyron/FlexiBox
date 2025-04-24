@@ -12,10 +12,7 @@ class Locker extends Model
         'description',
     ];
 
-    /* public function locker()
-    {
-        return $this->hasMany(Locker::class);
-    } */
+   
     public function products()
     {
         return $this->belongsToMany(Product::class);
