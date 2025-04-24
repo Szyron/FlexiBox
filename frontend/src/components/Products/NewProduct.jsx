@@ -133,7 +133,7 @@ function NewProduct() {
               <label className="label">
               </label>
               <label className="input input-bordered flex items-center gap-2 border-primary">
-                <input className="grow"
+                <input className="grow placeholder-info"
                   type="text"
                   id="name"
                   placeholder="Termék neve"
@@ -145,7 +145,7 @@ function NewProduct() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary"
+                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary placeholder-info"
                   id="description"
                   placeholder="Termék leirása"
                   required
@@ -156,7 +156,7 @@ function NewProduct() {
               <label className="label">
               </label>
               <label className="input input-bordered flex items-center gap-2 border-primary">
-                <input className="grow"
+                <input className="grow placeholder-info"
                   type="number"
                   id="price_per_day"
                   placeholder="Termék Bérlési ára Ft/nap"

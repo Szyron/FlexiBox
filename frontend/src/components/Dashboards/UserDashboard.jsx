@@ -150,7 +150,7 @@ function UserDashboard() {
               value={searchName}
               onChange={handleSearch}
               placeholder="Keresés név szerint"
-              className="input input-bordered w-full input-primary"
+              className="input input-bordered w-full input-primary placeholder-info"
             />
           </div>
           <div className="form-control mb-4">
@@ -160,7 +160,7 @@ function UserDashboard() {
               value={searchEmail}
               onChange={handleSearch}
               placeholder="Keresés email szerint"
-              className="input input-bordered w-full input-primary"
+              className="input input-bordered w-full input-primary placeholder-info"
             />
           </div>
           <div className="form-control mb-4">
@@ -170,7 +170,7 @@ function UserDashboard() {
               value={searchLockerName}
               onChange={handleSearch}
               placeholder="Keresés csomagautomata neve szerint"
-              className="input input-bordered w-full input-primary"
+              className="input input-bordered w-full input-primary placeholder-info"
             />
           </div>
           <div className="form-control mb-4">
@@ -180,7 +180,7 @@ function UserDashboard() {
               value={searchLockerAddress}
               onChange={handleSearch}
               placeholder="Keresés csomagautomata cím szerint"
-              className="input input-bordered w-full input-primary"
+              className="input input-bordered w-full input-primary placeholder-info"
             />
           </div>
         </div>

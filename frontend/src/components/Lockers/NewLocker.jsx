@@ -57,7 +57,7 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="input input-bordered flex items-center gap-2 border-primary">
-                <input className="grow"
+                <input className="grow placeholder-info"
                   type="text"
                   id="locker_name"
                   placeholder="Csomagautómata neve"
@@ -69,7 +69,7 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="input input-bordered flex items-center gap-2 border-primary">
-                <input className="grow"
+                <input className="grow placeholder-info"
                   type="text"
                   id="address"
                   placeholder="Cím"
@@ -82,7 +82,7 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary"
+                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary placeholder-info"
                   id="description"
                   placeholder="Csomagautómata leirása"
                   required

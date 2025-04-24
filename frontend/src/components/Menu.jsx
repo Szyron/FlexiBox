@@ -86,21 +86,22 @@ function Menu() {
                     <summary className="text-primary font-bold">Admin Dashboard</summary>
                     <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
                       <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Felhasználó Kezelő</Link></li>
+                      <li><Link to="/newcategory" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Kategória</Link></li>
                       <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Termék</Link></li>
-                      <li><Link to="/newcategory" className="btn btn-ghost text-primary onClick={closeDropdown}">Új Kategória</Link></li>
-                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={closeDropdown}>Kategóriák</Link></li>
+                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új csomagautomata</Link></li>
                       <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Közterület</Link></li>
-                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
                       <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Fizetési mód</Link></li>
-                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
-                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Autómaták</Link></li>
-                      <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
                       {user.isadmin >= 90 && (
                         <>
                           <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új Jogosultság</Link></li>
                           <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={closeDropdown}>Jogosultságok</Link></li>
                         </>
                       )}
+                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={closeDropdown}>Kategóriák</Link></li>
+                      <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
+                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
+                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
+
 
                     </ul>
                   </details>

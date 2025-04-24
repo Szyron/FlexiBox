@@ -55,16 +55,8 @@ function RegistrationDataEdit({ user, closeFunction }) {
             <label className="label">
               <span className="label-text text-primary">Vezetéknév</span>
             </label>
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 opacity-70"
-              >
-                <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-              </svg>
+            <label className="input input-bordered flex items-center gap-2 border-primary">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <input
                 type="text"
                 id="last_name"
@@ -78,18 +70,10 @@ function RegistrationDataEdit({ user, closeFunction }) {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text text-primary">Keresztnév</span>
+              <span className="label-text text-primary ">Keresztnév</span>
             </label>
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 opacity-70"
-              >
-                <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-              </svg>
+            <label className="input input-bordered flex items-center gap-2 border-primary">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <input
                 type="text"
                 id="first_name"
@@ -105,16 +89,11 @@ function RegistrationDataEdit({ user, closeFunction }) {
             <label className="label">
               <span className="label-text text-primary">Email cím</span>
             </label>
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 opacity-70"
-              >
-                <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-              </svg>
+            <label className="input input-bordered flex items-center gap-2 border-primary">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="1" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20.62,5.22l-8,6.29a1,1,0,0,1-1.24,0l-8-6.29A1,1,0,0,1,4,5H20A1,1,0,0,1,20.62,5.22Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               <input
                 type="email"
                 id="email"
@@ -130,7 +109,7 @@ function RegistrationDataEdit({ user, closeFunction }) {
             <label className="label">
               <span className="label-text text-primary">Jogosultság</span>
             </label>
-            <select className="select select-bordered w-full" id="role_id" onChange={writeData} value={formData.role_id}>
+            <select className="select select-bordered w-full border-primary" id="role_id" onChange={writeData} value={formData.role_id}>
               {
                 roles.map((role) => (<option key={role.id} value={role.id}>{role.warrant_name}</option>))
               }
