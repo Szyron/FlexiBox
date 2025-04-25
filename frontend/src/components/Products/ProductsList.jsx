@@ -191,7 +191,7 @@ function ProductsList() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="Keresés termékek között"
-            className="input input-bordered w-full input-primary placeholder-info"
+            className="input input-primary w-full placeholder-info"
           />
         </div>
         <div className="form-control mb-4">

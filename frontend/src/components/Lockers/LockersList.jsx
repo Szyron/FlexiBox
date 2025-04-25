@@ -113,7 +113,7 @@ function LockersList() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="Keresés csomagautomatára"
-            className="input input-bordered w-full border-primary placeholder-info"
+            className="input input-primary w-full border-primary placeholder-info"
           />
         </div>
       </div>

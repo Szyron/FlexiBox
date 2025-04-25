@@ -145,23 +145,23 @@ function Footer() {
           </div>
           {user?.isadmin >= 70 && (
             <ul className="menu p-4 gap-2">
-              <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Felhasználó Kezelő</Link></li>
-              <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Termék</Link></li>
-              <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Termék</Link></li>
-              <li><Link to="/newcategory" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Kategória</Link></li>
-              <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Kategóriák</Link></li>
-              <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Közterület</Link></li>
-              <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Közterületek</Link></li>
-              <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Fizetési mód</Link></li>
-              <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Fizetési módok</Link></li>
-              <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Autómaták</Link></li>
-              <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Orderek</Link></li>
-              {user.isadmin >= 90 && (
-                <>
-                  <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új Jogosultság</Link></li>
-                  <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Jogosultságok</Link></li>
-                </>
-              )}
+              <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Felhasználó kezelő</Link></li>
+                      <li><Link to="/newcategory" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új kategória</Link></li>
+                      <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új termék</Link></li>
+                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új csomagautomata</Link></li>
+                      <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új közterület</Link></li>
+                      <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új fizetési mód</Link></li>
+                      {user.isadmin >= 90 && (
+                        <>
+                          <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Új jogosultság</Link></li>
+                          <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Jogosultságok</Link></li>
+                        </>
+                      )}
+                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Kategóriák</Link></li>
+                      <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Orderek</Link></li>
+                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Közterületek</Link></li>
+                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={() => setMenuAdminOpen(false)}>Fizetési módok</Link></li>
+
             </ul>
           )}
         </div>

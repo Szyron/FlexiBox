@@ -87,48 +87,80 @@ function Profile() {
   }
 
   return (
-    <div className='text-3xl bg-base-200 text-center font-bold text-primary w-full'>Profile
-      <form className='flex flex-col gap-4 items-center m-5' onSubmit={onSubmit}>
-        <div className="flex flex-col items-center">
-          <img
-            src={
-              profile.file_path == null && !image
-                ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                : image
-                  ? URL.createObjectURL(image)
-                  : `${import.meta.env.VITE_LARAVEL_IMAGE_URL}${profile.file_path}`
-            }
-            alt="Profile"
-            className="w-20 h-20 rounded-full object-cover cursor-pointer"
-            onClick={() => document.getElementById("fileInput").click()}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onFileChange}
-            style={{ display: "none" }}
-            id="fileInput"
-          />
-          <button
-            type="button"
-            onClick={() => document.getElementById("fileInput").click()}
-            className="mt-2 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            Kép feltöltése/módosítása
-          </button>
-        </div>
-        <button type='submit' className="btn btn-primary">Save</button>
-        <button type="button" onClick={() => handleDelete()} className="btn bg-rose-400 rounded-btn">
-          Delete
-        </button>
-        <button type="button" onClick={() => navigate("/")} className="btn bg-rose-400 rounded-btn">
-          Back
-        </button>
-      </form>
-      <div className="p-4 flex-[3] w-full">
-        <CartCheckout />
+<div className="w-full bg-base-200 p-4 "> {/* Itt adunk extra paddingot az alsó menü miatt */}
+  <div className="text-3xl bg-base-200 text-center w-full text-primary font-bold pb-10 mb-4">
+    Személyes adatok
+  </div>
+
+  <div className="flex flex-col lg:flex-row w-full max-w-full pb-24 mx-auto">
+    {/* Profilkép feltöltő form */}
+    <form
+      className="flex flex-col gap-4 items-center bg-base-100 rounded-box shadow-lg w-full lg:w-1/3 max-w-full overflow-hidden"
+      onSubmit={onSubmit}
+    >
+      {/* Jobbra igazított fejléc */}
+      <div className="w-full text-left p-6 mt-5">
+        <div className="text-2xl text-primary font-bold">Profilkép</div>
+        <div className="divider divider-info"></div>
       </div>
+
+      <div className="flex flex-col items-center">
+        <img
+          src={
+            profile.file_path == null && !image
+              ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              : image
+              ? URL.createObjectURL(image)
+              : `${import.meta.env.VITE_LARAVEL_IMAGE_URL}${profile.file_path}`
+          }
+          alt="Profile"
+          className="w-20 h-20 rounded-full object-cover cursor-pointer"
+          onClick={() => document.getElementById("fileInput").click()}
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+          style={{ display: "none" }}
+          id="fileInput"
+        />
+        <button
+          type="button"
+          onClick={() => document.getElementById("fileInput").click()}
+          className="btn btn-secondary mt-2 text-white"
+        >
+          Kép feltöltése/módosítása
+        </button>
+      </div>
+
+      <button type="submit" className="btn btn-primary text-white">Véglegesítés</button>
+
+      <button
+        type="button"
+        onClick={() => handleDelete()}
+        className="btn bg-info rounded-btn mb-5 text-white"
+      >
+        Profilkép törlése
+      </button>
+
+      {/* Záró gomb, eltűnik mobil és tablet nézetekben */}
+
+    </form>
+    <div className="hidden lg:flex card-actions justify-end mt-6">
+        <button
+          className="btn btn-primary btn-circle absolute right-2 top-20 text-info"
+          onClick={() => navigate("/")}
+        >
+          ✕
+        </button>
+      </div>
+
+    {/* CartCheckout komponens */}
+    <div className="p-1 flex-[3] w-full lg:w-2/3 max-w-full">
+      <CartCheckout />
     </div>
+  </div>
+</div>
   )
 }
 

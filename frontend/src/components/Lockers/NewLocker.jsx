@@ -56,7 +56,7 @@ function NewLocker() {
             <div className="form-control">
               <label className="label">
               </label>
-              <label className="input input-bordered flex items-center gap-2 border-primary">
+              <label className="input input-primary flex items-center gap-2 border-primary">
                 <input className="grow placeholder-info"
                   type="text"
                   id="locker_name"
@@ -68,7 +68,7 @@ function NewLocker() {
               </label>
               <label className="label">
               </label>
-              <label className="input input-bordered flex items-center gap-2 border-primary">
+              <label className="input input-primary flex items-center gap-2 border-primary">
                 <input className="grow placeholder-info"
                   type="text"
                   id="address"
@@ -82,7 +82,7 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-                <textarea className="textarea textarea-bordered h-24 textarea-auto w-full border-primary placeholder-info"
+                <textarea className="textarea textarea-primary h-24 textarea-auto w-full border-primary placeholder-info"
                   id="description"
                   placeholder="Csomagautómata leirása"
                   required

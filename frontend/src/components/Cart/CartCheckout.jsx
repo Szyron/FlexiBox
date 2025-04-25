@@ -137,16 +137,16 @@ function CartCheckout() {
 
   return (
     <div className="w-full">
-      <div className="card w-full max-w-4xl bg-base-100 shadow-xl mt-5">
+      <div className="card w-full max-w-4xl bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="text-2xl text-left text-primary font-bold">Számlázási cím</h2>
-          <div className="divider"></div>
+          <div className="divider divider-info"></div>
           <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text font-bold">Új címet adok meg</span>
+              <span className="label-text font-bold text-primary text-xl">Új címet adok meg</span>
               <input
                 type="checkbox"
-                className="checkbox checkbox-primary"
+                className="checkbox checkbox-primary accent-white"
                 checked={isNewAddress}
                 onChange={handleCheckboxChange}
               />
@@ -157,13 +157,10 @@ function CartCheckout() {
               <div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Város</span>
-                    </label>
                     <input
                       type="text"
                       id="city"
-                      className="input input-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="input input-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
                       placeholder="Város"
                       required
                       onChange={writeData}
@@ -172,13 +169,10 @@ function CartCheckout() {
                   </div>
 
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Írányítószám</span>
-                    </label>
                     <input
                       type="number"
                       id="zip"
-                      className="input input-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="input input-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
                       placeholder="Írányítószám"
                       required
                       onChange={writeData}
@@ -189,13 +183,10 @@ function CartCheckout() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Email cím</span>
-                    </label>
                     <input
                       type="email"
                       id="email"
-                      className="input input-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="input input-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
                       placeholder="Email"
                       required
                       onChange={writeData}
@@ -204,12 +195,9 @@ function CartCheckout() {
                   </div>
 
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Közterület jellege</span>
-                    </label>
                     <select
                       id="street_id"
-                      className="select select-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="select select-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
                       onChange={writeData}
                       value={formData.street_id}
                     >
@@ -225,13 +213,10 @@ function CartCheckout() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Utca</span>
-                    </label>
                     <input
                       type="text"
                       id="street"
-                      className="input input-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="input input-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
                       placeholder="Utca"
                       required
                       onChange={writeData}
@@ -240,13 +225,10 @@ function CartCheckout() {
                   </div>
 
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Házszám</span>
-                    </label>
                     <input
                       type="text"
                       id="house_number"
-                      className="input input-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="input input-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info" 
                       placeholder="Házszám"
                       required
                       onChange={writeData}
@@ -257,14 +239,14 @@ function CartCheckout() {
               </div>
             ) : (
               <div>
-                <div className="divider mt-10"></div>
+                <div className="divider mt-10 divider-info"></div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text font-bold">Válassza ki a címet</span>
+                    <span className="label-text font-bold text-primary text-xl">Válassza ki a címet</span>
                   </label>
                   <select
                     id="address_id"
-                    className="select select-bordered w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="select select-bordered w-full p-3 mt-2 border border-primary rounded-md select-primary text-info"
                     onChange={writeData2}
                     value={formData2.address_id}
                   >
@@ -285,7 +267,7 @@ function CartCheckout() {
                 <button
                   type="button"
                   onClick={onSubmit}
-                  className="btn btn-primary w-full py-3 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="btn btn-primary w-full py-3 text-white font-semibold rounded-md"
                 >
                   Cím mentése
                 </button>
