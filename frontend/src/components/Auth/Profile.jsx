@@ -87,8 +87,8 @@ function Profile() {
   }
 
   return (
-<div className="w-full bg-base-200 p-4 "> {/* Itt adunk extra paddingot az alsó menü miatt */}
-  <div className="text-3xl bg-base-200 text-center w-full text-primary font-bold pb-10 mb-4">
+<div className="w-full bg-base-200 p-4"> {/* Itt adunk extra paddingot az alsó menü miatt */}
+  <div className="text-3xl bg-base-200 text-center w-full text-primary font-bold pb-10">
     Személyes adatok
   </div>
 
@@ -99,7 +99,7 @@ function Profile() {
       onSubmit={onSubmit}
     >
       {/* Jobbra igazított fejléc */}
-      <div className="w-full text-left p-6 mt-5">
+      <div className="w-full text-left p-6">
         <div className="text-2xl text-primary font-bold">Profilkép</div>
         <div className="divider divider-info"></div>
       </div>

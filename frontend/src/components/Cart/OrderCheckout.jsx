@@ -30,26 +30,27 @@ function OrderCheckout() {
   };
 
   return (
-    <div className="bg-base-200">
-      <form onSubmit={finalSubmit} className="max-w-6xl mx-auto">
-        <div className="flex flex-col items-start">
-          <div className="w-full pl-28">
-            <CartCheckout />
-          </div>
-          <div className="w-full pl-28">
-            <PaymentMethod />
-          </div>
-          <div className="mx-auto mt-10 mb-10 flex justify-center">
-            <button
-              type="submit"
-              className="btn btn-primary text-white text-lg font-semibold rounded-xl"
-            >
-              Rendelés véglegesítése
-            </button>
-          </div>
-        </div>
-      </form>
+<div className="bg-base-200 p-4">
+<h1 className="text-3xl font-bold text-center pb-10 mb-4 text-primary">Rendelés véglegesítése</h1>
+  <form onSubmit={finalSubmit} className="max-w-6xl mx-auto">
+    <div className="flex flex-col items-start">
+      <div className="w-full md:pl-28">
+        <CartCheckout />
+      </div>
+      <div className="w-full md:pl-28">
+        <PaymentMethod />
+      </div>
+      <div className="mx-auto mt-5 mb-10 flex justify-center p-10">
+        <button
+          type="submit"
+          className="btn btn-primary text-white text-lg font-semibold rounded-xl"
+        >
+          Megrendelés
+        </button>
+      </div>
     </div>
+  </form>
+</div>
   );
 }
 

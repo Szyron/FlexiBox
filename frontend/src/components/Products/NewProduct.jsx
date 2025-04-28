@@ -115,7 +115,7 @@ function NewProduct() {
   };
 
   return (
-    <div className="bg-base-200 flex items-center justify-center min-h-screen">
+    <div className="bg-base-200 flex items-center justify-center min-h-screen pr-3 mb-10">
       <div className="card w-96 bg-base-100 shadow-xl text-3xl text-center text-info">
         <div className="card-body">
           <h2 className="text-2xl font-bold text-center text-primary">{cim}</h2>
@@ -166,7 +166,7 @@ function NewProduct() {
                 />
               </label>
               <label className="label">
-                <span className="label-text">Kategória</span>
+                <span className="label-text text-primary font-bold">Kategória</span>
               </label>
               <select className="select select-primary w-full border-primary" id="category_id" onChange={writeData} value={formData.category_id}>
                 {
@@ -174,7 +174,7 @@ function NewProduct() {
                 }
               </select>
               <label className="label">
-                <span className="label-text">Csomagautomata</span>
+                <span className="label-text text-primary font-bold">Csomagautomata</span>
               </label>
               <select
                 className="select select-primary w-full border-primary"

@@ -19,6 +19,7 @@ function AdminOrders() {
   const [searchLockerAddress, setSearchLockerAddress] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage] = useState(2);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BASE_URL}/orderslist`, {
@@ -138,82 +139,175 @@ function AdminOrders() {
 
   return (
     <div className="bg-base-200 min-h-screen p-4">
-      <h1 className="text-3xl font-bold text-center mb-4 text-primary">Megrendelések</h1>
-      <div className="flex flex-row">
-        <div className="w-[20%] p-4">
-          <h2 className="text-xl font-bold mb-2 text-center text-primary">Szűrők</h2>
-          <div className="form-control mb-4">
-            <input
-              type="text"
-              name="searchName"
-              value={searchName}
-              onChange={handleSearch}
-              placeholder="Keresés név szerint"
-              className="input input-bordered w-full input-primary"
-            />
-          </div>
-          <div className="form-control mb-4">
-            <input
-              type="text"
-              name="searchEmail"
-              value={searchEmail}
-              onChange={handleSearch}
-              placeholder="Keresés email szerint"
-              className="input input-bordered w-full input-primary"
-            />
-          </div>
-          <div className="form-control mb-4">
-            <input
-              type="text"
-              name="searchLockerName"
-              value={searchLockerName}
-              onChange={handleSearch}
-              placeholder="Keresés csomagautomata neve szerint"
-              className="input input-bordered w-full input-primary"
-            />
-          </div>
-          <div className="form-control mb-4">
-            <input
-              type="text"
-              name="searchLockerAddress"
-              value={searchLockerAddress}
-              onChange={handleSearch}
-              placeholder="Keresés csomagautomata cím szerint"
-              className="input input-bordered w-full input-primary"
-            />
-          </div>
-        </div>
-        <div className="flex flex-wrap justify-start gap-4 w-[80%] p-4">
-          {currentOrders.map((order) => (
-            <AdminOrdersCard key={order.id} order={order} handleDelete={handleDelete} />
-          ))}
-        </div>
-      </div>
-      <div className="join flex justify-center mt-4">
+  {/* Cím */}
+  <h1 className="text-3xl font-bold text-center pb-10 mb-4 text-primary">
+    Megrendelések
+  </h1>
+
+  {/* Hamburger Menü Ikon (csak mobilon és tableten) */}
+  <button
+    onClick={() => setIsFilterOpen(true)}
+    className="lg:hidden fixed bottom-20 right-2 p-2 rounded-full bg-primary text-white shadow-lg z-50"
+  >
+    <svg
+      fill="none"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5,3V17M12,7V21m7-7v7m0-11V3"
+        className="stroke-[#005c6a] fill-none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <path
+        d="M5,17a2,2,0,1,0,2,2A2,2,0,0,0,5,17ZM12,3a2,2,0,1,0,2,2A2,2,0,0,0,12,3Zm7,7a2,2,0,1,0,2,2A2,2,0,0,0,19,10Z"
+        className="stroke-[#2ca9bc] fill-none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  </button>
+
+  {/* Szűrőpanel - mobil/tablet (becsúszó oldalról) */}
+  <div
+    className={`fixed top-0 right-0 w-64 h-full bg-base-100 shadow-lg transform transition-transform z-50 ${isFilterOpen ? "translate-x-0" : "translate-x-full"
+      } lg:hidden`}
+  >
+    <div className="p-4">
+      <div className="flex justify-end">
         <button
-          className="join-item btn btn-primary"
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
+          className="text-xl font-bold text-primary"
+          onClick={() => setIsFilterOpen(false)}
         >
-          «
-        </button>
-        <button className="join-item btn btn-info">
-          Oldal {currentPage} / {totalPages}
-        </button>
-        <button
-          className="join-item btn btn-primary"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          »
-        </button>
-      </div>
-      <div className="card-actions justify-end mt-6">
-        <button className="btn btn-primary btn-circle absolute right-2 top-20 text-info" onClick={handleClose}>
           ✕
         </button>
       </div>
+      <h2 className="text-xl font-bold mb-4 text-primary text-center">Szűrők</h2>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchName"
+          value={searchName}
+          onChange={handleSearch}
+          placeholder="Keresés név szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchEmail"
+          value={searchEmail}
+          onChange={handleSearch}
+          placeholder="Keresés email szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchLockerName"
+          value={searchLockerName}
+          onChange={handleSearch}
+          placeholder="Keresés csomagautomata név szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchLockerAddress"
+          value={searchLockerAddress}
+          onChange={handleSearch}
+          placeholder="Keresés csomagautomata cím szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
     </div>
+  </div>
+
+  {/* Tartalom */}
+  <div className="flex flex-col lg:flex-row gap-6">
+    {/* Szűrők - asztali nézet (bal oldali panel) */}
+    <div className="hidden lg:block w-[20%] p-4">
+      <h2 className="text-xl font-bold mb-4 text-center text-primary">Szűrők</h2>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchName"
+          value={searchName}
+          onChange={handleSearch}
+          placeholder="Keresés név szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchEmail"
+          value={searchEmail}
+          onChange={handleSearch}
+          placeholder="Keresés email szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchLockerName"
+          value={searchLockerName}
+          onChange={handleSearch}
+          placeholder="Keresés csomagautomata név szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+      <div className="form-control mb-4">
+        <input
+          type="text"
+          name="searchLockerAddress"
+          value={searchLockerAddress}
+          onChange={handleSearch}
+          placeholder="Keresés csomagautomata cím szerint"
+          className="input input-bordered w-full input-primary"
+        />
+      </div>
+    </div>
+
+    {/* Megrendelések kártyák */}
+    <div className="flex flex-wrap justify-start gap-4 w-full lg:w-[80%] p-4">
+      {currentOrders.map((order) => (
+        <AdminOrdersCard key={order.id} order={order} handleDelete={handleDelete} />
+      ))}
+    </div>
+  </div>
+
+  {/* Lapozás */}
+  <div className="join flex justify-center mt-10 mb-24">
+    <button
+      className="join-item btn btn-secondary"
+      onClick={handlePrevPage}
+      disabled={currentPage === 1}
+    >
+      «
+    </button>
+    <button className="join-item btn btn-primary text-white">
+      Oldal {currentPage} / {totalPages}
+    </button>
+    <button
+      className="join-item btn btn-secondary"
+      onClick={handleNextPage}
+      disabled={currentPage === totalPages}
+    >
+      »
+    </button>
+  </div>
+</div>
+
   );
 }
 

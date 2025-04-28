@@ -139,7 +139,11 @@ function CartCheckout() {
     <div className="w-full">
       <div className="card w-full max-w-4xl bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="text-2xl text-left text-primary font-bold">Számlázási cím</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-2xl text-left text-primary font-bold">Számlázási cím</h2>
+            <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"><path d="M15.93 18a1.47 1.47 0 0 1 .07.46c0 1.4-1.79 2.54-4 2.54s-4-1.14-4-2.54A1.47 1.47 0 0 1 8.07 18" className="stroke-[#005c6a] fill-none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" /><path d="M9 6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3h0a3 3 0 0 0-3-3h0A3 3 0 0 0 9 6Zm3 3v8" className="stroke-[#50c6c9] fill-none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" /></svg>
+          </div>
+          
           <div className="divider divider-info"></div>
           <div className="form-control">
             <label className="label cursor-pointer">
@@ -197,7 +201,7 @@ function CartCheckout() {
                   <div className="form-control">
                     <select
                       id="street_id"
-                      className="select select-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
+                      className="select select-primary w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
                       onChange={writeData}
                       value={formData.street_id}
                     >
@@ -217,7 +221,7 @@ function CartCheckout() {
                       type="text"
                       id="street"
                       className="input input-bordered w-full p-3 mt-2 border border-primary rounded-md text-info input-primary placeholder:text-info"
-                      placeholder="Utca"
+                      placeholder="Utca neve"
                       required
                       onChange={writeData}
                       value={formData.street}
