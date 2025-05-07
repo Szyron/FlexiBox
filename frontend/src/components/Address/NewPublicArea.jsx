@@ -9,7 +9,7 @@ function NewPublicArea() {
   const { backendMuvelet } = useContext(CrudContext);
   const { state } = useLocation();
 
-  let cim = "Új Közterület Felvitele";
+  let cim = "Új közterület felvitel";
   let method = "POST";
   let header = {
     "Content-type": "application/json",

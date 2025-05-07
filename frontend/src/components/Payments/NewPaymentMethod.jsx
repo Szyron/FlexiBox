@@ -7,7 +7,7 @@ function NewPaymentMethod() {
   const { backendMuvelet } = useContext(PaymentContext);
   const { state } = useLocation();
 
-  let cim = "Új Fizetési mód felvitele";
+  let cim = "Új fizetési mód felvitel";
   let method = "POST";
   let header = { "Content-type": "application/json" };
 

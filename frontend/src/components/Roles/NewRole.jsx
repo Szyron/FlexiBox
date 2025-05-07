@@ -8,7 +8,7 @@ function NewRole() {
   const { backendMuveletRole } = useContext(AuthContext);
   const { state } = useLocation();
 
-  let cim = "Új Jogosultság felvitele";
+  let cim = "Új jogosultság felvitel";
   let method = "POST";
   let header = { "Content-type": "application/json", "Authorization": `Bearer ${sessionStorage.getItem("usertoken")}` };
 

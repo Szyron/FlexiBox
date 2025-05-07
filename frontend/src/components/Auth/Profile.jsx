@@ -78,12 +78,11 @@ function Profile() {
       const response = await axios.post(url, formData, { headers: header });
       console.log(response.data);
       update();
+      toast.success('Sikeresen módosítva/feltöltve!');
       navigate('/');
     } catch (error) {
       toast.error('Hiba a profil frissítése során.', error);
     }
-    toast.success('Sikeresen módosítva/feltöltve!');
-    navigate('/');
   }
 
   return (
@@ -100,7 +99,15 @@ function Profile() {
     >
       {/* Jobbra igazított fejléc */}
       <div className="w-full text-left p-6">
+        <div className="flex items-center gap-2">
         <div className="text-2xl text-primary font-bold">Profilkép</div>
+          <lable className="label text-xs flex flex-col bg-info text-white rounded-lg p-2 mt-2">
+                  <ul className="list-disc list-inside font-bold">
+                    <li className="text-white">Maxiumum 8M fájméret</li>
+                    <li className="uppercase text-white">jpeg,png,jpg,gif,svg</li>
+                  </ul>
+          </lable>
+          </div>
         <div className="divider divider-info"></div>
       </div>
 
@@ -124,6 +131,7 @@ function Profile() {
           style={{ display: "none" }}
           id="fileInput"
         />
+
         <button
           type="button"
           onClick={() => document.getElementById("fileInput").click()}
@@ -131,6 +139,7 @@ function Profile() {
         >
           Kép feltöltése/módosítása
         </button>
+
       </div>
 
       <button type="submit" className="btn btn-primary text-white">Véglegesítés</button>

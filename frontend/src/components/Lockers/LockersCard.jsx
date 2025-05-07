@@ -56,7 +56,7 @@ function LockersCard({ locker }) {
           </button>
         </>
       )}
-      <button className="btn btn-primary text-white">Elérhető Termékek</button>
+      {/*Inaktív <button className="btn btn-primary text-white">Elérhető Termékek</button> */}
       <button className="btn btn-secondary text-white" onClick={openInfo}>
         Info
       </button>

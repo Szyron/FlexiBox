@@ -65,7 +65,7 @@ function Footer() {
         <nav className="min-w-[150px]">
           <h6 className="footer-title text-secondary">Szolgáltatások</h6>
           <Link to="/lockers" className="link link-hover text-info">Csomagautomaták</Link>
-          <Link to="/products" className="link link-hover text-info">Összes Termék</Link>
+          <Link to="/products" className="link link-hover text-info">Összes termék</Link>
         </nav>
         <nav className="min-w-[150px]">
           <h6 className="footer-title text-secondary">Jogi információk</h6>
@@ -90,10 +90,10 @@ function Footer() {
         </aside>
 
         <nav className="flex gap-4">
-          <a href="#" aria-label="Instagram">
+          <a aria-label="Instagram">
             <svg width="32" height="32" fill="#50c6c9" viewBox="0 0 24 24"><path d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9ZM7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM17.5 8C18.3284 8 19 7.32843 19 6.5C19 5.67157 18.3284 5 17.5 5C16.6716 5 16 5.67157 16 6.5C16 7.32843 16.6716 8 17.5 8Z" /></svg>
           </a>
-          <a href="#" aria-label="Facebook">
+          <a aria-label="Facebook">
             <svg width="32" height="32" fill="#50c6c9" viewBox="0 0 32 32"><path d="M21.95 5.005l-3.306-.004c-3.206 0-5.277 2.124-5.277 5.415v2.495H10.05v4.515h3.317l-.004 9.575h4.641l.004-9.575h3.806l-.003-4.514h-3.803v-2.117c0-1.018.241-1.533 1.566-1.533l2.366-.001.01-4.256z" /></svg>
           </a>
         </nav>

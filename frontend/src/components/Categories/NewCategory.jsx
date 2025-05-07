@@ -11,7 +11,7 @@ function NewCategory() {
   const { backendMuvelet } = useContext(CrudContext);
   const { state } = useLocation();
 
-  let cim = "Új Kategória Felvitele";
+  let cim = "Új kategória felvitel";
   let method = "POST";
   let header = { "Content-type": "application/json" };
 

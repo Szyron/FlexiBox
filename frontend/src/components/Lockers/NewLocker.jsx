@@ -7,7 +7,7 @@ function NewLocker() {
   const { backendMuvelet } = useContext(ServiceContext);
 
   const { state } = useLocation();
-  let cim = "Új Csomagautomata Felvitele";
+  let cim = "Új csomagautomata felvitel";
   let method = "POST";
   let header = { "Content-type": "application/json" };
 
@@ -66,7 +66,7 @@ function NewLocker() {
                 <input className="grow placeholder-info"
                   type="text"
                   id="locker_name"
-                  placeholder="Csomagautómata neve"
+                  placeholder="Csomagautomata neve"
                   required
                   onChange={writeData}
                   value={formData.locker_name}
@@ -91,7 +91,7 @@ function NewLocker() {
               <label className="flex items-center gap-2">
                 <textarea className="textarea textarea-primary h-24 textarea-auto w-full border-primary placeholder-info"
                   id="description"
-                  placeholder="Csomagautómata leirása"
+                  placeholder="Csomagautomata leírása"
                   required
                   onChange={writeData}
                   value={formData.description}

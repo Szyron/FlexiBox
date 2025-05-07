@@ -58,7 +58,7 @@ class RegisterController extends Controller
 
             
             return response()->json([
-                'message' => 'Registration failed',
+                'message' => 'Sikertelen regisztráció',
                 'error' => $e->getMessage()
             ], 500);
         }

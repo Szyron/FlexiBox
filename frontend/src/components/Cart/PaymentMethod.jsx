@@ -23,7 +23,7 @@ function PaymentMethod({ onPaymentChange }) {
   const handleChange = (e) => {
     const { value } = e.target;
     setFormDataPayment({ ...formDataPayment, card_type: value });
-    onPaymentChange(value);
+    onPaymentChange?.(value);
   };
 
   return (

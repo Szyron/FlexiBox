@@ -75,7 +75,7 @@ function Menu() {
       {/* Jobb oldal – Desktop */}
       <div className="hidden md:flex md:items-center md:gap-4">
         <Link to="/lockers" className="btn btn-ghost text-primary font-bold">Csomagautomaták</Link>
-        <Link to="/products" className="btn btn-ghost text-primary font-bold">Termékek</Link>
+        <Link to="/products" className="btn btn-ghost text-primary font-bold" id="products">Termékek</Link>
         {user ? (
         <>
           {user.isadmin >= 70 && (

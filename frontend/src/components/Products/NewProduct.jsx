@@ -14,7 +14,7 @@ function NewProduct() {
   const [image, setImage] = useState(null);
 
   let headers = { "Content-type": "multipart/form-data" };
-  let cim = "Új termék felvitele";
+  let cim = "Új termék felvitel";
   let method = "POST";
 
   let formObj = {
@@ -136,7 +136,7 @@ function NewProduct() {
                 <input className="grow placeholder-info"
                   type="text"
                   id="name"
-                  placeholder="Termék neve"
+                  placeholder="Termék név"
                   required
                   onChange={writeData}
                   value={formData.name}
@@ -147,7 +147,7 @@ function NewProduct() {
               <label className="flex items-center gap-2">
                 <textarea className="textarea textarea-primary h-24 textarea-auto w-full border-primary placeholder-info"
                   id="description"
-                  placeholder="Termék leirása"
+                  placeholder="Termék leírása"
                   required
                   onChange={writeData}
                   value={formData.description}
@@ -159,7 +159,7 @@ function NewProduct() {
                 <input className="grow placeholder-info"
                   type="number"
                   id="price_per_day"
-                  placeholder="Termék Bérlési ára Ft/nap"
+                  placeholder="Bérlési ár Ft/nap"
                   required
                   onChange={writeData}
                   value={formData.price_per_day}
