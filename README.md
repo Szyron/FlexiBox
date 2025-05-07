@@ -129,9 +129,22 @@ All rights reserved. Use of any part is only permitted with the authors' prior w
 
 ---
 
+## 📜 Licenc / License
+
+A projekt szerzői jogi védelem alatt áll. Részletek a LICENSE.txt fájlban.  
+This project is protected by copyright. See LICENSE.txt for details.
+
+Minden jog fenntartva. Bármely rész felhasználása kizárólag az alkotók előzetes írásos engedélyével lehetséges.  
+All rights reserved. Use of any part is only permitted with the authors' prior written consent.
+
+---
+
 # 🔖 Fontos megjegyzés / Important Note
 
 A FlexiStore projekt élesben elérhető:  
 The FlexiStore project is live at:
 
 [https://flexistore.hu](https://flexistore.hu)
+
+
+
