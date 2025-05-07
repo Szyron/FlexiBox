@@ -96,16 +96,6 @@ php artisan serve
 
 ---
 
-## 📜 Licenc / License
-
-A FlexiStore projekt szerzői jogi védelem alatt áll.  
-The FlexiStore project is protected under copyright law.
-
-Minden jog fenntartva. Bármely rész felhasználása kizárólag az alkotók előzetes írásos engedélyével lehetséges.  
-All rights reserved. Use of any part is only permitted with the authors' prior written consent.
-
----
-
 ## ❓ Gyakori kérdések / FAQ
 
 - **Milyen adatbázist használ?**  
