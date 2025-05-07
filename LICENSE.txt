@@ -1,0 +1,37 @@
+--- MAGYAR VERZIÓ ---
+Copyright (c) 2025 [Szirony Balázs Gábor és Gombkötő Gábor]
+
+Minden jog fenntartva.
+
+Ez a szoftverprojekt és annak minden része (kód, dokumentáció, fájlstruktúra, ötlet, megvalósítási mód) a szerzői jog védelme alatt áll a hatályos magyar és nemzetközi jogszabályok szerint.
+
+A projekt átadása kizárólag vizsgáztatási célból történik, a szerző(k) szellemi tulajdonának teljes körű fenntartásával. A beadás nem értelmezhető sem a felhasználási jogok, sem a tulajdonjog átruházásaként.
+
+Tilos a projekt bármely részének:
+- nyilvános vagy belső rendszerekben való közzététele,
+- más hallgatók általi újrafelhasználása,
+- módosítása és továbbfejlesztése szerzői engedély nélkül,
+- publikálása vagy más oktatási anyagban való felhasználása.
+
+Bármely jogosulatlan felhasználás jogi lépéseket vonhat maga után.
+
+Dátum: 2025. április 30.
+
+--- ENGLISH VERSION ---
+Copyright (c) 2025 [Szirony Balázs Gábor és Gombkötő Gábor]
+
+All rights reserved.
+
+This software project, including all of its components (code, documentation, file structure, ideas, and implementation methods), is protected under applicable Hungarian and international copyright laws.
+
+The submission of this project is solely for examination and evaluation purposes and does not constitute a transfer of usage rights or ownership of intellectual property.
+
+It is strictly prohibited to:
+- publish any part of the project publicly or within internal systems,
+- reuse by other students or third parties,
+- modify, further develop, or repurpose without the explicit written permission of the author(s),
+- distribute or include in any other educational or public materials.
+
+Any unauthorized use of this project may result in legal action.
+
+Date: April 30, 2025
