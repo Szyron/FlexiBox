@@ -30,9 +30,9 @@ function Main() {
           <div className="divider divider-secondary w-full"></div>
 
           <div className="flex gap-4 mt-4 flex-wrap justify-center lg:justify-start">
-            <Link to="/lockers" className="btn btn-primary text-white">Csomagautomaták</Link>
+            <Link to="/maplockers" className="btn btn-primary text-white">Csomagautomaták</Link>
             {!user && (
-              <Link to="/register2" className="btn btn-info text-white">Regisztráció</Link>
+              <Link to="/register" className="btn btn-info text-white">Regisztráció</Link>
             )}
           </div>
         </div>

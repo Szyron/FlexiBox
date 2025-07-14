@@ -37,6 +37,7 @@ import NewLocker from "./components/Lockers/NewLocker";
 import LockersList from "./components/Lockers/LockersList";
 import AdminOrders from "./components/Dashboards/AdminOrders";
 import MobileTableInfo from "./components/MobileTableInfo";
+import LockerMapList from "./components/LockersWithMap/LockerMapList";
 
 
 function App() {
@@ -56,8 +57,8 @@ function App() {
                           <Menu />
                           <Routes>
                             <Route path="/" element={<Main />} />
-                            <Route path="/register2" element={<Register2 />} />
-                            <Route path="/login2" element={<Login2 />} />
+                            <Route path="/register" element={<Register2 />} />
+                            <Route path="/login" element={<Login2 />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/cart" element={<CartView />} />
                             <Route path="/checkout" element={<OrderCheckout />} />
@@ -71,6 +72,7 @@ function App() {
                             <Route path="/publicareas" element={<PublicAreaList />} />
                             <Route path="/newcategory" element={<NewCategory />} />
                             <Route path="/newlocker" element={<NewLocker />} />
+                            <Route path="/maplockers" element={<LockerMapList />} />
                             <Route path="/categories" element={<CategoriesList />} />
                             <Route path="/newproduct" element={<NewProduct />} />
                             <Route path="/lockers" element={<LockersList />} />

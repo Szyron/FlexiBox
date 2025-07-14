@@ -13,12 +13,16 @@ class LockerController extends Controller
             'locker_name' => 'required|string|max:255',
             'address' =>  'required|string|max:255',
             'description' => 'required|string|max:1000',
+            'lat' => 'required|numeric',
+            'lon' => 'required|numeric',
         ]);
 
         $locker = new Locker();
         $locker->locker_name = $request->locker_name;
         $locker->address = $request->address;
         $locker->description = $request->description;
+        $locker->lat = $request->lat;
+        $locker->lon = $request->lon;
         $locker->save();
 
         return response()->json([
@@ -41,6 +45,8 @@ class LockerController extends Controller
             'locker_name' => 'required|string|max:255',
             'address' =>  'required|string|max:255',
             'description' => 'required|string|max:1000',
+            'lat' => 'required|numeric',
+            'lon' => 'required|numeric',
         ]);
 
         $locker = Locker::find($request->id);
@@ -53,6 +59,8 @@ class LockerController extends Controller
         $locker->locker_name = $request->locker_name;
         $locker->address = $request->address;
         $locker->description = $request->description;
+        $locker->lat = $request->lat;
+        $locker->lon = $request->lon;
         $locker->save();
 
         return response()->json([

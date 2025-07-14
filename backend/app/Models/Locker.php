@@ -10,6 +10,8 @@ class Locker extends Model
         'locker_name',
         'address',
         'description',
+        'lat',
+        'lon',
     ];
 
    

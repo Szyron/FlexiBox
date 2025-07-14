@@ -16,6 +16,8 @@ function NewLocker() {
     locker_name: "",
     address: "",
     description: "",
+    lat: "",
+    lon: "",
   };
 
   let url = `${import.meta.env.VITE_BASE_URL}/locker`;
@@ -27,6 +29,8 @@ function NewLocker() {
       locker_name: locker.locker_name,
       address: locker.address,
       description: locker.description,
+      lat: locker.lat,
+      lon: locker.lon,
     };
     method = "PATCH";
     cim = `${locker.locker_name} módosítása`;
@@ -95,6 +99,32 @@ function NewLocker() {
                   required
                   onChange={writeData}
                   value={formData.description}
+                />
+              </label>
+              <label className="label">
+              </label>
+              <label className="input input-primary flex items-center gap-2 border-primary">
+                <input className="grow placeholder-info"
+                  type="number"
+                  id="lat"
+                  placeholder="Szélesség (lat)"
+                  required
+                  onChange={writeData}
+                  value={formData.lat}
+
+                />
+              </label>
+              <label className="label">
+              </label>
+              <label className="input input-primary flex items-center gap-2 border-primary">
+                <input className="grow placeholder-info"
+                  type="number"
+                  id="lon"
+                  placeholder="Hosszúság (lon)"
+                  required
+                  onChange={writeData}
+                  value={formData.lon}
+
                 />
               </label>
             </div>

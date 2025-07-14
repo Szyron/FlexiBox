@@ -57,12 +57,12 @@ function Menu() {
               </div>
               <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                  <Link to="/login2" className="text-primary font-medium">
+                  <Link to="/login" className="text-primary font-medium">
                     Bejelentkezés
                   </Link>
                 </li>
                 <li>
-                  <Link to="/register2" className="text-primary font-medium">
+                  <Link to="/register" className="text-primary font-medium">
                     Regisztráció
                   </Link>
                 </li>
@@ -74,7 +74,8 @@ function Menu() {
 
       {/* Jobb oldal – Desktop */}
       <div className="hidden md:flex md:items-center md:gap-4">
-        <Link to="/lockers" className="btn btn-ghost text-primary font-bold">Csomagautomaták</Link>
+        <Link to="/maplockers" className="btn btn-ghost text-primary font-bold">Csomagautómaták</Link>
+
         <Link to="/products" className="btn btn-ghost text-primary font-bold" id="products">Termékek</Link>
         {user ? (
         <>
@@ -91,6 +92,7 @@ function Menu() {
                       <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új csomagautomata</Link></li>
                       <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új közterület</Link></li>
                       <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új fizetési mód</Link></li>
+                      <li><Link to="/lockers" className="btn btn-ghost text-primary font-bold">Csomagautomaták</Link></li>
                       {user.isadmin >= 90 && (
                         <>
                           <li><Link to="/newrole" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új jogosultság</Link></li>
@@ -164,8 +166,8 @@ function Menu() {
           </div>
         ) : (
           <div className="hidden md:flex gap-2">
-            <Link to="/register2" className="btn btn-info text-white">Regisztráció</Link>
-            <Link to="/login2" className="btn btn-primary text-white">Bejelentkezés</Link>
+            <Link to="/register" className="btn btn-info text-white">Regisztráció</Link>
+            <Link to="/login" className="btn btn-primary text-white">Bejelentkezés</Link>
           </div>
         )}
       </div>

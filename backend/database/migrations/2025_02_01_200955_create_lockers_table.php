@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('locker_name');
             $table->string('address');
             $table->text('description');
+            $table->decimal('lat', 10,7)->nullable();
+            $table->decimal('lon', 10,7)->nullable();
             $table->timestamps();
         });
     }
