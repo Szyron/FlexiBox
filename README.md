@@ -1,6 +1,6 @@
 # FlexiStore Projekt / FlexiStore Project
 
-**Weboldal / Website**: [https://flexistore.hu](https://flexistore.hu) <-- **Under Maintenance **
+**Weboldal / Website**: [https://flexistore.hu](https://flexistore.hu) <-- **Under Maintenance**
 
 ---
 
@@ -134,7 +134,7 @@ All rights reserved. Use of any part is only permitted with the authors' prior w
 A FlexiStore projekt élesben elérhető:  
 The FlexiStore project is live at:
 
-[https://flexistore.hu](https://flexistore.hu) <-- **Under Maintenance **
+[https://flexistore.hu](https://flexistore.hu) <-- **Under Maintenance**
 
 
 
