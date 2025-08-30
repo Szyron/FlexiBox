@@ -38,13 +38,14 @@ import LockersList from "./components/Lockers/LockersList";
 import AdminOrders from "./components/Dashboards/AdminOrders";
 import MobileTableInfo from "./components/MobileTableInfo";
 import LockerMapList from "./components/LockersWithMap/LockerMapList";
+import Maintenance from "./components/Maintenance";
 
 
 function App() {
 
   return (
     <div>
-      <CrudProvider>
+       <CrudProvider>
         <PaymentProvider>
           <AdminProvider>
             <CartProvider>
@@ -96,7 +97,9 @@ function App() {
           </AdminProvider>
         </PaymentProvider>
       </CrudProvider>
-      <ToastContainer />
+      <ToastContainer /> 
+      {/* <Maintenance/>*/}
+
     </div>
   )
 }

@@ -42,7 +42,7 @@ function LockerMapList() {
           onChange={e => setQuery(e.target.value)}
         />
         <div className="mt-6">
-          <h3 className="font-semibold mb-2">Találatok: {filteredLockers.length}</h3>
+          <h3 className="font-semibold mb-2">Elérhető csomagautomaták: {filteredLockers.length}</h3>
           <ul className="text-sm space-y-2 max-h-64 overflow-y-auto">
             {filteredLockers.map(loc => (
               <li key={loc.id} className="border-b pb-1">
