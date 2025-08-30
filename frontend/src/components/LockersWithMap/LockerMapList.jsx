@@ -37,7 +37,7 @@ function LockerMapList() {
         <input
           type="text"
           placeholder="Keresés név vagy cím alapján..."
-          className="w-full p-2 border border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full p-2 border border-primary rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary"
           value={query}
           onChange={e => setQuery(e.target.value)}
         />

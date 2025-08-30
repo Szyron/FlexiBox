@@ -56,7 +56,7 @@ function RegistrationDataEdit({ user, closeFunction }) {
               <span className="label-text text-primary">Vezetéknév</span>
             </label>
             <label className="input input-bordered flex items-center gap-2 border-primary">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="stroke-[#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="stroke-[#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <input
                 type="text"
                 id="last_name"
@@ -73,7 +73,7 @@ function RegistrationDataEdit({ user, closeFunction }) {
               <span className="label-text text-primary ">Keresztnév</span>
             </label>
             <label className="input input-bordered flex items-center gap-2 border-primary">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none"><path d="M11,13h2a7,7,0,0,1,7,7v0a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1v0a7,7,0,0,1,7-7Z" className="stroke-[#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="8" r="5" className="stroke-[#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <input
                 type="text"
                 id="first_name"
@@ -91,8 +91,8 @@ function RegistrationDataEdit({ user, closeFunction }) {
             </label>
             <label className="input input-bordered flex items-center gap-2 border-primary">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-[17px] h-[17px]" fill="none">
-                  <rect x="3" y="5" width="18" height="14" rx="1" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M20.62,5.22l-8,6.29a1,1,0,0,1-1.24,0l-8-6.29A1,1,0,0,1,4,5H20A1,1,0,0,1,20.62,5.22Z" className="[stroke:#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <rect x="3" y="5" width="18" height="14" rx="1" className="stroke-[#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20.62,5.22l-8,6.29a1,1,0,0,1-1.24,0l-8-6.29A1,1,0,0,1,4,5H20A1,1,0,0,1,20.62,5.22Z" className="stroke-[#00aab3]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               <input
                 type="email"

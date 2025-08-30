@@ -54,7 +54,7 @@ function ProductsCard({ product }) {
   }, [product]);
 
   return (
-<div className="card bg-base-100 w-96 shadow-sm m-10 hover:shadow-lg transition duration-300 ease-in-out">
+<div className="card bg-base-100 w-96 shadow-xs m-10 hover:shadow-lg transition duration-300 ease-in-out">
   <figure className="px-8 pt-8">
     <img
       src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${product.file_path}`}
@@ -62,7 +62,7 @@ function ProductsCard({ product }) {
       alt="Product"
     />
   </figure>
-  <div className="card-body flex flex-col justify-between flex-grow">
+  <div className="card-body flex flex-col justify-between grow">
     <div>
       <h2 className="card-title line-clamp-2 text-center text-primary font-bold">{product.name}</h2>
       <h2 className="card-title line-clamp-2 text-center text-info">{product.price_per_day} Ft/nap</h2>
@@ -74,7 +74,7 @@ function ProductsCard({ product }) {
       <select
         value={selectedLocker}
         onChange={handleLockerChange}
-        className="w-full rounded-lg border border-primary bg-base-100 py-2.5 px-3 text-sm text-gray-800 shadow-sm focus:border-secondary focus:ring-2 focus:ring-secondary/50"
+        className="w-full rounded-lg border border-primary bg-base-100 py-2.5 px-3 text-sm text-gray-800 shadow-xs focus:border-secondary focus:ring-2 focus:ring-secondary/50"
       >
         {product.lockers.map((locker) => (
           <option key={locker.id} value={locker.id}>

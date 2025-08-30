@@ -165,7 +165,7 @@ function Profile() {
       </div>
 
     {/* CartCheckout komponens */}
-    <div className="p-1 flex-[3] w-full lg:w-2/3 max-w-full">
+    <div className="p-1 flex-3 w-full lg:w-2/3 max-w-full">
       <CartCheckout />
     </div>
   </div>

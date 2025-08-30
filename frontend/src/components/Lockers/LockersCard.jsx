@@ -32,7 +32,7 @@ function LockersCard({ locker }) {
   const closeInfo = () => setInfo(false);
 
   return (
-<div className="card bg-base-100 w-full sm:w-96 shadow-sm m-4 sm:m-10">
+<div className="card bg-base-100 w-full sm:w-96 shadow-xs m-4 sm:m-10">
   <figure className="px-10 pt-10">
     <img src={LockerKep} alt="Shoes" className="rounded-xl" />
   </figure>

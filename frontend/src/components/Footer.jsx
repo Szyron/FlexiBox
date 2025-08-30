@@ -175,7 +175,7 @@ function Footer() {
                 <span className="badge badge-sm indicator-item">{user ? cartItems?.length || 0 : 0}</span>
               </div>
             </div>
-            <div tabIndex={0} className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
+            <div tabIndex={0} className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow-sm">
               <div className="card-body">
                 <span className="text-lg font-bold text-primary">Termék: {cartItems?.length || 0} db</span>
                 <span className="text-info">Összesen: {getCartTotal()} Ft</span>
