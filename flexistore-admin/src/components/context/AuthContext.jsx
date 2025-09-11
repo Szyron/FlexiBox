@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setProfile(null);
     update();
-    //toast.success('Sikeres kijelentkezés!');
+    toast.success('Sikeres kijelentkezés!');
   }
 
   const backendMuveletRole = async (data, method, url, header) => {

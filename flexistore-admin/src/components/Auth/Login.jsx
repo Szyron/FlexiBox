@@ -1,12 +1,73 @@
-import React from 'react'
+import { toast } from "react-toastify";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import secureStorage from "../Utils/secureStorage";
+import AuthContext from "../context/AuthContext";
 
 function Login() {
+
+    const navigate = useNavigate();
+    const { update, setUser } = useContext(AuthContext);
+
+const kuldes = (formData, method) => {
+  fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
+    method: method,
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Login response:", data);
+
+      if (!data.error) {
+        if (data.user.isadmin >= 70) {
+          sessionStorage.setItem("usertoken", data.access_token);
+          secureStorage.setItem("user", data.user);
+          setUser(data.user);
+          update();
+          toast.success("Sikeres belépés");
+          navigate("/");
+        } else {
+          toast.error("Nincs jogosultságod az admin felülethez!");
+        }
+      } else {
+        toast.error("Kérjük ellenőrizze a bejelentkezési adatait!");
+      }
+    })
+    .catch((err) => toast.error("Hiba történt: " + err));
+};
+
+
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        kuldes(formData, "POST");
+    };
+
+    let formObj = {
+        email: "",
+        password: "",
+    };
+
+    const [formData, setFormData] = useState(formObj);
+
+    const writeData = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.id]: e.target.value,
+        }));
+    };
+
+
+
+
+
     return (
         <div className="bg-base-200 flex items-center justify-center min-h-screen text-info">
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="text-2xl font-bold text-center text-primary">Admin Felület</h2>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <div className="form-control">
                             <label className="label">
                             </label>
@@ -20,6 +81,8 @@ function Login() {
                                     id="email"
                                     placeholder="Admin Email"
                                     required
+                                    value={formData.email}
+                                    onChange={writeData}
                                 />
                             </label>
                         </div>
@@ -33,6 +96,8 @@ function Login() {
                                     id="password"
                                     placeholder="Admin Jelszó"
                                     required
+                                    value={formData.password}
+                                    onChange={writeData}
                                 />
                             </label>
                         </div>

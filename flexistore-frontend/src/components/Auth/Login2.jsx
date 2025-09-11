@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import secureStorage from "../../utils/secureStorage";
+import secureStorage from "../../Utils/secureStorage";
 import AuthContext from "../../context/AuthContext";
 
 
@@ -18,6 +18,10 @@ function Login2() {
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
+            if (data.user.isadmin >= 70) {
+              toast.error("Admin nem léphet be a felhasználói felületre!");
+              return;
+            }
           sessionStorage.setItem("usertoken", data.access_token);
           secureStorage.setItem('user', { ...data.user });
           update();

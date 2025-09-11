@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from "react-router-dom";
 
 function SideMenu() {
@@ -7,7 +6,7 @@ function SideMenu() {
                             <div className="flex items-center border-b border-primary border-4">
             </div>
                 <ul className="menu bg-accent w-full flex-1 text-primary text-xl font-bold">
-                    <li><a>Felhasználókezelő</a></li>
+                    <li><Link to="/admindashboard">Felhasználókezelő</Link></li>
                     <li>
                         <details open>
                             <summary>Új adatok felvitele</summary>
@@ -25,11 +24,12 @@ function SideMenu() {
                         <details open>
                             <summary>Alapadatok</summary>
                             <ul>
-                                <li><a>Jogosultságok</a></li>
-                                <li><a>Kategóriák</a></li>
+                                <li><Link to="/categories">Kategóriák</Link></li>
+                                <li><Link to="/publicareas">Közterületek</Link></li>
+                                <li><Link to="/paymentmethods">Fizetési módok</Link></li>
+                                <li><Link to="/roles">Jogosultságok</Link></li>
+                                <li><Link to="/lockers">Csomagautomaták</Link></li>
                                 <li><a>Orderek</a></li>
-                                <li><a>Közterületek</a></li>
-                                <li><a>Fizetési módok</a></li>
                             </ul>
                         </details>
                     </li>

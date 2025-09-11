@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ServiceContext from "../../../../flexistore-frontend/src/context/ServiceContext";
+import ServiceContext from "../context/ServiceContext";
 
 function NewLocker() {
   const navigate = useNavigate();

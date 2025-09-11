@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import AuthContext from "../../../../flexistore-frontend/src/context/AddressContext";
+import AuthContext from "../context/AuthContext";
 
 
 function NewRole() {

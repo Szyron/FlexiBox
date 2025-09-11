@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import PaymentContext from "../../../../flexistore-frontend/src/context/PaymentContext";
+import PaymentContext from "../context/PaymentContext";
 
 function NewPaymentMethod() {
   const navigate = useNavigate();

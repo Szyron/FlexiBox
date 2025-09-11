@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import AdminContext from '../../context/AdminContext';
-import secureStorage from '../../Utils/secureStorage';
+import AdminContext from '../context/AdminContext';
+import secureStorage from '../Utils/secureStorage';
 import AdminDashboardCard from './AdminDashboardCard';
 import UserCard from './UserCard';
 
@@ -21,7 +21,6 @@ function AdminDashboard() {
     if (!user || user.isadmin < 70) {
       toast.error('Hozzáférés megtagadva!');
       navigate('/');
-      return;
     }
 
     fetch(`${import.meta.env.VITE_BASE_URL}/users`, {

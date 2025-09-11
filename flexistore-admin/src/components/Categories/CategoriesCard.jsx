@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import secureStorage from '../../utils/secureStorage';
-import InitialContext from "../../context/InitialContext";
-import CrudContext from '../../context/CrudContext';
+import secureStorage from '../Utils/secureStorage';
+import InitialContext from "../context/InitialContext";
+import CrudContext from '../context/CrudContext';
 
 function CategoriesCard({ category }) {
     const user = secureStorage.getItem('user');

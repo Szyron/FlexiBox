@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import secureStorage from "../../utils/secureStorage";
-import CrudContext from "../../context/CrudContext";
-import InitialContext from "../../context/InitialContext";
+import secureStorage from "../Utils/secureStorage";
+import CrudContext from "../context/CrudContext";
+import InitialContext from "../context/InitialContext";
 
 
 
@@ -33,7 +33,7 @@ function PublicAreaCard({ publicarea }) {
   return (
     <div className="card w-96 shadow-xl m-5 bg-base-100">
       <div className="card-body text-center">
-        <h2 className="card-title justify-center">{publicarea.public_area_name}</h2>
+        <h2 className="card-title justify-center text-primary">{publicarea.public_area_name}</h2>
         <div className="card-actions justify-center">
           {user ? (
             <>

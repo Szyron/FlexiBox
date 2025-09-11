@@ -1,7 +1,17 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import { useContext } from 'react'
+import { Link , useNavigate} from "react-router-dom";
+import AuthContext from './context/AuthContext';
 
 function Menu() {
+
+  const { logout, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();          
+    navigate("/login");
+  };
+
 
 
   return (
@@ -44,7 +54,7 @@ function Menu() {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><button onClick={handleLogout}>Logout</button></li>
       </ul>
     </div>
 

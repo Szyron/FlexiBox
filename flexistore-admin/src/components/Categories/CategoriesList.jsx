@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import CategoriesCard from './CategoriesCard'
-import InitialContext from '../../context/InitialContext';
+import InitialContext from '../context/InitialContext';
 
 function CategoriesList() {
 

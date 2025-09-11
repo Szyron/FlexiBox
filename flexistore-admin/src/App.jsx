@@ -2,58 +2,98 @@ import Menu from "./components/Menu"
 import SideMenu from "./components/SideMenu";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NewCategory from "./components/Categories/NewCategory";
-import { CrudProvider } from "../../flexistore-frontend/src/context/CrudContext";
-import { InitialProvider } from "../../flexistore-frontend/src/context/InitialContext";
-import { ServiceProvider } from "../../flexistore-frontend/src/context/ServiceContext";
 import NewProduct from "./components/Products/NewProduct";
 import NewLocker from "./components/Lockers/NewLocker";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import NewPublicArea from "./components/Address/NewPublicArea"
 import NewPaymentMethod from "./components/Payments/NewPaymentMethod";
-import { PaymentProvider } from "../../flexistore-frontend/src/context/PaymentContext";
 import NewRole from "./components/Roles/NewRole";
-import { AuthProvider } from "../../flexistore-frontend/src/context/AuthContext";
-import { CartProvider } from "../../flexistore-frontend/src/context/CartContext";
+import CategoriesList from "./components/Categories/CategoriesList";
+import PublicAreaList from "./components/Address/PublicAreaList";
+import PaymentMethlist from "./components/Payments/PaymentMethodList";
+import RolesList from "./components/Roles/RolesList";
+import AdminDashboard from "./components/Dashboard/AdminDashboard";
+import LockersList from "./components/Lockers/LockersList";
+import Login from "./components/Auth/Login";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { CrudProvider } from "./components/context/CrudContext";
+import { InitialProvider } from "./components/context/InitialContext";
+import { ServiceProvider } from "./components/context/ServiceContext";
+import { PaymentProvider } from "./components/context/PaymentContext";
+import { AuthProvider } from "./components/context/AuthContext";
+import { CartProvider } from "./components/context/CartContext";
+import { AdminProvider } from "./components/context/AdminContext";
+
 
 function App() {
   
 
   return (
+    <div>
+<CartProvider>
+      <PaymentProvider>
+        <AdminProvider>
+          <AuthProvider>
+            <ServiceProvider>
+              <InitialProvider>
+                <CrudProvider>
+                  <BrowserRouter>
+                    <Routes>
+                      {/* 🔹 Login oldal mindig elérhető */}
+                      <Route path="/login" element={<Login />} />
 
-      <div>
-    <CartProvider>
-    <PaymentProvider>
-      <AuthProvider>
-    <ServiceProvider>
-    <InitialProvider>
-      <CrudProvider>
-        <BrowserRouter>
-          <Menu />
-          <div style={{ display: "flex", minHeight: "100vh" }}>
-            <SideMenu />
-            <div style={{ flex: 1 }}>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/newcategory" element={<NewCategory />} />
-                <Route path="/newproduct" element={<NewProduct />} />
-                <Route path="/newlocker" element={<NewLocker />} />
-                <Route path="/newpublicarea" element={<NewPublicArea/>} />
-                <Route path="/newpaymentmethod" element={<NewPaymentMethod />} />
-                <Route path="/newrole" element={<NewRole />} />
-                <Route path="*" element={<Navigate to="/" />} />
-              </Routes>
-            </div>
-          </div>
-          <Footer/>
-        </BrowserRouter>
-      </CrudProvider>
-    </InitialProvider>
-    </ServiceProvider>
-    </AuthProvider>
-    </PaymentProvider>
+                      {/* 🔹 Minden más védett útvonal */}
+                      <Route
+                        path="/*"
+                        element={
+                          <ProtectedRoute>
+                            <div>
+                              <Menu />
+                              <div style={{ display: "flex", minHeight: "100vh" }}>
+                                <SideMenu />
+                                <div style={{ flex: 1 }}>
+                                  <Routes>
+                                    <Route path="/" element={<Main />} />
+                                    <Route path="/newcategory" element={<NewCategory />} />
+                                    <Route path="/newproduct" element={<NewProduct />} />
+                                    <Route path="/newlocker" element={<NewLocker />} />
+                                    <Route path="/newpublicarea" element={<NewPublicArea />} />
+                                    <Route path="/newpaymentmethod" element={<NewPaymentMethod />} />
+                                    <Route path="/newrole" element={<NewRole />} />
+                                    <Route path="/categories" element={<CategoriesList />} />
+                                    <Route path="/publicareas" element={<PublicAreaList />} />
+                                    <Route path="/paymentmethods" element={<PaymentMethlist />} />
+                                    <Route path="/admindashboard" element={<AdminDashboard />} />
+                                    <Route path="/roles" element={<RolesList />} />
+                                    <Route path="/lockers" element={<LockersList />} />
+                                    <Route path="*" element={<Navigate to="/" />} />          
+                                  </Routes>
+                                </div>
+                              </div>
+                              <Footer />
+                            </div>
+                          </ProtectedRoute>
+                        }
+                      />
+                    </Routes>
+                    <ToastContainer />
+                  </BrowserRouter>
+                </CrudProvider>
+              </InitialProvider>
+            </ServiceProvider>
+                 <ToastContainer /> 
+          </AuthProvider>
+        </AdminProvider>
+      </PaymentProvider>
     </CartProvider>
-      </div>
+    
+
+
+    </div>
+
   )
 }
 

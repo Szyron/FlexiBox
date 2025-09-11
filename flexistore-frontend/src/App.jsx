@@ -18,22 +18,14 @@ import Login2 from "./components/Auth/Login2";
 import Profile from "./components/Auth/Profile";
 import AdminDashboard from "./components/Dashboards/AdminDashboard";
 import UserDashboard from "./components/Dashboards/UserDashboard";
-import NewCategory from "./components/Categories/NewCategory";
-import CategoriesList from "./components/Categories/CategoriesList";
-import NewProduct from "./components/Products/NewProduct";
 import ProductsList from "./components/Products/ProductsList";
 import ProductsInfo from "./components/Products/ProductsInfo";
 import CartView from "./components/Cart/CartView";
 import RegistrationDataEdit from "./components/Dashboards/RegistrationDataEdit";
-import NewPublicArea from "./components/Address/NewPublicArea";
-import PublicAreaList from "./components/Address/PublicAreaList";
 import OrderCheckout from "./components/Cart/OrderCheckout";
-import NewPaymentMethod from "./components/Payments/NewPaymentMethod";
-import PaymentMethodList from "./components/Payments/PaymentMethodList";
 import UserOrder from "./components/Cart/UserOrder";
 import NewRole from "./components/Roles/NewRole";
 import RolesList from "./components/Roles/RolesList";
-import NewLocker from "./components/Lockers/NewLocker";
 import LockersList from "./components/Lockers/LockersList";
 import AdminOrders from "./components/Dashboards/AdminOrders";
 import MobileTableInfo from "./components/MobileTableInfo";
@@ -65,17 +57,9 @@ function App() {
                             <Route path="/checkout" element={<OrderCheckout />} />
                             <Route path="/userorder" element={<UserOrder />} />
                             <Route path="/adminorders" element={<AdminOrders />} />
-                            <Route path="/newpaymentmethod" element={<NewPaymentMethod />} />
-                            <Route path="/paymentmethods" element={<PaymentMethodList />} />
                             <Route path="/newrole" element={<NewRole />} />
                             <Route path="/roles" element={<RolesList />} />
-                            <Route path="/newpublicarea" element={<NewPublicArea />} />
-                            <Route path="/publicareas" element={<PublicAreaList />} />
-                            <Route path="/newcategory" element={<NewCategory />} />
-                            <Route path="/newlocker" element={<NewLocker />} />
                             <Route path="/maplockers" element={<LockerMapList />} />
-                            <Route path="/categories" element={<CategoriesList />} />
-                            <Route path="/newproduct" element={<NewProduct />} />
                             <Route path="/lockers" element={<LockersList />} />
                             <Route path="/products" element={<ProductsList />} />
                             <Route path="/productsinfo" element={<ProductsInfo />} />

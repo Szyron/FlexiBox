@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import PaymentContext from '../../context/PaymentContext';
-import secureStorage from '../../utils/secureStorage';
+import PaymentContext from '../context/PaymentContext';
+import secureStorage from '../Utils/secureStorage';
 
 function PaymentMethodCard({ payment }) {
   const user = secureStorage.getItem('user');

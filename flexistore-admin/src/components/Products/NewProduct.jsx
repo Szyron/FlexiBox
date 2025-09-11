@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import InitialContext from "../../../../flexistore-frontend/src/context/InitialContext";
-import CrudContext from "../../../../flexistore-frontend/src/context/CrudContext";
+import InitialContext from "../context/InitialContext";
+import CrudContext from "../context/CrudContext";
 
 
 function NewProduct() {

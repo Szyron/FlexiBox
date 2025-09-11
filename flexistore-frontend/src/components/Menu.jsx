@@ -2,7 +2,7 @@ import { useContext, useEffect,useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import AuthContext from "../context/AuthContext";
-import secureStorage from "../utils/secureStorage";
+import secureStorage from "../Utils/secureStorage";
 
 function Menu() {
   const user = secureStorage.getItem("user");
@@ -87,11 +87,6 @@ function Menu() {
                     <summary className="text-primary font-bold">Admin Dashboard</summary>
                     <ul className="bg-base-100 rounded-t-none p-2 z-50 items-start text-left absolute">
                       <li><Link to="/admindashboard" className="btn btn-ghost text-primary" onClick={closeDropdown}>Felhasználó kezelő</Link></li>
-                      <li><Link to="/newcategory" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új kategória</Link></li>
-                      <li><Link to="/newproduct" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új termék</Link></li>
-                      <li><Link to="/newlocker" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új csomagautomata</Link></li>
-                      <li><Link to="/newpublicarea" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új közterület</Link></li>
-                      <li><Link to="/newpaymentmethod" className="btn btn-ghost text-primary" onClick={closeDropdown}>Új fizetési mód</Link></li>
                       <li><Link to="/lockers" className="btn btn-ghost text-primary font-bold">Csomagautomaták</Link></li>
                       {user.isadmin >= 90 && (
                         <>
@@ -99,12 +94,7 @@ function Menu() {
                           <li><Link to="/roles" className="btn btn-ghost text-primary" onClick={closeDropdown}>Jogosultságok</Link></li>
                         </>
                       )}
-                      <li><Link to="/categories" className="btn btn-ghost text-primary" onClick={closeDropdown}>Kategóriák</Link></li>
                       <li><Link to="/adminorders" className="btn btn-ghost text-primary" onClick={closeDropdown}>Orderek</Link></li>
-                      <li><Link to="/publicareas" className="btn btn-ghost text-primary" onClick={closeDropdown}>Közterületek</Link></li>
-                      <li><Link to="/paymentmethods" className="btn btn-ghost text-primary" onClick={closeDropdown}>Fizetési módok</Link></li>
-
-
                     </ul>
                   </details>
                 </li>
