@@ -115,90 +115,97 @@ function NewProduct() {
   };
 
   return (
-    <div className="bg-base-200 flex items-center justify-center min-h-screen pr-3 mb-10">
+    <div className="bg-base-200 flex items-center justify-center min-h-screen">
       <div className="card w-96 bg-base-100 shadow-xl text-3xl text-center text-info">
         <div className="card-body">
           <h2 className="text-2xl font-bold text-center text-primary">{cim}</h2>
           <form onSubmit={onSubmit}>
             <div className="form-control">
+              <div>
               <label className="label">
-              </label>
-              {state && <img src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${state.product.file_path}`} alt="Preview" className="w-10 h-10 rounded-full object-cover" />}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="file-input file-input-primary w-full max-w-xs border-primary"
-              />
-              <label className="label">
-              </label>
-              <label className="input input-primary flex items-center gap-2 border-primary">
-                <input className="grow placeholder-info"
-                  type="text"
-                  id="name"
-                  placeholder="Termék név"
-                  required
-                  onChange={writeData}
-                  value={formData.name}
+                </label>
+                {state && <img src={`${import.meta.env.VITE_LARAVEL_IMAGE_URL}${state.product.file_path}`} alt="Preview" className="w-10 h-10 rounded-full object-cover" />}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="file-input file-input-primary max-w-xs border-primary mb-5"
                 />
-              </label>
-              <label className="label">
-              </label>
-              <label className="flex items-center gap-2">
-                <textarea className="textarea textarea-primary h-24 textarea-auto w-full border-primary placeholder-info"
-                  id="description"
-                  placeholder="Termék leírása"
-                  required
-                  onChange={writeData}
-                  value={formData.description}
-                />
-              </label>
-              <label className="label">
-              </label>
-              <label className="input input-primary flex items-center gap-2 border-primary">
-                <input className="grow placeholder-info"
-                  type="number"
-                  id="price_per_day"
-                  placeholder="Bérlési ár Ft/nap"
-                  required
-                  onChange={writeData}
-                  value={formData.price_per_day}
-                />
-              </label>
-              <label className="label">
-                <span className="label-text text-primary font-bold">Kategória</span>
-              </label>
-              <select className="select select-primary w-full border-primary" id="category_id" onChange={writeData} value={formData.category_id}>
-                {
-                  categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))
-                }
-              </select>
-              <label className="label">
-                <span className="label-text text-primary font-bold">Csomagautomata</span>
-              </label>
-              <select
-                className="select select-primary w-full border-primary"
-                id="locker_ids"
-                multiple
-                onChange={(e) => {
-                  const selected = Array.from(e.target.selectedOptions, (option) => option.value);
-                  setFormData((prev) => ({ ...prev, locker_ids: selected }));
-                }}
-                value={formData.locker_ids || []}
-              >
-                {lockers.map((locker) => (
-                  <option className="m-1" key={locker.id} value={locker.id}>
-                    {locker.locker_name}
-                  </option>
-                ))}
-              </select>
-
+              </div>
+              <div className="mb-3 pl-2">
+                <label className="input input-primary flex items-center gap-2 border-primary">
+                  <input className="grow placeholder-info"
+                    type="text"
+                    id="name"
+                    placeholder="Termék név"
+                    required
+                    onChange={writeData}
+                    value={formData.name}
+                  />
+                </label>
+              </div>
+              <div className="mb-3 pl-2">
+                <label className="flex items-center gap-2">
+                  <textarea className="textarea textarea-primary h-24 textarea-auto border-primary placeholder-info"
+                    id="description"
+                    placeholder="Termék leírása"
+                    required
+                    onChange={writeData}
+                    value={formData.description}
+                  />
+                </label>
+              </div>
+              <div className="mb-3 pl-2">
+                <label className="input input-primary flex items-center gap-2 border-primary">
+                  <input className="grow placeholder-info"
+                    type="number"
+                    id="price_per_day"
+                    placeholder="Bérlési ár Ft/nap"
+                    required
+                    onChange={writeData}
+                    value={formData.price_per_day}
+                  />
+                </label>
+              </div>
+              <div className="mb-3 pl-2">
+                <label className="label">
+                  <span className="label-text text-primary font-bold">Kategória</span>
+                </label>
+                  <select className="select select-primary border-primary" id="category_id" onChange={writeData} value={formData.category_id}>
+                    {
+                      categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))
+                    }
+                  </select>
+              </div>
+              <div className="mb-3 pl-2">
+                <label className="label">
+                  <span className="label-text text-primary font-bold">Csomagautomata</span>
+                </label>
+                <select
+                  className="select select-primary w-full border-primary h-24"
+                  id="locker_ids"
+                  multiple
+                  onChange={(e) => {
+                    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+                    setFormData((prev) => ({ ...prev, locker_ids: selected }));
+                  }}
+                  value={formData.locker_ids || []}
+                >
+                  {lockers.map((locker) => (
+                    <option className="m-1" key={locker.id} value={locker.id}>
+                      {locker.locker_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-3 pl-2">
               <label className="label">
               </label>
               <select className="select select-primary w-full border-primary" id="available" onChange={writeData} value={formData.available}>
                 <option value="1">Elérhető</option>
                 <option value="0">Nem elérhető</option>
               </select>
+            </div>
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary text-white">

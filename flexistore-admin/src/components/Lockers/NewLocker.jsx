@@ -93,7 +93,7 @@ function NewLocker() {
               <label className="label">
               </label>
               <label className="flex items-center gap-2">
-                <textarea className="textarea textarea-primary h-24 textarea-auto w-full border-primary placeholder-info"
+                <textarea className="textarea textarea-primary h-24  textarea-auto w-80 border-primary placeholder-info"
                   id="description"
                   placeholder="Csomagautomata leírása"
                   required
